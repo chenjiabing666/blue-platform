@@ -1,0 +1,144 @@
+
+<div class="page page-table" ng-controller="TaskKindCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">任务品类列表</h2>
+        </div>
+        
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="taskKind_list_header">
+                    
+                   <label class="col-sm-3 col-xs-1">
+                        <span >任务品类ID:</span>
+                        <input type="text" id="taskKindId" placeholder="输入任务品类ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwTaskKindId" data-ng-keyup="search()">
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-4">
+                        <span>标题ID:</span>
+                        <input type="text" id="userId" placeholder="输入标题名称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwTitle" data-ng-keyup="search()">
+                    </label>
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/taskKind/taskKind-add">添加任务品类</a>
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <th><div class="th">
+                任务品类ID
+                </div></th>
+                <th><div class="th">
+                品类标题
+                </div></th>
+                <th><div class="th">
+                标题说明
+                </div></th>
+                <th><div class="th">
+                详情图片
+                </div></th>
+                <th><div class="th">
+                列表图片
+                </div></th>
+                <th><div class="th">
+                人数上限
+                </div></th>
+                <th><div class="th">
+                是否开启饮酒
+                </div></th>
+                <th><div class="th">
+                是否开启匿名
+                </div></th>
+                <th><div class="th">
+                创建时间
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskKindId}}">
+                <td> <md-checkbox ng-click="selectItem(store.taskKindId)" ng-checked="selected[store.taskKindId]"></md-checkbox></td>
+                <td ng-bind="store.taskKindId"></td>
+                <td ng-bind="store.title"></td>
+                <td ng-bind="store.titleRemark"></td>
+                <td> <img class="showImg" ng-src="{{store.imageUrl}}" alt=""></td>
+                <td> <img class="showImg" ng-src="{{store.showImageUrl}}" alt=""></td>
+                <td ng-bind="store.maxmember"></td>
+                <td ng-bind="store.isOpenDrink | isDoing"></td>
+                <td ng-bind="store.isOpenAnonymity | isDoing"></td>
+                <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td>          
+                <td class="opertation">
+                    <a href="#/taskKind/taskKind-change?id={{store.taskKindId}}">编辑</a>
+                    <a href="" ng-click="deleteTaskKind(store.taskKindId)">删除</a>
+                    <a href="#/taskKind/taskKind-detail?id={{store.taskKindId}}">详情</a>
+                    <a href="#/taskDuration/taskDuration-list?id={{store.taskKindId}}">时长</a>
+                    <a href="#/taskReward/taskReward-list?id={{store.taskKindId}}">打赏</a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+
+    .product-buyer-name {
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>

@@ -1,0 +1,119 @@
+
+<div class="page page-table" ng-controller="InvitationUserCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">邀请列表</h2>
+        </div>
+        
+    </div>
+    <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="invitation_list_header">
+                    
+                   <label class="col-sm-3 col-xs-1">
+                        <span >用户ID:</span>
+                        <input type="text" id="invitationId" placeholder="用户ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwUserId" data-ng-keyup="search()">
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-4">
+                        <span >手机号:</span>
+                        <input type="text" id="invitation" placeholder="输入邀手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwMobile" data-ng-keyup="search()">
+                    </label> 
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <th><div class="th">
+                用户ID
+                </div></th>
+                <th><div class="th">
+                头像
+                </div></th>
+                <th><div class="th">
+                手机
+                </div></th>
+                <th><div class="th">
+                昵称
+                </div></th>
+                <th><div class="th">
+                邀请时间
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.invitationId}}">
+                <td> <md-checkbox ng-click="selectItem(store.invitationId)" ng-checked="selected[store.invitationId]"></md-checkbox></td>
+                <td ng-bind="store.toUserId"></td>
+                <td> <img class="showImg" ng-src="{{store.userIcon}}" alt=""></td>
+                <td ng-bind="store.mobile"></td>
+                <td ng-bind="store.nickName"></td>
+                <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td>           
+                <td class="opertation">
+                    <!-- <a href="#/invitation/invitation-change?id={{store.invitationId}}">编辑</a> -->
+                    <a href="" ng-click="deleteInvitation(store.invitationId)">删除</a>
+                    <!-- <a href="#/invitation/invitation-detail?id={{store.invitationId}}">详情</a> -->
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

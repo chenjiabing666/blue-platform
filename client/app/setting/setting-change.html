@@ -1,0 +1,108 @@
+
+
+<section class="page-form-ele page" ng-controller="ChangeSettingCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-md-12"></div>
+        <div class="col-md-8 clearfix"> <h2 class="section-header">系统参数设置</h2> </div>
+        <!-- <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div> -->
+        <div class="col-md-12" ng-show="isShow==1">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row banner-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="bannerForm" id="bannerForm">
+                                        
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">管理员ID：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerId" ng-model="settingId"  disabled>
+                                            </div>
+                                        </div>
+ -->
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">点灯超过：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerType" ng-model="lightDuration"><span style="position: relative;left: 313px;
+    top: -33px;font-size: 15px;font-weight: bold;color: gray;"> 分 自动关灯</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">角色ID：</label>
+                                            <div class="col-sm-9">
+                                                <select name="select" id="sel" data-ng-model="kwRoleIds">
+                                                    <option value="" >全部</option>
+                                                    <option  value="{{r.roleId}}" ng-repeat="r in roleList" >{{r.roleName}}</option>
+                                                </select> 
+                                            </div>
+                                        </div>       -->                               
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">预约祭祀开始时间：</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" class="bannerLink" ng-model="sacrificeStartTimeHour" placeholder="0-24">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <span style="position: relative;left: -71px;font-size: 18px;font-weight: bold;color: gray;top: 10px;">点</span>
+                                            </div>
+
+                                            <div class="col-sm-3" style="position: relative;left: -98px;">
+                                                <input class="form-control" class="bannerLink" ng-model="sacrificeStartTimeMinute" placeholder="0-60">
+                                                <span style="position: relative;left: 100px;top: -27px;font-size: 18px;font-weight: bold;color: gray;">分</span>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">预约祭祀结束时间：</label>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" class="bannerLink" ng-model="sacrificeEndTimeHour" placeholder="0-24">
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <span style="position: relative;left: -71px;font-size: 18px;font-weight: bold;color: gray;top: 10px;">点</span>
+                                            </div>
+
+                                            <div class="col-sm-3" style="position: relative;left: -98px;">
+                                                <input class="form-control" class="bannerLink" ng-model="sacrificeEndTimeMinute" placeholder="0-60">
+                                                <span style="position: relative;left: 100px;top: -27px;font-size: 18px;font-weight: bold;color: gray;">分</span>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">预约间隔时间：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerType" ng-model="timeInterval"><span style="position: relative;left: 313px;
+    top: -33px;font-size: 15px;font-weight: bold;color: gray;"> 分 </span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class=" rolexia1 clearfix">
+                                                <label class="col-sm-3 control-label">权限设置：</label>
+                                        </div> -->
+                                        <div class="form-group col-sm-12 col-sm-offset-1" ng-repeat="auth in authorityList">
+                                            <div class="col-sm-3 ">{{auth.description}}:</div>
+                                            <div class="col-sm-3" ng-repeat="son in auth.authorityList">
+                                            <input name='authoritys' style="width: 10px;" type="checkbox" value='{{son.authorityId}}'>
+                                            <span>{{son.pageName}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center clearfix">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="modifySetting()">保存</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

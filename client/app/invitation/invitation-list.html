@@ -1,0 +1,133 @@
+
+<div class="page page-table" ng-controller="InvitationCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">邀请人列表</h2>
+        </div>
+        
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="invitation_list_header">
+                    
+                   <label class="col-sm-3 col-xs-1">
+                        <span >邀请人ID:</span>
+                        <input type="text" id="invitationId" placeholder="输入邀请人ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwInvitationId" data-ng-keyup="search()">
+                    </label> 
+                    <label class="col-sm-3 col-xs-4">
+                        <span >邀请手机:</span>
+                        <input type="text" id="invitaterMobile" placeholder="输入邀请人手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwInvitaterMobile" data-ng-keyup="search()">
+                    </label> 
+
+                   <!--  <label class="col-sm-4 col-xs-4">
+                        <span >邀请人类型:</span>
+                    <select name="select" id="level" data-ng-change="search()" data-ng-model="kwUserType">
+                      <option value="" >全部</option>
+                        <option  value="1">经纪人</option>
+                        <option  value="2">普通</option>
+                    </select>
+                    </label>
+ -->
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/invitation/invitation-add?pageType=1">添加邀请人</a>
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <th><div class="th">
+                邀请人用户ID
+                </div></th>
+                <th><div class="th">
+                邀请人昵称
+                </div></th>
+                <th><div class="th">
+                邀请人手机
+                </div></th>
+                <th><div class="th">
+                邀请人类型
+                </div></th>
+                <th><div class="th">
+                邀请码
+                </div></th>
+                <th><div class="th">
+                邀请人数
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.invitationCodeId}}">
+                <td> <md-checkbox ng-click="selectItem(store.invitationCodeId)" ng-checked="selected[store.invitationCodeId]"></md-checkbox></td>
+                <td ng-bind="store.userId"></td>
+                <td ng-bind="store.nickName"></td>
+                <td ng-bind="store.inviterMobile"></td>
+                <td ng-bind="store.userType"></td>
+                <td ng-bind="store.inviteCode"></td>
+                <!-- <td ><a href="#/invitation/invitation-user-list?id={{store.userId}}&pageType=1" ng-bind="store.countInvitation"></a></td> -->
+                <td ><a href="#/invitation/invitation-user-list?id={{store.userId}}&pageType=1&isAgent=2" ng-bind="store.countInvitation"></a></td>
+                <td class="opertation">
+                    <!-- <a href="#/invitation/invitation-change?id={{store.invitationId}}">编辑</a> -->
+                    <a href="" ng-click="deleteInvitation(store.invitationCodeId)">删除</a>
+                    <!-- <a href="#/invitation/invitation-detail?id={{store.invitationCodeId}}">详情</a> -->
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

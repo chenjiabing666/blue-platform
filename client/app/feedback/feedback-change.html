@@ -1,0 +1,84 @@
+<section class="page-form-ele page" ng-controller="ChangeFeedbackCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">修改用户反馈</h2> </div>
+
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" class="userForm">
+
+                                     <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">用户反馈ID</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="feedbackName" ng-model="feedback.feedbackId" disabled="true">
+                                        </div>
+                                    </div>
+            
+                                    <div class="form-group clearfix">
+                                    <label for="" class="col-sm-3 control-label">用户反馈内容</label>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <section class="panel panel-default" >
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                <textarea style="width: 100%;min-height: 80px;padding: 15px;" ng-model="feedback.content" class="ui-editor" disabled></textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="form-group clearfix" ng-show="imageUrl1 !=''">
+                                        <label for="" class="col-sm-3 control-label">图片1</label>
+                                        <div class="col-sm-9">
+                                            <img class="showImage scaleImg" src="{{imageUrl1}}" alt="" style="width: 120px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix" ng-show="imageUrl2 !=''">
+                                        <label for="" class="col-sm-3 control-label">图片2</label>
+                                        <div class="col-sm-9">
+                                            <img class="showImage scaleImg" src="{{imageUrl2}}" alt="" style="width: 120px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix" ng-show="imageUrl3 !=''">
+                                        <label for="" class="col-sm-3 control-label">图片3</label>
+                                        <div class="col-sm-9">
+                                            <img class="showImage scaleImg" src="{{imageUrl3}}" alt="" style="width: 120px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                    <label for="" class="col-sm-3 control-label">管理员备注</label>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <section class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                <textarea style="width: 100%;min-height: 80px;padding: 15px;" ng-model="feedback.adminDescription" class="ui-editor"></textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div layout layout-sm='column' class="changeConfirm add-btn">
+                                        <md-button class="md-raised btn-w-md md-primary" ng-click="modifyFeedback()">确定修改</md-button><div class="divider"></div>
+                                    </div>
+                                    
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

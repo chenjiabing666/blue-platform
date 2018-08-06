@@ -1,0 +1,93 @@
+
+
+<section class="page-form-ele page" ng-controller="AddMessageCtrl">
+
+
+    <div class="row ui-section" ng-controller="AddMessageCtrl" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">发送消息</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button>
+        </div>
+        
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row message-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" id="bannerForm">
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">消息类型：</label>
+                                            <div class="col-sm-9">
+                                                <md-radio-group class="ui-md-radio-group-inline messageTypeSelect" ng-model="type">
+                                                    <md-radio-button value="1">平台消息</md-radio-button>
+                                                    <md-radio-button value="2">房间消息</md-radio-button>
+                                                    <!-- <md-radio-button value="2">促销活动</md-radio-button>
+                                                    <md-radio-button value="3">订单消息</md-radio-button> -->
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+
+                                        <!-- 后期做 -->
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">发送方式：</label>
+                                            <div class="col-sm-9">
+                                                <md-radio-group class="ui-md-radio-group-inline messageTypeSelect" ng-model="message.type">
+                                                    <md-radio-button value="1">平台</md-radio-button>
+                                                    <md-radio-button value="0">微信</md-radio-button>
+                                                     <md-radio-button value="2">短信</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">发送对象：</label>
+                                            <div class="col-sm-9">
+                                                <md-radio-group class="ui-md-radio-group-inline messageTypeSelect" ng-model="message.isRecommand">
+                                                    <md-radio-button value="true">统一发送</md-radio-button>
+                                                    <md-radio-button value="false">选择发送</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">消息内容：</label>
+                                        </div>
+                                        <!-- <div class="form-group clearfix">
+                                            <section class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div text-angular ng-model="message.content" class="ui-editor"></div>
+                                                </div>
+                                            </section>
+                                        </div> -->
+                                        <div class="form-group clearfix">
+                                            <md-input-container flex class="recommand">
+                                                <!-- <label class="product-detail-title">产品描述：</label> -->
+                                                <div class="row product-description-edit">
+                                                   
+                                                    <div class="col-md-12">
+                                                        <section class="panel panel-default">
+                                                            <div class="panel-body">
+                                                                <div text-angular ng-model="message.content" class="ui-editor"></div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </md-input-container>
+                                            <textarea class="activity.activity_planning-edit-html" ng-model="activity.activity_planning" style="display:none"></textarea>
+                                        </div>         
+
+                                       
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addMessage()">确定添加</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

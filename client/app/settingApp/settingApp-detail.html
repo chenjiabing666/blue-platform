@@ -1,0 +1,181 @@
+
+
+<section class="page-form-ele page" ng-controller="SettingAppDetailCtrl">
+
+
+    <div class="row ui-section" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">设置详情</h2> </div>
+        <div class="col-lg-8 clearfix" ng-if="isShow == 1"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick cancelClick" ng-click="cancelClick()" style="display:none">取消</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-show="isShow == 1">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form nsettingApp="userForm" class="userForm">
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">设置ID：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.settingId" disabled="" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">普通VIP费用：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.commonVipFee" >
+                                            </div>
+                                        </div>                                        
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">普通VIP每日发单次数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.cvipSendTasktimes" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">普通抢单次数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.cvipRobtaskNumber" >
+                                            </div>
+                                        </div>   
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">普通VIP关注人数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.cvipFocusNumber" >
+                                            </div>
+                                        </div>                                                                                                     
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">超级VIP发单次数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.svipSendTasktimes" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">超级VIP费用：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.superVipFee" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">vip试用期(天)：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.vipProbation" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">超级VIP抢单次数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.svipRobtaskNumber" >
+                                            </div>
+                                        </div>                                        
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">超级vip关注人数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.svipFocusNumber" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">平台线上单分成比例（%）：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.platformOnlineProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">平台线下单分成比例（%）：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.platformLineoffProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">平台礼物分成比例（%）</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.platformGiftProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">发单方经纪人线下单分成比例(%)</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.fromUserAgentProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">发单方邀请人线下单分成比例(%)</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.fromUserInviterProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">接单方经纪人线下单分成比例(%)</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.toUserAgentProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">接单方邀请人线下单分成比例(%)</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.toUserInviterProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">接单方线下单分成比例(%)：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.toUserProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">接单方线上单分成比例(%)：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.toUserOnlineProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">接单方收礼分成比例(%)：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="settingAppList.toUserGiftProportion" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模版图片1：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="activityIcon" ng-model="settingAppList.modelImage1" accept="image/*" ng-submit="doUploadPhoto1()" onchange="angular.element(this).scope().doUploadPhoto1(this)">
+                                            </div>
+                                        </div>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模版图片2</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="activityIcon" ng-model="settingAppList.modelImage2" accept="image/*" ng-submit="doUploadPhoto2()" onchange="angular.element(this).scope().doUploadPhoto2(this)">
+                                            </div>
+                                        </div>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模版图片3</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="activityIcon" ng-model="settingAppList.modelImage3" accept="image/*" ng-submit="doUploadPhoto3()" onchange="angular.element(this).scope().doUploadPhoto3(this)">
+                                            </div>
+                                        </div>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模板视频</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="activityIcon" ng-model="settingAppList.modelVideo" ng-submit="doUploadVideo()" onchange="angular.element(this).scope().doUploadVideo(this)">
+                                            </div>
+                                        </div>
+
+                                         <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="changeSettingApp()">确定修改</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>    
+        </div>
+    </div>
+</section>

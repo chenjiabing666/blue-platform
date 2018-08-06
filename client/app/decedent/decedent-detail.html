@@ -1,0 +1,233 @@
+
+
+<section class="page-form-ele page" ng-controller="DecedentDetailCtrl">
+
+
+    <div class="row ui-section"  >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">逝者详情</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-show="isShow==1">
+            <div class="row">
+                        <div class="col-md-2"></div>
+                         <div class="col-md-4">
+                            <a href="#/decedent/decedent-change?decedentId={{decedent.decedentId}}" class="btn btn-primary">绑定会员</a>
+                        </div>
+
+                        <!-- <div class="col-md-4" ng-show="isRestShow==1">
+                           <button class="btn btn-primary" ng-click="resetPassword(decedent.decedentId)">重置密码</button>
+                        </div> -->
+
+
+                    </div>
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row decedent-detail" >
+                        <div class="col-lg-8 col-lg-offset-2" class="videoBg">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="decedentForm" class="decedentForm">
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">逝者Id：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="decedentId" ng-model="decedent.decedentId" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">性别：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="gender" ng-model="decedent.decedentGender" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">逝者姓名：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="realName" ng-model="decedent.decedentName" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">年龄：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.age" ng-disabled="true">
+                                            </div>
+                                        </div> -->
+                                         
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">逝者身份证：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="idCard" ng-model="decedent.idCard" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">逝者生辰：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="birthDay" ng-model="decedent.birthDay" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">逝者忌日：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="deathDate" ng-model="decedent.deathDate" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">星座：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.constellation" ng-disabled="true">
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">地址：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.address" ng-disabled="true">
+                                            </div>
+                                        </div> -->
+                                         <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">签名：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="gender" ng-model="decedent.signature" ng-disabled="true">
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">职业：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.job" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">等级：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="gender" ng-model="decedent.level" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">积分：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.integral" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">技能：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="gender" ng-model="decedent.skill" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">余额：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="mobile" ng-model="decedent.balance" ng-disabled="true">
+                                                </div>
+                                        </div> -->
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">头像：</label>
+                                            <div class="col-sm-2">
+                                                <img class="showImage scaleImg" src="{{decedent.decedentIcon}}" alt="" >
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">视频：</label>
+                                            <div class="col-sm-9">
+                                              
+                                                <video ng-click="videoClick()" ng-if="videoImg" class="myVideo" ng-src="{{videoUrl(decedent.approveVideoUrl)}}" width="320" height="240">
+                                                </video>
+                                            </div>
+                                           
+                                        </div> -->
+
+
+                                         
+                                        <!--  <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">身份证号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="idNumber" ng-model="decedent.idNumber" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">银行卡号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bankCard" ng-model="decedent.bankCard" ng-disabled="true">
+                                            </div>
+                                        </div> -->
+
+                                    </form>
+
+                                    <div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-10 col-xs-10">
+                                                <table class="table table-striped">
+  <caption>已绑定的用户</caption>
+  <thead>
+    <tr>
+      <th>用户Id</th>
+      <th>用户姓名</th>
+      <th>性别</th>
+      <th>用户手机号码</th>
+      <th>用户类型</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="u in decedents" id="delete-{{u.userId}}">
+      <td>{{u.userId}}</td>
+      <td>{{u.userName}}</td>
+      <td>{{u.sex}}</td>
+      <td>{{u.mobile}}</td>
+      <td>{{u.vipType}}</td>
+      <td><button class="btn btn-primary" ng-click="unbindingDecedent(u.userId)" ng-if="u.userId!=null">解除绑定</button></td>
+    </tr>
+
+  </tbody>
+</table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>  
+
+        </div>
+        <video class="myVideoBig" ng-if="videoBig" ng-src="{{videoUrl(decedent.approveVideoUrl)}}"  controls="controls"  width="50%" height="60%">
+        </video>
+        <a class="closeVideo" ng-if="videoBig" ng-click = "closeVideo()">关闭</a>
+    </div>
+</section>
+
+<style type="text/css">
+    .myVideoBig{
+        position: absolute;
+        left: 35%;
+        top: 350px;  
+    }
+    .closeVideo{
+        position: absolute;
+        left: 78%;
+        top: 350px;
+
+
+    }
+</style>
+<style type="text/css">
+    .scaleImg{
+        width: 50px;
+        z-index: 2;
+    }
+    .scaleImg:hover{
+        transform: scale(4);
+    }
+</style>

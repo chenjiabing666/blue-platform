@@ -1,0 +1,79 @@
+
+
+<section class="page-form-ele page" ng-controller="TaskKindDetailCtrl">
+
+
+    <div class="row ui-section"  >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">任务品类详情</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row TaskKind-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="articleForm" class="articleForm">
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">任务品类Id：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="taskKindId" ng-model="taskKind.taskKindId" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">标题：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="title" ng-model="taskKind.title" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">人数上线：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="maxmember" ng-model="taskKind.maxmember" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                       <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">图片地址：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="imageUrl" ng-model="taskKind.imageUrl" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        
+										<div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">是否开启饮酒：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="isOpenDrink" ng-model="taskKind.isOpenDrink" ng-disabled="true">
+                                            </div>
+                                        </div>
+										<div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">是否开启匿名发布：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="isOpenAnonymity" ng-model="taskKind.isOpenAnonymity" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">标题说明：</label>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <section class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                <textarea style="width: 100%;min-height: 300px;padding: 15px;" ng-model="taskKind.titleRemark" class="ui-editor" disabled="true"></textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

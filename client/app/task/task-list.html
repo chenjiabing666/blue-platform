@@ -1,0 +1,172 @@
+
+<div class="page page-table" ng-controller="taskCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">订单列表</h2>
+        </div>
+        
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="task_list_header user_list_header">
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span >约会项目:</span>
+                        <input type="text" id="taskTitle" placeholder="输入约会标题" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwtTaskTitle" data-ng-keyup="search()">
+                    </label> 
+                    <label class="col-sm-3 col-xs-3">
+                        <span >手机号:</span>
+                        <input type="text" id="taskTitle" placeholder="输入手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwtMobile" data-ng-keyup="search()">
+                    </label> 
+                    <label class="col-sm-3 col-xs-3">
+                        <span >支付状态:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="kwStatus1">
+                        <option value="">全部</option>
+                        <option value="1">未支付</option>
+                        <option value="2">已支付</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-3 col-xs-3" style="height: 28px;">
+                        <span >订单状态:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="kwStatus2">
+                        <option value="">全部</option>
+                        <option value="6">待抢单</option>
+                        <option value="3">已抢满</option>
+                        <option value="4">已完成</option>
+                        <option value="5">已取消</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-5 col-xs-5">
+                        <span >订单时间:</span>
+                        <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分">
+                        <span>-</span>
+                        <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分">                
+                    </label> 
+                    <div class="col-sm-1 col-xs-1 search" data-name="search" data-code="f1c3" ng-click="search()" >
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
+                    <label class="col-sm-5 col-xs-5" style="margin-left: 70px;">
+                        <div ng-click="emptyCondition()"><span>清空条件</span></div>
+                    </label> 
+                    
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <!-- <a class=" md-primary add-product" href="#/task/task-add">添加订单</a> -->
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <th><div class="th">
+                订单号
+                </div></th>
+                <th><div class="th">
+                用户ID
+                </div></th>
+                <th><div class="th">
+                用户手机
+                </div></th>
+                <th><div class="th">
+                约会项目
+                </div></th>
+                <th><div class="th">
+                订单金额
+                </div></th>
+                <th><div class="th">
+                订单状态
+                </div></th>
+                <th><div class="th">
+                约会开始时间
+                </div></th>
+                <th><div class="th">
+                约会时长
+                </div></th>
+                <th><div class="th">
+                订单备注
+                </div></th>
+                <th><div class="th">
+                管理员id
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskId}}">
+                <td> <md-checkbox ng-click="selectItem(store.taskId)" ng-checked="selected[store.taskId]"></md-checkbox></td>
+                <td ng-bind="store.orderCode"></td>
+                <td ng-bind="store.userId"></td>
+                <td ng-bind="store.userName"></td>
+                <td ng-bind="store.taskTitle"></td>
+                <td ng-bind="store.rewardMoney"></td> 
+                <td ng-bind="store.status | paseTaskStatus"></td> 
+                <td ng-bind="store.time"></td>
+                <td ng-bind="store.duration"></td>
+                <td ng-bind="store.adminDescription"></td>
+                <td ng-bind="store.adminId"></td>
+                <td class="opertation">
+                    <a href="#/task/task-change?taskId={{store.taskId}}&status={{store.status}}">编辑</a>
+                    <a href="" ng-click="deleteTask(store.taskId)">删除</a>
+                    <a href="#/task/task-detail?id={{store.taskId}}">详情</a>
+                    <a href="#/task/task-deal?taskId={{store.taskId}}&status={{store.status}}" ng-show="store.status!=1 && store.status!=2 && store.status!=0">处理</a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

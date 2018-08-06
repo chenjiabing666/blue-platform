@@ -1,0 +1,100 @@
+
+<div class="nav-wrapper" style="overflow-y:auto" ng-controller="AppCtrl">
+    <ul id="nav"
+        class="nav"
+        data-slim-scroll
+        data-collapse-nav
+        data-highlight-active ng-if="isHome == 1"><!-- 首页 -->
+        <li><a md-button aria-label="meanu" href="#/dashboard"><i class="zmdi zmdi-home"></i><span>主页</span> </a></li>
+
+      <!--   <li>
+            <a md-button aria-label="meanu" href="#/admin"><i class="zmdi zmdi-edit"></i><span>Test</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/test/test-add"><i class="fa fa-circle"></i><span>发布测试</span></a></li>
+            </ul>
+        </li>
+ -->
+        <li>
+            <a md-button aria-label="meanu" href="#/admin"><i class="zmdi zmdi-edit"></i><span>管理员</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/admin/admin-list"><i class="fa fa-circle"></i><span
+                >管理员列表</span></a></li>
+
+                <li><a md-button aria-label="meanu" href="#/admin/admin-add"><i class="fa fa-circle"></i><span>添加管理员</span></a></li>
+
+                <li><a md-button aria-label="meanu" href="#/admin/admin-change"><i class="fa fa-circle"></i><span>密码修改</span></a></li>
+            </ul>
+        </li>
+
+
+        <li>
+            <a md-button aria-label="meanu" href="#/ui"><i class="zmdi zmdi-account"></i><span>用户管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/user/user-list"><i class="fa fa-circle"></i><span
+                >用户列表</span></a></li>
+
+                <!-- <li><a md-button aria-label="meanu" href="#/user/user-add"><i class="fa fa-circle"></i><span
+                >添加用户</span></a></li> -->
+            </ul>
+        </li>   
+
+
+        <li>
+            <a md-button aria-label="meanu" href="#/decedent"><i class="zmdi zmdi-account"></i><span>逝者管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/decedent/decedent-list"><i class="fa fa-circle"></i><span
+                >逝者列表</span></a></li>
+            </ul>
+        </li> 
+
+        <li>
+            <a md-button aria-label="meanu" href="#/image"><i class="zmdi zmdi-account"></i><span>照片管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/image/image-list"><i class="fa fa-circle"></i><span
+                >照片审核</span></a></li>
+            </ul>
+            
+        </li> 
+
+        <li>
+            <a md-button aria-label="meanu" href="#/video"><i class="zmdi zmdi-account"></i><span>视频管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/video/video-list"><i class="fa fa-circle"></i><span
+                >视频审核</span></a></li>
+            </ul>
+            
+        </li>
+
+        <li>
+            <a md-button aria-label="meanu" href="#/setting"><i class="zmdi zmdi-account"></i><span>设置</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/setting/setting-change"><i class="fa fa-circle"></i><span
+                >系统参数设置</span></a></li>
+            </ul>
+            
+        </li>
+
+
+        <li>
+            <a md-button aria-label="meanu" href="#/banner"><i class="zmdi zmdi-account"></i><span>广告管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/banner/banner-list"><i class="fa fa-circle"></i><span
+                >广告列表</span></a></li>
+
+                <!-- <li><a md-button aria-label="meanu" href="#/banner/banner-add"><i class="fa fa-circle"></i><span
+                >添加广告</span></a></li> -->
+            </ul>
+            
+        </li>
+
+        <!-- <li>
+            <a md-button aria-label="meanu" href="#/teacher"><i class="zmdi zmdi-accounts-list-alt"></i><span>教师管理</span></a>
+            <ul>
+                <li><a md-button aria-label="meanu" href="#/teacher/teacher-list"><i class="fa fa-circle"></i><span
+                >教师列表</span></a></li>
+                <li><a md-button aria-label="meanu" href="#/novel/novel-add"><i class="fa fa-circle"></i><span>添加礼物</span></a></li>
+            </ul>
+        </li> -->
+
+    </ul>
+</div>

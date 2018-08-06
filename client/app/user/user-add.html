@@ -1,0 +1,89 @@
+
+
+<section class="page-form-ele page" ng-controller="UserAddCtrl">
+
+
+    <div class="row ui-section" ng-controller="UserAddCtrl" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加用户</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-show="isShow == 1">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" class="userForm">
+                                    
+
+                                       <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">会员姓名：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userName" ng-model="user.userName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">手机号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userPsd" ng-model="user.mobile">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">验证码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userPsd" ng-model="user.code">
+                                            </div>
+
+                                            <div class="col-sm-3" style="position: relative;left: 434px;top: -37px;">
+                                                <button class="btn btn-danger" ng-click="sendCode(user.mobile)">获取验证码</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">会员类型：</label>
+                                            <div class="col-sm-9">
+                                                <!-- <input class="form-control" class="userPsd" ng-model="user.mobile"> -->
+                                                <select name="vipType" ng-model="user.vipType" class="form-control">
+                                                    <option value="1">普通会员</option>
+                                                    <option value="2">藏晶苑会员</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">会员性别：</label>
+                                            <div class="col-sm-9">
+                                                <!-- <input class="form-control" class="userPsd" ng-model="user.mobile"> -->
+                                                <select name="sex" ng-model="user.sex" class="form-control">
+                                                    <option value="1">男</option>
+                                                    <option value="2">女</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        
+                                       <!--  <div class="form-group clearfix">
+                                           <label for="" class="col-sm-3 control-label">昵称：</label>
+                                           <div class="col-sm-9">
+                                               <input class="form-control" class="nickName" ng-model="user.nickName">
+                                           </div>
+                                       </div> -->
+                                        
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="adduser()">确定添加</md-button><div class="divider"></div>
+                                        </div>
+                                    
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

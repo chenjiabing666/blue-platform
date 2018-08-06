@@ -1,0 +1,181 @@
+<div class="page page-table" ng-controller="CustomTaskCtrl">
+    <div class="row ui-section">
+        <div class="col-md-12">
+            <div class="col-md-8 clearfix">
+                <h2 class="section-header">
+                    自定义订单列表
+                </h2>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="isShow == 1">
+            <section class="panel panel-default table-dynamic">
+                <div class="table-filters">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form class="task_list_header">
+                                <label class="col-sm-3 col-xs-4">
+                                    <span>
+                                        手机号:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="kwtMobile" id="taskTitle" placeholder="输入手机号" type="text">
+                                    </input>
+                                </label>
+                                <label class="col-sm-5 col-xs-5">
+                                    <span>
+                                        订单时间:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="KwStartTime" id="dateInput" onchange="" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="年-月-日 时-分" type="text">
+                                        <span>
+                                            -
+                                        </span>
+                                        <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="KwEndTime" id="dateInput1" onchange="" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="年-月-日 时-分" type="text">
+                                        </input>
+                                    </input>
+                                </label>
+                                <div class="col-sm-1 col-xs-1 search" data-code="f1c3" data-name="search" ng-click="search()">
+                                    <i class="zmdi zmdi-search">
+                                    </i>
+                                </div>
+                                <label class="col-sm-5 col-xs-5">
+                                    <div ng-click="emptyCondition()">
+                                        <span>
+                                            清空条件
+                                        </span>
+                                    </div>
+                                </label>
+                                <div class="col-sm-6 col-xs-8" style="margin-top:0px;">
+                                    <md-radio-group class="ui-md-radio-group-inline" data-ng-change="search()" id="gender" ng-model="kwExamine">
+                                        <md-radio-button value="3">
+                                            待审核
+                                        </md-radio-button>
+                                        <md-radio-button value="1">
+                                            已通过
+                                        </md-radio-button>
+                                        <md-radio-button value="2">
+                                            未通过
+                                        </md-radio-button>                                        
+                                    </md-radio-group>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    订单号
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户ID
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户手机
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    约会项目
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    约会说明
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    约会开始时间
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    约会金额
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    约会时长
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    管理员id
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    操作
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="delete-{{store.taskId}}" data-ng-repeat="store in currentPageStores">
+                            <!-- <td> <md-checkbox ng-click="selectItem(store.taskId)" ng-checked="selected[store.taskId]"></md-checkbox></td> -->
+                            <td ng-bind="store.orderCode">
+                            </td>
+                            <td ng-bind="store.userId">
+                            </td>
+                            <td ng-bind="store.userName">
+                            </td>
+                            <td ng-bind="store.taskTitle">
+                            </td>
+                            <td ng-bind="store.titleRemark">
+                            </td>
+                            <td ng-bind="store.rewardMoney">
+                            </td>
+                            <td ng-bind="store.time">
+                            </td>
+                            <td ng-bind="store.duration">
+                            </td>
+                            <td ng-bind="store.adminId">
+                            </td>
+                            <td class="opertation">
+                                <a href="" ng-click="reviewTask(store.taskId,1)" ng-if="kwExamine == 3">
+                                    通过
+                                </a>
+                                <a href="" ng-click="reviewTask(store.taskId,2)" ng-if="kwExamine == 3">
+                                    拒绝
+                                </a>
+                                <a href="" ng-click="deleteTask(store.taskId)">
+                                    删除
+                                </a>
+                                <a href="#/task/task-detail?id={{store.taskId}}">
+                                    详情
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示
+                                <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                                </select>
+                                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <uib-pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" next-text="›" ng-change="select(currentPage)" ng-model="currentPage" previous-text="‹" rotate="false" total-items="total">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

@@ -1,0 +1,80 @@
+<section class="page-form-ele page" ng-controller="AuthenticationDetailCtrl">
+
+    <div class="row ui-section"  >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">认证详情</h2> </div>
+        <div class="col-md-8 clearfix" ng-if="authAdmin.roleId==1 || authAdmin.roleId==3"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-if="authAdmin.roleId==1 || authAdmin.roleId==3">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" class="userForm" style="min-height:500px">
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">认证ID：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userId" ng-model="authentication.authenticationId" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">用户ID：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userId" ng-model="authentication.userId" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">审核状态：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="userId" ng-model="authentication.status" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">身份证正反照：</label>
+                                            <div class="col-sm-2">
+                                                <img class="showImage scaleImg" src="{{authentication.holdIdImage}}" alt="" >
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <img class="showImage scaleImg " src="{{authentication.onlyIdImage}}" alt="" >
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>
+
+
+<style type="text/css">
+    .scaleImg{
+        width: 50px;
+        z-index: 9 !important;
+    }
+    .scaleImg:hover{
+        transform: scale(5);
+    }
+</style>
+<script type="text/javascript">
+// window.onload=function(){
+//     var showImageHeight = $('.showImage').height();
+//     console.log('sdaksdjkals',showImageHeight);
+//     $('.userForm').css('min-height',showImageHeight);
+//     $('.scaleImg').mouseover(function(){
+//         $('.scaleImg').css('transform','scale(6)');
+//     })
+     
+//     $('.scaleImg').mouseout(function(){
+//         $('.scaleImg').css('transform','scale(1)');
+//     })
+// } 
+    
+</script>

@@ -1,0 +1,163 @@
+    
+
+<section class="page-form-ele page" ng-controller="AddNovelCtrl">
+
+    <div class="row ui-section" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">
+            录入小说</h2>
+        </div>
+
+    <div class="col-md-8 clearfix"> 
+        <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+    </div>
+
+    <div class="col-md-12">
+        <section class="panel panel-default">
+            <div class="panel-body">
+                <div class="row banner-detail" >
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <md-content layout-padding>
+                                <form name="novelForm">
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">
+                                            小说名称：
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="novelName" ng-model="novel.novelName">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">作者名称：</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="authorName" ng-model="novel.authorName">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">小说类型：</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" class="novelType" ng-model="novel.novelType">
+                                                <option value="1">都市生活</option>
+                                                <option value="2">官场职场</option>
+                                                <option value="3">玄幻仙侠</option>
+                                                <option value="4">悬疑探案</option>
+                                                <option value="5">灵异恐怖</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">小说类型：</label>
+                                        <div class="col-sm-9">
+                                            <select name="select" id="homeRecommend" data-ng-model="novel.novelType">
+                                                <option value="1">都市生活</option>
+                                                <option value="2">官场职场</option>
+                                                <option value="3">玄幻仙侠</option>
+                                                <option value="4">悬疑探案</option>
+                                                <option value="5">灵异恐怖</option>
+                                            </select>   
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">封面图片：</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="activityIcon" ng-model="novel.imageUrl" accept="image/*" ng-submit="doUploadPhoto()" onchange= "angular.element(this).scope().doUploadPhoto(this)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">首页推荐：</label>
+                                        <div class="col-sm-9">
+                                            <md-radio-group class="ui-md-radio-group-inline novel" ng-model="novel.homeRecommand">
+                                                <md-radio-button value="1">是</md-radio-button>
+                                                <md-radio-button value="2">否</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">适用人群：</label>
+                                        <div class="col-sm-9">
+                                            <md-radio-group class="ui-md-radio-group-inline novel" ng-model="novel.gender">
+                                                <md-radio-button value="1">男生喜欢</md-radio-button>
+                                                <md-radio-button value="2">女生喜欢</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">是否出版：</label>
+                                        <div class="col-sm-9">
+                                            <md-radio-group class="ui-md-radio-group-inline novel" ng-model="novel.isPublished">
+                                                <md-radio-button value="1">是</md-radio-button>
+                                                <md-radio-button value="2">否</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">是否连载：</label>
+                                        <div class="col-sm-9">
+                                            <md-radio-group class="ui-md-radio-group-inline novel" ng-model="novel.isFinished">
+                                                <md-radio-button value="1">是</md-radio-button>
+                                                <md-radio-button value="2">否</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">是否免费：</label>
+                                        <div class="col-sm-9">
+                                            <md-radio-group class="ui-md-radio-group-inline novel" ng-model="novel.isFree">
+                                            <md-radio-button value="1">是</md-radio-button>
+                                            <md-radio-button value="2">否</md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">标签：</label>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" ng-model="novel.labels">工程师
+                                            <input type="checkbox" ng-model="user.jobs.designer">设计师
+                                            <input type="checkbox" ng-model="user.jobs.teacher">教师
+                                        </div>
+                                    </div> -->
+
+                                        <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">标签：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="labels" ng-model="novel.labels">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">字数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="wordNumber" ng-model="novel.wordNumber">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">发布人id：</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" class="publishId" ng-model="novel.publishId">
+                                                </div>
+                                            </div>
+
+                                            <div layout layout-sm='column' class="changeConfirm add-btn">
+                                                <md-button class="md-raised btn-w-md md-primary" ng-click="addNovel()">确定添加</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

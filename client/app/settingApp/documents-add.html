@@ -1,0 +1,96 @@
+<section class="page-form-ele page" ng-controller="AddDocumentsCtrl">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">
+                添加价格
+            </h2>
+        </div>
+        <div class="col-md-8 clearfix">
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">
+                返回
+            </md-button>
+            <div class="divider">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="md-inline-form inputdemoBasicUsage" layout="column" ng-cloak="">
+                                <md-content layout-padding="">
+                                    <form class="userForm" name="userForm">
+                                        <div class="form-group clearfix">
+                                            <label class="col-sm-3 control-label" for="">
+                                                邀请人类型：
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <md-radio-group class="ui-md-radio-group-inline document" ng-model="document.type">
+                                                    <md-radio-button value="1">
+                                                        等级规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="2">
+                                                        vip介绍
+                                                    </md-radio-button>
+                                                    <md-radio-button value="3">
+                                                        充值规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="4">
+                                                        邀请好友规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="5">
+                                                        奖励规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="6">
+                                                        消息提醒规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="7">
+                                                        关于我们
+                                                    </md-radio-button>
+                                                    <md-radio-button value="8">
+                                                        用户协议
+                                                    </md-radio-button>
+                                                    <md-radio-button value="9">
+                                                        经济人规则
+                                                    </md-radio-button>
+                                                    <md-radio-button value="11">
+                                                        其他
+                                                    </md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label class="col-sm-3 control-label" for="">
+                                                文案内容
+                                            </label>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <section class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="col-sm-12">
+                                                        <textarea class="ui-editor" ng-model="document.documentContent" style="width: 100%;min-height: 150px;padding: 15px;">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="changeConfirm add-btn" layout="" layout-sm="column">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addDocument()">
+                                                确定发布
+                                            </md-button>
+                                            <div class="divider">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .ta-editor{overflow: hidden !important;}
+</style>

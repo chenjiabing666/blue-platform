@@ -1,0 +1,163 @@
+<div class="page page-table" ng-controller="DivideIntoCtrl">
+    <div class="row ui-section">
+        <div class="col-md-12">
+            <div class="col-md-8 clearfix">
+                <h2 class="section-header">
+                    分成列表
+                </h2>
+            </div>
+            <div class="col-md-6 clearfix">
+                <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">
+                    返回
+                </md-button>
+                <div class="divider">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default table-dynamic">
+                <div class="table-filters">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form class="deal_list_header">
+                                <!-- <label class="col-sm-3 col-xs-1">
+                                    <span>
+                                        交易ID:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="kwDealId" id="dealId" placeholder="输入交易ID" type="text">
+                                    </input>
+                                </label> -->
+                                <!-- <label class="col-sm-3 col-xs-4">
+                                    <span>
+                                        用户ID:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="kwUserId" id="deal" placeholder="输入用户ID" type="text">
+                                    </input>
+                                </label> -->
+                                <!-- <label class="col-sm-3 col-xs-4">
+                                    <span>
+                                        用户手机:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="kwUserMobile" id="deal" placeholder="输入用户手机号" type="text">
+                                    </input>
+                                </label> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <!-- <th>
+                                <div class="th">
+                                    <md-checkbox ng-checked="isSelectedAll" ng-click="selectAll()">
+                                        全选
+                                    </md-checkbox>
+                                </div>
+                            </th> -->
+                            <th>
+                                <div class="th">
+                                    交易ID
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户ID
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户手机
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    分成角色
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    分成金额
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    交易类型
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    交易描述
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    创建时间
+                                </div>
+                            </th>
+                           <!--  <th>
+                                <div class="th">
+                                    操作
+                                </div>
+                            </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="delete-{{store.dealId}}" data-ng-repeat="store in currentPageStores">
+                            <!-- <td>
+                                <md-checkbox ng-checked="selected[store.dealId]" ng-click="selectItem(store.dealId)">
+                                </md-checkbox>
+                            </td> -->
+                            <td ng-bind="store.dealId">
+                            </td>
+                            <td ng-bind="store.userId">
+                            </td>
+                            <td ng-bind="store.userMobile">
+                            </td>
+                            <td ng-bind="store.userType | parseUserType">
+                            </td>
+                            <td ng-bind="store.price">
+                            </td>
+                            <td ng-bind="store.dealType | parseDealType">
+                            <td ng-bind="store.description">
+                            </td>
+                            <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'">
+                            </td>
+                           <!--  <td class="opertation">
+                                
+                                <a href="" ng-click="deleteDeal(store.dealId)">
+                                    删除
+                                </a>
+                                <a href="#/deal/deal-detail?id={{store.dealId}}&pageType=3">
+                                    详情
+                                </a>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示
+                                <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                                </select>
+                                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <uib-pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" next-text="›" ng-change="select(currentPage)" ng-model="currentPage" previous-text="‹" rotate="false" total-items="total">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

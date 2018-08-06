@@ -1,0 +1,210 @@
+<div class="page page-table" ng-controller="AuthenticationCtrl">
+    <div class="row ui-section">
+        <div class="col-md-12">
+            <div class="col-md-8 clearfix">
+                <h2 class="section-header">
+                    身份认证
+                </h2>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="isShow == 1">
+            <section class="panel panel-default table-dynamic">
+                <div class="table-filters">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form class="elite_list_header">
+                                <label class="col-sm-3 col-xs-1">
+                                    <span>
+                                        用户手机号:
+                                    </span>
+                                    <input class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-keyup="search()" data-ng-model="kwMobile" id="eliteId" placeholder="输入用户手机号" type="text">
+                                    </input>
+                                </label>
+                                <!-- <label class="col-sm-3 col-xs-4">
+                        <span >精英昵称:</span>
+                        <input type="text" id="nickName" placeholder="输入精英昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwNickName" data-ng-keyup="search()">
+                    </label> 
+ -->
+                                <!-- <label class="col-sm-4 col-xs-4">
+                        <span >精英等级:</span>
+                    <select name="select" id="level" data-ng-change="search()" data-ng-model="level">
+                        <option value="0" >初级精英</option>
+                        <option  value="1">高级精英</option>
+                        <option  value="2">砖石精英</option>
+                        <option value="">全部</option>
+                    </select>                  
+                    </label> -->
+                                <!--  <label class="col-sm-4 col-xs-4">
+                        <span >所属经纪人:</span>
+                        <input type="text" id="name" placeholder="输入所属经纪人" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwName" data-ng-keyup="search()">
+                    </label> -->
+                                <!--  <label class="col-sm-4 col-xs-4">
+                        <span >手机号码:</span>
+                        <input type="text" id="mobile" placeholder="输入手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwMobile" data-ng-keyup="search()">
+                    </label> -->
+                                <!--   <label class="col-sm-4 col-xs-4">
+                        <span >所属客服:</span>
+                        <input type="text" id="csName" placeholder="输入所属客服" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwCsName" data-ng-keyup="search()">
+                    </label> -->
+                                <div class="col-sm-6 col-xs-8" style="margin-top:0px;">
+                                    <md-radio-group id="gender" class="ui-md-radio-group-inline" ng-model="kwExamine" data-ng-change="search()">
+                                         <md-radio-button value="1">
+                                            未审核
+                                        </md-radio-button>
+                                        <md-radio-button value="2">
+                                            已通过
+                                        </md-radio-button>
+                                        <md-radio-button value="3">
+                                            已拒绝
+                                        </md-radio-button>
+                                        <md-radio-button value="">
+                                            全部
+                                        </md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                                <!-- <div class="col-sm-6 col-xs-8" style="margin-top:0px;">
+                                    <md-radio-group class="ui-md-radio-group-inline" data-ng-change="search()" id="gender" ng-model="kwExamine">
+                                        <md-radio-button value="1">
+                                            未审核
+                                        </md-radio-button>
+                                        <md-radio-button value="2">
+                                            已通过
+                                        </md-radio-button>
+                                        <md-radio-button value="3">
+                                            已拒绝
+                                        </md-radio-button>
+                                    </md-radio-group>
+                                </div> -->
+                            </form>
+                        </div>
+                        <div class="col-md-4 clearfix">
+                            <!-- <a class=" md-primary add-product" href="#/elite/elite-add">添加精英</a> -->
+                            <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a>
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                            <a class=" md-primary add-product" ng-click="reviewAll(2)">
+                                批量通过
+                            </a>
+                            <a class=" md-primary add-product" ng-click="reviewAll(3)">
+                                批量拒绝
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    <md-checkbox ng-checked="isSelectedAll" ng-click="selectAll()">
+                                        全选
+                                    </md-checkbox>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    认证ID
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户ID
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    用户手机号
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    身份证正面
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    身份证反面
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    审核状态
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    审核人
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    操作
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="delete-{{store.eliteId}}" data-ng-repeat="store in currentPageStores">
+                            <td>
+                                <md-checkbox ng-checked="selected[store.authenticationId]" ng-click="selectItem(store.authenticationId)">
+                                </md-checkbox>
+                            </td>
+                            <td ng-bind="store.authenticationId">
+                            </td>
+                            <td ng-bind="store.userId">
+                            </td>
+                            <td ng-bind="store.userName">
+                            </td>
+                            <td>
+                                <img alt="" class="showImage scaleImg" height="30" src="{{store.holdIdImage}}" width="60"/>
+                            </td>
+                            <td>
+                                <img alt="" class="showImage scaleImg" height="30" src="{{store.onlyIdImage}}" width="60"/>
+                            </td>
+                            <td ng-bind="store.status | parseIsReview">
+                            </td>
+                            <td ng-bind="store.adminId">
+                            </td>
+                            <td class="opertation">
+                                <a href="" ng-click="review(store.authenticationId,2)" ng-if="kwExamine==1">
+                                    通过
+                                </a>
+                                <a href="" ng-click="review(store.authenticationId,3)" ng-if="kwExamine==1">
+                                    拒绝
+                                </a>
+                                <a href="#/authentication/authentication-detail?id={{store.authenticationId}}">
+                                    详情
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示
+                                <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                                </select>
+                                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <uib-pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" next-text="›" ng-change="select(currentPage)" ng-model="currentPage" previous-text="‹" rotate="false" total-items="total">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

@@ -1,0 +1,134 @@
+
+<div class="page page-table" ng-controller="MessageCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">消息列表</h2>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <section class="panel panel-default table-dynamic">
+        <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="message_list_header">
+                    
+                    <label class="col-sm-4 col-xs-4">
+                        <span >消息类型:</span>
+                        <select name="select" id="sel" data-ng-change="search()" data-ng-model="kwMessageType">
+                            <option name="全部" value="">全部</option>
+                            <option name="系统消息" value="1">系统消息</option>
+                            <option name="点赞消息" value="2">点赞消息</option> 
+                            <option name="评论消息" value="3">评论消息</option> 
+                            <!-- <option value="4">积分消息</option>
+                            <option value="5">商品活动消息</option> -->
+                        </select>
+                    
+                    </label>
+
+                   <!-- <label class="col-sm-4 col-xs-4">
+                        <span >发送方式:</span>
+                        <select name="select" id="sel" >
+                            <option value="平台">平台</option>
+                            <option value="微信">微信</option>
+                            <option value="短信">短信</option>
+                            
+                        </select>
+                    
+                    </label> -->                 
+                    <!-- <div class="col-sm-1 col-xs-1 search" data-name="search" data-code="f1c3" ng-click="searchMessage(currentPage,numPerPage)" ><i class="zmdi zmdi-search"></i></div>  --> 
+
+                </form>
+            </div>
+            <div class="col-md-4 clearfix" ng-show="isAddMessage == 1">    
+                    <a class=" md-primary add-product" href="#/message/message-add" >发送消息</a>
+            </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+                <th><div class="th">
+                消息ID
+                </div></th>
+                <th><div class="th">
+                发送者
+                </div></th>
+                <th><div class="th">
+                接收者
+                </div></th>
+                 <th><div class="th">
+                消息类型
+                </div></th>
+                 <th><div class="th">
+                发送内容
+                </div></th>
+                 <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+               
+         <tbody>
+                <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.messageId}}">
+                <td ng-bind="store.messageId"></td>
+                <td ng-bind="store.fromUserId"></td>
+                <td ng-bind="store.toUserId"></td>
+                <td ng-bind="store.messageType | parseMessageType"></td>
+                <td ng-bind="store.content"></td>
+                <td class="opertation">
+                <!--
+                <a href="#/message/message-change?messageId={{store.messageId}}&&type={{store.type}}&&content={{store.content}}&&fromUserId={{store.fromUserId}}&&toUserId={{store.toUserId}}" >修改消息</a> 
+                -->
+                <a href="" ng-click="deleteMessage(store.messageId)" >删除</a>
+
+            </tr>
+            </tbody>
+          
+            <tbody>
+            
+             
+         <!--   <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.messageId}}">
+                <td ng-bind="store.messageId"></td>
+                <td ng-bind="store.title"></td>
+                <td ng-bind="type{{store.type}}"></td>-->
+                <!-- <td class="type-{{store.type}}"></td> -->
+              <!--  <td class="opertation"><a href="#/message/message-detail?id={{store.messageId}}">查看</a> <a href="#/message/message-detail?id={{store.messageId}}">修改</a> <a href="" ng-click="deleteMessage(store.messageId)">删除</a></td>
+            </tr>-->
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>

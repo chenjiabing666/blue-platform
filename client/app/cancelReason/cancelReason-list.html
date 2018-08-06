@@ -1,0 +1,98 @@
+
+<div class="page page-table" ng-controller="CancelReasonCtrl">
+
+    <div class="row ui-section">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">取消原因列表</h2>
+        </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+            <div class="table-filters">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12" >
+                        <form class="cancelReason_list_header">
+                            <label class="col-sm-3 col-xs-3">
+                                <span >取消原因名:</span>
+                                <input type="text" id="nickName" placeholder="输入取消原因名" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                                data-ng-model="kwCancelReasonName" data-ng-keyup="search()">
+                            </label> 
+                        </form>
+                    </div>
+
+                    <div class="col-md-4 clearfix">    
+                        <a class=" md-primary add-product"  href="#/cancelReason/cancelReason-add" >录入取消原因</a>
+                        <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                        <div class="th">
+                        <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                        </div>
+                        </th>
+                        <th><div class="th">
+                            取消原因ID
+                        </div></th>
+                        <th><div class="th">
+                            取消原因
+                        </div></th>
+                        <th><div class="th">
+                            操作
+                        </div></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.cancelReasonId}}">
+                         <td> <md-checkbox ng-click="selectItem(store.cancelReasonId)" ng-checked="selected[store.cancelReasonId]"></md-checkbox></td>
+                        <td ng-bind="store.cancelReasonId"></td>
+                        <td ng-bind="store.cancelReason"></td>
+                        <td class="opertation">
+                            <a href="#/cancelReason/cancelReason-change?id={{store.cancelReasonId}}">修改</a>
+                            <a href="" ng-click="deleteCancelReason(store.cancelReasonId)">删除</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示 
+                                <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                            </select>
+                            条 
+                            当前页{{filteredStores.length}}条/总{{total}}条
+                        </span>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <uib-pagination class="pagination-sm"
+                        ng-model="currentPage"
+                        total-items="total"
+                        max-size="4"
+                        ng-change="select(currentPage)"
+                        items-per-page="numPerPage"
+                        rotate="false"
+                        previous-text="&lsaquo;" next-text="&rsaquo;"
+                        boundary-links="true"></uib-pagination>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

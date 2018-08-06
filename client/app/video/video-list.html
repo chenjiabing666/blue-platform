@@ -1,0 +1,202 @@
+
+<div class="page page-table" ng-controller="VideoListCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">视频审核</h2>
+        </div>
+
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="video_list_header">
+
+                   <!-- <label class="col-sm-2 col-xs-2">
+                        <span >用 户 ID:</span>
+                        <input type="text" id="videoId" placeholder="输入用户ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwVideoId" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >昵称:</span>
+                        <input type="text" id="nickName" placeholder="输入用户昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwNickName" data-ng-keyup="search()"  style="width: 150px;">
+                   </label> -->
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >用户手机:</span>
+                        <input type="text" id="videoId" placeholder="输入用户手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="mobile" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
+
+                   <label class="col-sm-2 col-xs-2">
+                        
+                        <span >提交时间:</span>
+                        <input type="text" id="startDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="startDate"  onchange="" data-ng-keyup="search()" placeholder="开始日期">
+                        
+
+                        <!-- <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日"> -->                
+                    </label>  
+            
+                    
+                    <label class="col-sm-2 col-xs-2" style="margin-top: 17px;margin-left: 40px;">                        <!-- <span >-</span> -->
+                        <!-- <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日">
+                        <span>-</span> -->
+                        <input type="text" id="endDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="endDate" onchange="" data-ng-keyup="search()" placeholder="截止日期">     
+                    </label>                                        
+                    
+                    <label class="col-sm-1 col-xs-1" style="margin-left: 100px;margin-top: 10px;">
+                        <button class="btn btn-primary" ng-click="getAll()">全部</button>
+                   </label>                
+    
+                    <label class="col-sm-1 col-xs-1" style="margin-top: 10px;">
+                        <button class="btn btn-primary" ng-click="getWait()">待审核</button>
+                   </label>
+
+                   <label class="col-sm-1 col-xs-1" style="margin-top: 10px;">
+                        <button class="btn btn-primary" ng-click="getPass()">已通过</button>
+                   </label>
+
+
+                   <label class="col-sm-1 col-xs-1" style="margin-top: 10px;">
+                        <button class="btn btn-primary" ng-click="getRefuse()">已拒绝</button>
+                   </label>
+
+
+
+                   
+                </form>
+                <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
+            </div>
+
+            <!-- <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/video/video-add">添加用户</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/lifecrystal-server/video/exportExcel.do?videoIds={{videoIdsExcel}}" >导出到Excel</a> -->
+                <!-- <a ng-click="exportExcel()" class=" md-primary add-product">导出</a>
+            </div> -->
+
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px;margin-left: 34px;">
+
+            <div class="col-md-3 col-sm-3 col-xs-3 delete-{{store.videoId}}" data-ng-repeat="store in currentPageStores" style="border: solid 1px black;height: 235px;">
+                <p>
+                        <span ng-if="store.activated==1" style=" position: relative;top: -43px;left: 146px;color: red;">待审核</span>
+                        <span ng-if="store.activated==2" style=" position: relative;top: -43px;left: 146px;color: green">已通过</span>
+                        <span ng-if="store.activated==3" style=" position: relative;top: -43px;left: 146px;color: red">已拒绝</span>
+                        <a href="{{store.videoUrl}}" target="_blank">
+                            <img src="{{store.firstFrame}}" style="width: 100px;height: 100px">
+                        </a>
+                    </p>
+                    <p style="margin-left: 25px;"><span>用户账号：</span>{{store.mobile}}</p>
+                    <p style="margin-left: 25px;">{{store.createdDate}}</p>
+                    <p style="margin-left: 25px;"><span>审核人员：</span>{{store.adminName}}</p>
+                    <p style="margin-left: 25px;"><span>视频长度：</span>{{store.videoLength}}</p>
+
+                    <p style="margin-left: 40px;" >
+                        <button class="btn btn-default btn-sm" style="margin-top: 10px;background-color: gray;color: black" ng-if="store.activated==1||store.activated==3" ng-click="review(store.videoId,2)">审核通过
+                        </button>
+                    </p>
+                    
+                    <p style="margin-left: 40px;">
+                        <button class="btn btn-default btn-sm" style="margin-top: 10px;background-color: gray;color: black" ng-if="store.activated==1||store.activated==2" ng-click="review(store.videoId,3)" >审核驳回
+                        </button>
+                    </p>
+            </div>
+
+
+            
+           
+
+        </div>
+
+       <!--  <table class="table table-bordered table-striped table-responsive">
+            <tbody> -->
+              <!-- <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.videoId}}">
+                <td> <md-checkbox ng-click="selectItem(store.videoId)" ng-checked="selected[store.videoId]"></md-checkbox></td>
+                <td ng-bind="store.videoId"></td>
+                
+                <td ng-bind="store.mobile"></td>
+                <td ng-bind="store.nickName"></td>
+                <td ng-bind="store.videoName"></td>
+                
+                <td ng-bind="store.createdDate|date:'yyyy-MM-dd'"></td>
+                <td ng-if="store.vipType==1">普通会员</td>
+                <td ng-if="store.vipType==2">藏晶苑会员</td>
+                
+                <td class="opertation">
+                    <a href="" ng-click="deleteVideo(store.videoId)">删除</a>
+                    <a href="#/video/video-detail?id={{store.videoId}}">详情</a>
+                </td>
+              </tr> -->
+            
+            <!-- <tr>
+                <td>
+                    <p>
+                        <span style=" position: relative;top: -43px;left: 146px;">待审核</span>
+                        <a href="">
+                            <img ng-src="https://timgsa.baidu.com/timg?video&quality=80&size=b9999_10000&sec=1531806240932&di=75ce4bba17fa4dc6963b009f03ccfae6&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fbaike%2Fw%253D217%2Fsign%3D809ef80b0af79052ef1f403f3bf3d738%2Fe850352ac65c1038f37945dab1119313b07e89a7.jpg" style="width: 100px;height: 100px">
+                        </a>
+                    </p>
+                    <p><span>用户账号：</span>1879632255</p>
+                    <p>2018-01-01- 12:46:50</p>
+                    <p><span>审核人员：</span>张珊</p>
+                    <p><button class="btn btn-default btn-sm" style="margin-top: 10px;background-color: gray;color: black">审核通过</button></p>
+                    <p><button class="btn btn-default btn-sm " style="margin-top: 10px;background-color: gray;color: black">审核驳回</button></p>
+                </td>
+
+                
+
+            </tr>
+
+
+            </tbody>
+        </table> -->
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

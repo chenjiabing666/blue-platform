@@ -1,0 +1,50 @@
+
+
+<section class="page-form-ele page" ng-controller="VoteDetailCtrl">
+
+
+    <div class="row ui-section"  >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">投票详情</h2> </div>
+        <div class="col-md-8 clearfix" ng-if="isAdminListRole==1"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-if="isAdminListRole==1">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row vote-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="voteForm" class="voteForm">
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">投票Id：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="voteId" ng-model="vote.voteId" ng-disabled="true">
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">投票问题：</label>
+                                            <div class="col-sm-9">
+                                                  <input class="form-control" class="voteType" ng-model="vote.questionName" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项一：</label>
+                                            <div class="col-sm-9">
+                                                  <input class="form-control" class="startDatetime" ng-model="vote.optionOne" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

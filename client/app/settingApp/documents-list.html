@@ -1,0 +1,84 @@
+
+<div class="page page-table" ng-controller="DocumentsCtrl">
+
+    <div class="row ui-section">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">文案列表</h2>
+        </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+            <div class="table-filters">
+                <div class="row">
+                    <div class="col-md-4 clearfix">    
+                        <a class=" md-primary add-product"  href="#/settingApp/documents-add">增加</a>
+                    </div>
+
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th><div class="th">
+                            文案ID
+                        </div></th>
+                        <th><div class="th">
+                            文案类型
+                        </div></th>
+                        <th><div class="th">
+                            内容
+                        </div></th>
+                        <th><div class="th">
+                            操作
+                        </div></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.documentId}}">
+                        <td ng-bind="store.documentId"></td>
+                        <td ng-bind="store.type | paseType"></td>
+                         <td ng-bind="store.documentContent" style="max-width:300px;word-wrap:break-word;"></td>
+                        <td class="opertation">
+                            <a href="#/settingApp/documents-change?id={{store.documentId}}">修改</a>
+                            <a href="" ng-click="delete(store.documentId)">删除</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示 
+                                <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                            </select>
+                            条 
+                            当前页{{filteredStores.length}}条/总{{total}}条
+                        </span>
+                    </div>
+                    <div class="col-md-6 text-right pagination-container">
+                        <uib-pagination class="pagination-sm"
+                        ng-model="currentPage"
+                        total-items="total"
+                        max-size="4"
+                        ng-change="select(currentPage)"
+                        items-per-page="numPerPage"
+                        rotate="false"
+                        previous-text="&lsaquo;" next-text="&rsaquo;"
+                        boundary-links="true"></uib-pagination>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+</div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

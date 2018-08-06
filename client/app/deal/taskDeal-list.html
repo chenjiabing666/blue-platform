@@ -1,0 +1,190 @@
+
+<div class="page page-table" ng-controller="TaskDealCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">订单列表</h2>
+        </div>
+        
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="task_list_header user_list_header">
+
+                    <label class="col-sm-2 col-xs-2">
+                        <span >订&nbsp;&nbsp;单&nbsp;号:</span>
+                        <input type="text" id="taskTitle" placeholder="输入订单号" class="border-radius-5 border-default ml-10 input-default input-w-20"
+                        data-ng-model="kwtOutOrderNo" data-ng-keyup="search()">
+                    </label> 
+                    <label class="col-sm-2 col-xs-2">
+                        <span >发单方:</span>
+                        <input type="text" id="taskTitle" placeholder="输入发单方手机号" class="border-radius-5 border-default ml-10 input-default input-w-20"
+                        data-ng-model="kwFMobile" data-ng-keyup="search()">
+                    </label> 
+                    <label class="col-sm-2 col-xs-2">
+                        <span >接单方:</span>
+                        <input type="text" id="taskTitle" placeholder="输入接单方手机号" class="border-radius-5 border-default ml-10 input-default input-w-20"
+                        data-ng-model="kwTMobile" data-ng-keyup="search()">
+                    </label>
+                    <label class="col-sm-2 col-xs-2">
+                        <span >支付类型:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="kwPayType">
+                        <option value="">全部</option>
+                        <option value="1">支付宝</option>
+                        <option value="2">余&nbsp;&nbsp;&nbsp;额</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-2 col-xs-2">
+                        <span >交易类型:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="kwTaskTypeId">
+                        <option value="">全部</option>
+                        <option value="1">线上单</option>
+                        <option value="2">线下单</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-2 col-xs-2" style="height: 28px;">
+                        <span >交易状态:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="kwStatus">
+                        <option value="">全部</option>
+                        <option value="2">待处理</option>
+                        <option value="3">待完成</option>
+                        <option value="4">已完成</option>
+                        <option value="99">平台托管</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-4 col-xs-4">
+                        <span >创建时间:</span>
+                        <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="KwCreatedStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分-秒">
+                        <span>-</span>
+                        <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="KwCreatedEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分-秒">                
+                    </label> 
+                    <label class="col-sm-4 col-xs-4">
+                        <span >完成时间:</span>
+                        <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="KwCompleteStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分-秒">
+                        <span>-</span>
+                        <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="KwCompleteEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分-秒">                
+                    </label>
+                    <div class="col-sm-1 col-xs-1 search" data-name="search" data-code="f1c3" ng-click="search()" >
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
+                    <label class="col-sm-3 col-xs-3" style="margin-left: 50px;">
+                        <div ng-click="emptyCondition()"><span>清空条件</span></div>
+                    </label> 
+                    
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <!-- <a class=" md-primary add-product" href="#/task/task-add">添加订单</a> -->
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+                <th hidden='true'>
+                <div class="th" >
+                交易ID
+                </div></th>
+                <th><div class="th">
+                订单号
+                </div></th>
+                <th><div class="th">
+                发单方
+                </div></th>
+                <th><div class="th">
+                接单方
+                </div></th>
+                <th><div class="th">
+                订单金额
+                </div></th>
+                <th><div class="th">
+                支付方式
+                </div></th>
+                <th><div class="th">
+                交易状态
+                </div></th>
+                <th><div class="th">
+                交易类型
+                </div></th>
+                <th><div class="th">
+                创建时间
+                </div></th>
+                <th><div class="th">
+                完成时间
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskId}}">
+                <td ng-bind="store.dealId" hidden='true'></td>
+                <td ng-bind="store.outOuderNo"></td>
+                <td ng-bind="store.fromUserMobile"></td>
+                <td ng-bind="store.toUserMobile"></td>
+                
+                <td ><a href="#/deal/divide-into-list?id={{store.dealId}}&pageType=3&kwtOutOrderNo={{kwtOutOrderNo}}&kwTMobile={{kwTMobile}}" ng-bind="store.dealPrice"></a></td>
+                <td ng-bind="store.payType | parsePayType"></td> 
+                <td ng-bind="store.status | parseTaskDealStatus"></td> 
+                <td ng-bind="store.taskTypeId | parseTaskDealType"></td> 
+                <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td ng-bind="store.completeTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td class="opertation">
+                    <a href="#/task/task-change?taskId={{store.taskId}}&status={{store.status}}">编辑</a>
+                    <a href="" ng-click="deleteTask(store.taskId)">删除</a>
+                    <a href="#/task/task-detail?id={{store.taskId}}">详情</a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条；总金额:{{sumPrice}} 元
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

@@ -1,0 +1,263 @@
+
+<div class="page page-table" ng-controller="BannerCtrl">
+    <div class="row ui-section" ng-show="isShow==1">
+        <div class="col-md-12">
+            <div class="col-md-6 clearfix">
+                <h2 class="section-header">
+                    广告列表
+                </h2>
+            </div>
+        </div>
+        <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="image_list_header">
+
+                   <!-- <label class="col-sm-2 col-xs-2">
+                        <span >用 户 ID:</span>
+                        <input type="text" id="imageId" placeholder="输入用户ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwImageId" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >昵称:</span>
+                        <input type="text" id="nickName" placeholder="输入用户昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwNickName" data-ng-keyup="search()"  style="width: 150px;">
+                   </label> -->
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >广告名称:</span>
+                        <input type="text" id="bannerName" placeholder="输入广告名称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="bannerName" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >广告位置</span>
+                        <select name="select" id="bannerLocation" data-ng-change="search()" data-ng-model="bannerLocation" class="border-radius-5 border-default ml-10 input-default input-w-50" style="width: 136px;height: 28px;">
+                            <option value="" >全部</option>
+                            <option value="1">APP首页轮播</option>
+                            <!-- <option value="2">藏晶苑会员</option> -->
+                        </select>
+                    </label>
+
+
+                    <label class="col-sm-2 col-xs-2">
+                        <span >广告类型</span>
+                        <select name="select" id="bannerType" data-ng-change="search()" data-ng-model="bannerType" class="border-radius-5 border-default ml-10 input-default input-w-50" style="width: 136px;height: 28px;">
+                            <option value="" >全部</option>
+                            <option value="1">图片</option>
+                            <option value="2">视频</option>
+                        </select>
+                    </label>
+
+
+                    <label class="col-sm-2 col-xs-2">
+                        <span >广告状态</span>
+                        <select name="select" id="activated" data-ng-change="search()" data-ng-model="activated" class="border-radius-5 border-default ml-10 input-default input-w-50" style="width: 136px;height: 28px;">
+                            <option value="" >全部</option>
+                            <option value="1">上线</option>
+                            <option value="2">下线</option>
+                            <!-- <option value="2">藏晶苑会员</option> -->
+                        </select>
+                    </label>
+
+
+                   <label class="col-sm-2 col-xs-2">
+                        
+                        <span >活动开始时间:</span>
+                        <input type="text" id="startDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="startDate"  data-ng-keyup="search()" placeholder="开始日期" style="width: 136px;height: 28px;">            
+                    </label>  
+
+
+                    <label class="col-sm-2 col-xs-2">
+                        
+                        <span >活动结束时间:</span>
+                        <input type="text" id="endDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="endDate"  data-ng-keyup="search()" placeholder="结束日期" style="width: 136px;height: 28px;">
+                    </label>
+            
+                    
+                                          
+                    
+                    
+                   
+                </form>
+                <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
+            </div>
+
+            <!-- <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/image/image-add">添加用户</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/lifecrystal-server/image/exportExcel.do?imageIds={{imageIdsExcel}}" >导出到Excel</a> -->
+                <!-- <a ng-click="exportExcel()" class=" md-primary add-product">导出</a>
+            </div> -->
+
+            </div>
+        </div>
+        <div class="col-md-2 clearfix" ng-show="isShow == 1">
+            <a class=" md-primary add-product" href="#/banner/banner-add">
+                添加banner
+            </a>
+        </div>
+
+
+
+
+        <div class="col-md-12" ng-show="isShow == 1">
+            <section class="panel panel-default table-dynamic">
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    编号
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    广告名称
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    广告位置
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    广告图片/视频
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                   时间
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    上线下线
+                                </div>
+                            </th>
+
+                            <th>
+                                <div class="th">
+                                    点击次数
+                                </div>
+                            </th>
+
+                            <th>
+                                <div class="th">
+                                    链接
+                                </div>
+                            </th>
+                            
+                            <th>
+                                <div class="th">
+                                    操作
+                                </div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="delete-{{store.bannerId}}" data-ng-repeat="store in stores">
+                            <td ng-bind="store.bannerId">
+                            </td>
+
+                            <td class="bannerlink">
+                                <p ng-bind="store.bannerName">
+                                </p>
+                            </td>
+
+                            <td class="bannerLink" ng-if="store.bannerLocation==1">
+                                <p>APP首页轮播</p>
+                            </td>
+
+                                <td class="bannerlink" ng-if="store.bannerType==1">
+                                    <a href='{{store.linkUrl||"#/banner/banner-list"}}'>
+                                        <img alt="" class="showImg" ng-src="{{store.imageUrl}}"/>
+                                    </a>
+                                </td>
+
+                                <td class="bannerlink" ng-if="store.bannerType==2">
+                                    <!-- <img alt="" class="showImg" ng-src="{{store.videoUrl}}"/> -->
+                                   <!--  <video ></video> -->
+                                   <a href='{{store.videoUrl}}' target="_blank">{{store.videoUrl}}</a>
+                                   <!-- <video src="{{store.videoUrl}}" width="352" height="264" controls autobuffer></video> -->
+                                </td>
+
+                                
+                                <td class="bannerlink">
+                                    <p>
+                                        开始时间：{{store.startDate}}<br><br>
+                                        结束时间：{{store.endDate||"永久不过期"}}
+                                    </p>
+                                </td>
+
+                                <td class="bannerlink" ng-if="store.activated==1">
+                                    <p>
+                                        <button class="btn btn-primary" ng-click="makeUnEffect(store.bannerId)">下线</button>
+                                    </p>
+                                </td>
+
+                                <td class="bannerlink" ng-if="store.activated==2">
+                                    <p>
+                                        <button class="btn btn-primary" ng-click="makeEffect(store.bannerId)">上线</button>
+                                    </p>
+                                </td>
+
+                                <td class="bannerlink">
+                                    <p>
+                                        {{store.clickCount}}
+                                    </p>
+                                </td>
+
+
+                                <td class="bannerlink">
+                                    <p>
+                                        {{store.linkUrl}}
+                                    </p>
+                                </td>
+
+
+
+                                <td class="opertation" nowrap="nowrap">
+                                    
+                                    <a href="#/banner/banner-change?id={{store.bannerId}}">
+                                        编辑
+                                    </a>
+                                    <a href="" ng-click="topBanner(store.bannerId)">
+                                        置顶
+                                    </a>
+
+                                    <a href="" ng-click="deleteBanner(store.bannerId)">
+                                        删除
+                                    </a>
+                                </td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示
+                                <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                                </select>
+                                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <uib-pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" next-text="›" ng-change="select(currentPage)" ng-model="currentPage" previous-text="‹" rotate="false" total-items="total">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>

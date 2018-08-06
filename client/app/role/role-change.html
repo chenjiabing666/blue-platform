@@ -1,0 +1,55 @@
+
+
+<section class="page-form-ele page" ng-controller="ChangeRoleCtrl">
+
+
+    <div class="row ui-section" ng-controller="ChangeRoleCtrl" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">修改角色</h2> </div>
+        <!-- <div class="col-lg-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="changeClick()">修改</md-button><div class="divider"></div>
+        </div> -->
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row news-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm">
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">角色名称：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control roleName" ng-model="role.roleName" disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                        <div class=" rolexia1 clearfix">
+                                                <label class="col-sm-3 control-label">权限设置：</label>
+                                        </div>
+                                          <div class="rolexia col-sm-9 col-sm-offset-3" ng-repeat="first in authorityList">
+                                             <input name="Fruit" type="checkbox" value="" />&nbsp&nbsp{{first.pageName}} <br/>  
+                                             <div class="rolexia2" ng-repeat="second in first.secondList">
+                                             <input name="Fruit" type="checkbox" ng-model="checkStatus" value=""  ng-click="selectModuleUpdate(second.authorityId, checkStatus)">&nbsp&nbsp{{second.pageName}} <br/>
+                                          </div>
+                                        </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">角色描述：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="role.description">
+                                            </div>
+                                        </div>
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="modifyRole()">确定修改</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

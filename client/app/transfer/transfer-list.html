@@ -1,0 +1,155 @@
+<div class="page page-table" ng-controller="TransferCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">提现审核</h2>
+        </div>
+        
+    </div>
+    <div class="col-md-12" ng-show="isShow == 1">
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="elite_list_header">
+                    
+                   <!-- <label class="col-sm-3 col-xs-1">
+                        <span >精英ID:</span>
+                        <input type="text" id="eliteId" placeholder="输入精英ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwEliteId" data-ng-keyup="search()">
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-4">
+                        <span >精英昵称:</span>
+                        <input type="text" id="nickName" placeholder="输入精英昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwNickName" data-ng-keyup="search()">
+                    </label> 
+ -->
+                    <!-- <label class="col-sm-4 col-xs-4">
+                        <span >精英等级:</span>
+                    <select name="select" id="level" data-ng-change="search()" data-ng-model="level">
+                        <option value="0" >初级精英</option>
+                        <option  value="1">高级精英</option>
+                        <option  value="2">砖石精英</option>
+                        <option value="">全部</option>
+                    </select>                  
+                    </label> -->
+                   <!--  <label class="col-sm-4 col-xs-4">
+                        <span >所属经纪人:</span>
+                        <input type="text" id="name" placeholder="输入所属经纪人" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwName" data-ng-keyup="search()">
+                    </label> -->
+                   <!--  <label class="col-sm-4 col-xs-4">
+                        <span >手机号码:</span>
+                        <input type="text" id="mobile" placeholder="输入手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwMobile" data-ng-keyup="search()">
+                    </label> -->
+                  <!--   <label class="col-sm-4 col-xs-4">
+                        <span >所属客服:</span>
+                        <input type="text" id="csName" placeholder="输入所属客服" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="KwCsName" data-ng-keyup="search()">
+                    </label> -->
+                
+                     
+                </form>
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <!-- <a class=" md-primary add-product" href="#/elite/elite-add">添加精英</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a>
+                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <a class=" md-primary add-product"  ng-click="reviewAll(2)" >批量通过</a>
+                <a class=" md-primary add-product"  ng-click="reviewAll(3)" >批量拒绝</a>
+            </div>
+            
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+                <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <th><div class="th">
+                提现ID
+                </div></th>
+                <th><div class="th">
+                用户ID
+                </div></th>
+                <th><div class="th">
+                提现人
+                </div></th>
+                <th><div class="th">
+                提现金额
+                </div></th>
+                <th><div class="th">
+                提现状态
+                </div></th>
+                <th><div class="th">
+                审核人
+                </div></th>
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.eliteId}}">
+                <td> <md-checkbox ng-click="selectItem(store.transferId)" ng-checked="selected[store.transferId]"></md-checkbox></td>
+                <td ng-bind="store.transferId"></td>
+                <td ng-bind="store.userId"></td>
+                <td ng-bind="store.payeeRealName"></td>
+                <td ng-bind="store.amount"></td>
+                <td ng-bind="store.status | parseIsReview"></td>
+                <td ng-bind="store.adminId"></td>
+                <td class="opertation">
+                    <a href="" ng-click="review(store.transferId,2)">通过</a>
+                    <a href="" ng-click="review(store.transferId,3)">拒绝</a>
+                    <a href="#/transfer/transfer-detail?id={{store.transferId}}">详情</a>
+                </td>
+              </tr>
+
+
+            
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示 
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+    
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

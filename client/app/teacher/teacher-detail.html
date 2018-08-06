@@ -1,0 +1,113 @@
+
+
+<section class="page-form-ele page" ng-controller="GameDetailCtrl">
+
+
+    <div class="row ui-section" ng-controller="GameDetailCtrl" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">用户详情</h2> </div>
+        <div class="col-lg-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button>
+            <md-button class="md-raised btn-w-md md-primary changeClick cancelClick" ng-click="cancelClick()" style="display:none">取消</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" class="userForm">
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">用户ID：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.userId"  disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">用户昵称：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.nickName" disabled>
+                                            </div>
+                                        </div>                                        
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">性别：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.gender" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">手机号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.mobile" disabled>
+                                            </div>
+                                        </div>   
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">头像地址：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.icon" disabled>
+                                            </div>
+                                        </div>                                                                              
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">姓名：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.realName" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">地址：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.address" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">累计积分：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.accumulatedIntegral" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">剩余积分：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.integral" disabled>
+                                            </div>
+                                        </div>                                        
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">生日：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.birthday | date:'yyyy-MM-dd HH:mm:ss'" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">订单数：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.orderCount" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">订单总额：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.totalTurnover" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">创建时间：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" ng-model="user.createdDate | date:'yyyy-MM-dd HH:mm:ss'" disabled>
+                                            </div>
+                                        </div>
+                                    
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

@@ -1,0 +1,57 @@
+<section class="page-form-ele page" ng-controller="AddCancelReasonCtrl">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2 class="section-header">
+                添加取消原因
+            </h2>
+        </div>
+        <div class="col-md-8 clearfix">
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">
+                返回
+            </md-button>
+            <div class="divider">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="md-inline-form inputdemoBasicUsage" layout="column" ng-cloak="">
+                                <md-content layout-padding="">
+                                    <form class="userForm" name="userForm">
+                                        <div class="form-group clearfix">
+                                            <label class="col-sm-3 control-label" for="">
+                                                取消原因：
+                                            </label>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <section class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="col-sm-12">
+                                                        <textarea class="ui-editor" ng-model="cancelReason.cancelReason" style="width: 100%;min-height: 150px;padding: 15px;">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="changeConfirm add-btn" layout="" layout-sm="column">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addCancelReason()">
+                                                确定发布
+                                            </md-button>
+                                            <div class="divider">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .ta-editor{overflow: hidden !important;}
+</style>

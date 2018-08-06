@@ -1,0 +1,63 @@
+
+
+
+<section class="page-form-ele page" ng-controller="BannerDetailCtrl">
+
+
+    <div class="row ui-section" ng-controller="BannerDetailCtrl" >
+        <div class="col-md-12"></div>
+        <div class="col-md-8 clearfix"> <h2 class="section-header">banner详情</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="changeClick()">修改</md-button>
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button>
+            <md-button class="md-raised btn-w-md md-primary changeClick cancelClick" ng-click="cancelClick()" style="display:none">取消</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row banner-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="bannerForm" id="bannerForm">
+                                        <div layout layout-sm="column">
+                                            <md-input-container flex>
+                                                <label>banner ID：</label>
+                                                <input class="bannerId" ng-model="banner.bannerId"  disabled>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-sm="column">    
+                                            <md-input-container flex>
+                                                <label>banner类型：</label>
+                                                <input class="bannerType" ng-model="banner.type" disabled>
+                                                <md-radio-group class="ui-md-radio-group-inline bannerTypeSelect" ng-model="banner.type" style="display:none;">
+                                                    <md-radio-button value="1">主页banner</md-radio-button>
+                                                    <md-radio-button value="2">成功案例banner</md-radio-button>
+                                                    <md-radio-button value="3">活动介绍banner</md-radio-button>
+                                                    <md-radio-button value="4">员工风采banner</md-radio-button>
+                                                    <md-radio-button value="5">培训和发展banner</md-radio-button>
+                                                    <md-radio-button value="6">企业社会责任banner</md-radio-button>
+                                                    <md-radio-button value="7">行业殊荣banner</md-radio-button>
+                                                </md-radio-group>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-sm="column">
+                                            <md-input-container flex>
+                                                <label>banner链接：</label>
+                                                <input class="bannerLink" ng-model="banner.imageUrl" disabled>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-sm='column' class="changeConfirm" style="display:none">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="changeConfirm()">确定修改</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

@@ -1,0 +1,65 @@
+
+<section class="page-form-ele page" ng-controller="DecedentchangeCtrl">
+
+
+    <div class="row ui-section" ng-controller="DecedentchangeCtrl" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">绑定会员</h2> </div>
+
+        <div class="col-md-8 clearfix">
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm" class="userForm">
+
+                                        <div class="form-group clearfix">
+                                          <label for="" class="col-sm-3 control-label">绑定逝者：</label>
+                                          <div class="col-sm-9">
+                                              <input class="form-control" class="userId" ng-model="content" ng-change="searchDecedent()" style="width: 300px;font-size: 10px;" placeholder="可以通过会员姓名，会员手机号码，会员id查询">
+                                              <ul style="overflow: auto;width: 300px;height: 200px">
+                                                
+                                                <li ng-repeat="decedent in result" id="decedent-{{decedent.userId}}" ng-click="clickContent(decedent.userId)" ng-mouseover="mouseOver(decedent.userId)" ng-mouseleave="mouseLeave(decedent.userId)">{{decedent.userName}}&nbsp;&nbsp;&nbsp;{{decedent.mobile}}&nbsp;&nbsp;&nbsp;{{decedent.userId}}</li>
+                                              </ul>
+                                          </div>
+                                        </div>
+                                      
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">账号状态：</label>
+                                            <div class="col-sm-9">
+                                              <select name="select" class='form-control' id="statue" data-ng-model="user.deleted" style="width:50%;">
+                                                  <option value="1">正常</option>
+                                                  <option value="2">封号</option>
+                                                  <option value="3">暂停使用</option>
+
+
+                                              </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">礼物图片：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="activityIcon" ng-model="user.approveVideoUrl" accept="video/*" ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
+                                            </div>
+                                        </div> -->
+
+
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="bindingDecedent()">确定</md-button><div class="divider"></div>
+                                        </div>
+
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

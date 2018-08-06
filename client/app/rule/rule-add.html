@@ -1,0 +1,65 @@
+
+
+<section class="page-form-ele page" ng-controller="AddRuleCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加取消规则</h2> </div>
+
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row user-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                <form name="userForm" class="userForm">
+
+                                    <div class="form-group clearfix">
+                                    <label for="" class="col-sm-3 control-label">取消规则标题</label>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <section class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                <textarea style="width: 100%;min-height: 80px;padding: 15px;" ng-model="rule.title" class="ui-editor"></textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">取消规则：</label>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <section class="panel panel-default">
+                                                <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                        <textarea style="width: 100%;min-height: 150px;padding: 15px;" ng-model="rule.ruleText" class="ui-editor"></textarea>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                    <div layout layout-sm='column' class="changeConfirm add-btn">
+                                        <md-button class="md-raised btn-w-md md-primary" ng-click="addRule()">确定发布</md-button><div class="divider"></div>
+                                    </div>
+                                    
+                                </form>
+                            </md-content>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>    
+    </div>
+</div>
+</section>
+
+<style type="text/css">
+    .ta-editor{overflow: hidden !important;}
+</style>
