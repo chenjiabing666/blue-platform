@@ -15,95 +15,66 @@
                                 <md-content layout-padding>
                                     <form name="userForm">
 
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">bannerId：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" ng-model="banner.bannerId" disabled>
+                                         <div class="form-group clearfix" ng-show="selectShow==0">
+                                            <label for="" class="col-sm-3 control-label">应用名称：</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" value="{{app.name}}" />
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-danger" ng-click="modApp()">修改应用名称</button>
                                             </div>
                                         </div>
 
-                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">广告名称：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" ng-model="banner.bannerName" style="width: 128px;">
-                                            </div>
+                                        <div class="form-group clearfix" ng-show="selectShow==1">
+                                          <label for="" class="col-sm-3 control-label">应用名称：</label>
+                                          <div class="col-sm-9">
+                                              <input class="form-control" class="userId" ng-model="appName" ng-change="searchApp()" style="width: 300px;font-size: 10px;" placeholder="通过应用名称搜索">
+
+                                              <ul style="overflow: auto;width: 300px;height: 100px" ng-if="searchShow==1">
+                                                <li ng-repeat="app in appInfo" id="app-{{app.appId}}" ng-click="clickContent(app.appId)" ng-mouseover="mouseOver(app.appId)" ng-mouseleave="mouseLeave(app.appId)">{{app.name}}</li>
+                                              </ul>
+                                          </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">广告位置：</label>
+                                            <label for="" class="col-sm-3 control-label">位置：</label>
                                             <div class="col-sm-9">
-                                                <!-- <input class="form-control" ng-model="banner.sortIndex"> -->
-                                                <select class="form-control" ng-model="banner.bannerLocation" style="width: 128px;">
-                                                    <option value="1" ng-selected="banner.bannerLocation==1" >首页轮播图</option>
+                                                <select class="form-control" ng-model="banner.bannerLocation" >
+                                                    <option value="1" ng-selected="banner.bannerLocation==1">1</option>
+                                                    <option value="2" ng-selected="banner.bannerLocation==2">2</option>
+                                                    <option value="3" ng-selected="banner.bannerLocation==3">3</option>
+                                                    <option value="4" ng-selected="banner.bannerLocation==4">4</option>
+                                                    <option value="5" ng-selected="banner.bannerLocation==5">5</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label class="col-sm-3 col-xs-3">开始时间</label>
-                                                <input type="text" id="startDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                                                data-ng-model="banner.startDate"  data-ng-keyup="search()" placeholder="开始日期" style="width: 136px;height: 28px;">            
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label class="col-sm-3 col-xs-3">结束时间</label>
-                                                <input type="text" id="endDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                                                data-ng-model="banner.endDate"  data-ng-keyup="search()" placeholder="结束日期" style="width: 136px;height: 28px;">            
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">上线/下线：</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" ng-model="banner.activated" style="width: 128px;">
-                                                    <option value="1" ng-selected="banner.activated==1">上线</option>
-                                                    <option value="2" ng-selected="banner.activated==2">下线</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">广告类型：</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" ng-model="banner.bannerType" style="width: 128px;">
-                                                    <option value="1" ng-selected="banner.bannerType==1">图片</option>
-                                                    <option value="2" ng-selected="banner.bannerType==2">视频</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">排序：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" ng-model="banner.sortIndex">
-                                            </div>
-                                        </div> -->
-
-                                        <div class="form-group clearfix" ng-if="banner.bannerType==1">
-                                            <label for="" class="col-sm-3 control-label">图片上传：</label>
+                                            <label for="" class="col-sm-3 control-label">上传图片：</label>
                                             <div class="col-sm-9">
                                                 <input type="file" class="bannerFile" ng-model="banner.file" accept="image/*" multiple ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
                                                 <ul class="img-list"  style="height: 100px;"> </ul>
                                             </div>
                                         </div>
 
-                                        <div class="form-group clearfix" ng-if="banner.bannerType == 2">
-                                            <label for="" class="col-sm-3 control-label">视频上传：</label>
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">跳转链接：</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="bannerFile" ng-model="banner.file" " multiple ng-submit="doUploadVideo()" onchange="angular.element(this).scope().doUploadVideo(this)">
-                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                                <input class="form-control" ng-model="banner.linkUrl">
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">广告链接：</label>
+                                            <label for="" class="col-sm-3 control-label">状态：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" ng-model="banner.linkUrl" style="width: 128px;">
+                                                <select class="form-control" ng-model="banner.activated" >
+                                                    <option value="1" ng-selected="banner.activated==1">启用</option>
+                                                    <option value="2" ng-selected="banner.activated==2">禁用</option>
+                                                </select>
                                             </div>
                                         </div>
-
-                                        
-        
-                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                        <div layout layout-sm='column' class="changeConfirm add-btn" style="margin-left: 189px;margin-top: 50px;">
                                             <md-button class="md-raised btn-w-md md-primary" ng-click="changeBanner()">确定修改</md-button><div class="divider"></div>
                                         </div>
                                     </form>

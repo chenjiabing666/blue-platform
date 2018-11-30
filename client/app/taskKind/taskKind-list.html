@@ -4,7 +4,7 @@
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">任务品类列表</h2>
+            <h2 class="section-header">开发者认证审核</h2>
         </div>
         
     </div>
@@ -15,23 +15,62 @@
             <div class="col-sm-12 col-xs-12" >
                 <form class="taskKind_list_header">
                     
-                   <label class="col-sm-3 col-xs-1">
-                        <span >任务品类ID:</span>
-                        <input type="text" id="taskKindId" placeholder="输入任务品类ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwTaskKindId" data-ng-keyup="search()">
+                   <label class="col-sm-3 col-xs-3">
+                        <span >ID:</span>
+                        <input type="text" id="userId" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="userId" data-ng-keyup="search()">
                     </label> 
 
-                    <label class="col-sm-3 col-xs-4">
-                        <span>标题ID:</span>
-                        <input type="text" id="userId" placeholder="输入标题名称" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwTitle" data-ng-keyup="search()">
+                    <label class="col-sm-3 col-xs-3">
+                        <span>用户账号:</span>
+                        <input type="text" id="userName" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="userName" data-ng-keyup="search()">
                     </label>
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span>用户姓名:</span>
+                        <input type="text" id="realName" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="realName" data-ng-keyup="search()">
+                    </label>
+
+                    <label class="col-sm-3 col-xs-3">
+                                <span >地区:</span>
+                                <select data-ng-model="provinceCode" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-change="search()">
+                                    <option value="">全部</option>
+                                    <option data-ng-repeat="province in provinces" value="{{province.provinceCode}}">{{province.provinceName}}</option>
+                                </select>
+                    </label>
+
+                    <label class="col-sm-3 col-xs-3">
+                                <span >请求时间:</span>
+                               <input type="text" id="authDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="feedBackDate"  data-ng-keyup="search()" data-ng-change="search()">
+                    </label>
+
+                    <label class="col-sm-3 col-xs-3">
+                                <span >审核状态:</span>
+                                <select data-ng-model="status" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-change="search()">
+                                    <option value="">全部</option>
+                                    <option value="0">未审核</option>
+                                    <option value="1">审核通过</option>
+                                    <option value="2">审核失败</option>
+                                </select>
+                    </label>
+
+
+
+                    <!-- <label class="col-sm-3 col-xs-4">
+                        <span>用户账号:</span>
+                        <input type="text" id="userId" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwTitle" data-ng-keyup="search()">
+                    </label> -->
                 </form>
             </div>
 
             <div class="col-md-4 clearfix">
-                <a class=" md-primary add-product" href="#/taskKind/taskKind-add">添加任务品类</a>
-                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+                <!-- <a class=" md-primary add-product" href="#/taskKind/taskKind-add">添加任务品类</a> -->
+                <a class=" md-primary add-product"  ng-click="deleteList(1)" >审核通过</a>
+                <a class=" md-primary add-product"  ng-click="deleteList(2)" >审核不通过</a>
             </div>
             
             </div>
@@ -43,33 +82,33 @@
             <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
                 </div></th>
+               <!--  <th><div class="th">
+                序号
+                </div></th> -->
                 <th><div class="th">
-                任务品类ID
+                ID
                 </div></th>
                 <th><div class="th">
-                品类标题
+                用户账号
                 </div></th>
                 <th><div class="th">
-                标题说明
+                用户姓名
                 </div></th>
                 <th><div class="th">
-                详情图片
+                地址
+                </div></th>
+                <!-- <th><div class="th">
+                认证类型
+                </div></th> -->
+                <th><div class="th">
+                请求时间
                 </div></th>
                 <th><div class="th">
-                列表图片
+                审核状态
                 </div></th>
-                <th><div class="th">
-                人数上限
-                </div></th>
-                <th><div class="th">
-                是否开启饮酒
-                </div></th>
-                <th><div class="th">
-                是否开启匿名
-                </div></th>
-                <th><div class="th">
+                <!-- <th><div class="th">
                 创建时间
-                </div></th>
+                </div></th> -->
                 <th><div class="th">
                 操作
                 </div></th>
@@ -77,23 +116,32 @@
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskKindId}}">
-                <td> <md-checkbox ng-click="selectItem(store.taskKindId)" ng-checked="selected[store.taskKindId]"></md-checkbox></td>
-                <td ng-bind="store.taskKindId"></td>
-                <td ng-bind="store.title"></td>
-                <td ng-bind="store.titleRemark"></td>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.userId}}">
+                <td> <md-checkbox ng-click="selectItem(store.userId)" ng-checked="selected[store.userId]"></md-checkbox></td>
+                <td ng-bind="store.userId"></td>
+                <td ng-bind="store.userName"></td>
+                <td ng-bind="store.realName"></td>
+                <td ng-bind="store.address"></td>
+                <td ng-bind="store.authDate"></td>
+                <td>
+                    <p ng-if="store.examinStatus==0">未审核</p>
+                    <p ng-if="store.examinStatus==1">审核通过</p>
+                    <p ng-if="store.examinStatus==2">审核失败</p>
+                </td>
+                <!-- <td ng-bind="store.realName"></td>
+
                 <td> <img class="showImg" ng-src="{{store.imageUrl}}" alt=""></td>
                 <td> <img class="showImg" ng-src="{{store.showImageUrl}}" alt=""></td>
                 <td ng-bind="store.maxmember"></td>
                 <td ng-bind="store.isOpenDrink | isDoing"></td>
                 <td ng-bind="store.isOpenAnonymity | isDoing"></td>
-                <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td>          
+                <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td> -->          
                 <td class="opertation">
-                    <a href="#/taskKind/taskKind-change?id={{store.taskKindId}}">编辑</a>
-                    <a href="" ng-click="deleteTaskKind(store.taskKindId)">删除</a>
-                    <a href="#/taskKind/taskKind-detail?id={{store.taskKindId}}">详情</a>
-                    <a href="#/taskDuration/taskDuration-list?id={{store.taskKindId}}">时长</a>
-                    <a href="#/taskReward/taskReward-list?id={{store.taskKindId}}">打赏</a>
+                    <!-- <a href="#/taskKind/taskKind-change?id={{store.userId}}">编辑</a>
+                    <a href="" ng-click="deleteTaskKind(store.userId)">删除</a> -->
+                    <a href="#/taskKind/taskKind-detail?id={{store.userId}}">详情</a>
+                   <!--  <a href="#/taskDuration/taskDuration-list?id={{store.userId}}">时长</a>
+                    <a href="#/taskReward/taskReward-list?id={{store.userId}}">打赏</a> -->
                 </td>
               </tr>
             </tbody>

@@ -2,7 +2,7 @@
 
 
     <div class="row ui-section">
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">修改用户反馈</h2> </div>
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">审核详情</h2> </div>
 
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
@@ -18,14 +18,38 @@
                                     <form name="userForm" class="userForm">
 
                                      <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">用户反馈ID</label>
+                                        <label for="" class="col-sm-3 control-label">用户账号：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="feedbackName" ng-model="feedback.feedbackId" disabled="true">
+                                            <input class="form-control" class="feedbackName" ng-model="auth.mobile" disabled="true">
                                         </div>
                                     </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">公司名称：</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="feedbackName" ng-model="auth.companyName" disabled="true">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">企业营业执照：</label>
+                                        <div class="col-sm-9">
+                                            <!-- <input class="form-control" class="feedbackName" ng-model="authId.companyName" disabled="true"> -->
+                                            <img src="{{auth.license}}" style="height: 300px;width: 400px">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">公司名称：</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="feedbackName" ng-model="authId.companyName" disabled="true">
+                                        </div>
+                                    </div>
+
+
             
                                     <div class="form-group clearfix">
-                                    <label for="" class="col-sm-3 control-label">用户反馈内容</label>
+                                        <label for="" class="col-sm-3 control-label">用户反馈内容</label>
                                     </div>
                                     <div class="form-group clearfix">
                                         <section class="panel panel-default" >
@@ -66,10 +90,11 @@
                                                 </div>
                                             </div>
                                         </section>
-                                    </div>
+                                    </div> -->
 
                                     <div layout layout-sm='column' class="changeConfirm add-btn">
-                                        <md-button class="md-raised btn-w-md md-primary" ng-click="modifyFeedback()">确定修改</md-button><div class="divider"></div>
+                                        <md-button class="md-raised btn-w-md md-primary" ng-click="modifyAuth(1)">通过</md-button>
+                                        <md-button class="md-raised btn-w-md md-primary" ng-click="modifyAuth(0)">不通过</md-button>
                                     </div>
                                     
                                     </form>

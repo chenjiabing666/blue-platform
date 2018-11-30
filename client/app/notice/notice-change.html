@@ -1,0 +1,209 @@
+
+
+
+<section class="page-form-ele page" ng-controller="noticechangeCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加解决方案</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row notice-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="noticeForm" class="noticeForm">
+
+
+                                       <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">行业：</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="industryId" >
+                                                    <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
+                                                    <!-- <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option> -->
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <h2>高分解决方案</h2>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题及原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="q1"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="cd" multiple ng-submit="doUploadPhoto_q1()" onchange="angular.element(this).scope().doUploadPhoto_q1(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="ad1"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_ad1()" onchange="angular.element(this).scope().doUploadPhoto_ad1(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="an1"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_an1()" onchange="angular.element(this).scope().doUploadPhoto_an1(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+                                         <hr>
+
+                                         <h2>中等解决方案</h2>
+                                       
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题及原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="q2"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_q2()" onchange="angular.element(this).scope().doUploadPhoto_q2(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="ad2"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_ad2()" onchange="angular.element(this).scope().doUploadPhoto_ad2(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="an2"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_an2()" onchange="angular.element(this).scope().doUploadPhoto_an2(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+                                         <hr>
+
+
+                                         <h2>低分解决方案</h2>
+                                       
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题及原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="q3"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_q3()" onchange="angular.element(this).scope().doUploadPhoto_q3(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="ad3"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_ad3()" onchange="angular.element(this).scope().doUploadPhoto_ad3(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="10" cols="60" ng-model="an3"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_an3()" onchange="angular.element(this).scope().doUploadPhoto_an3(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+                                         <hr>
+
+                                        
+
+
+
+                                        
+                                        
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addSolution()">确定添加模块</md-button><div class="divider"></div>
+                                        </div>
+
+
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+
+
+
+
+    </div>
+</section>
+

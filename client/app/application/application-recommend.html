@@ -1,0 +1,81 @@
+
+
+<section class="page-form-ele page" ng-controller="RecommendApplicationCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-md-12"></div>
+        <div class="col-md-8 clearfix"> <h2 class="section-header">推荐应用</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row banner-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="bannerForm" id="bannerForm">
+                                        
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">邮箱账号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerId" ng-model="application.email">
+                                            </div>
+                                        </div>
+
+                                                                     
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">新密码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="application.newPassword">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">确认密码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="application.confirmPassword">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">管理员账号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="application.account">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">手机号码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="application.mobile">
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">推荐分类：</label>
+                                            <div class="col-sm-9">
+                                                <select ng-model="typeId" class="form-controller bannerLink" style="width: 294px;">
+                                                    <option value="{{type.recommendTypeId}}" ng-repeat="type in types">{{type.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                       
+                                        <div class="form-group text-center clearfix">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="recommend()">提交</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>

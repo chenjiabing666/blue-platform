@@ -20,58 +20,55 @@
 
     $scope.isShow = 0;
     var authoritySet = sessionStorage.authoritySet.split(',');
+    console.log(sessionStorage.authoritySet);
     for (var i = 0; i < authoritySet.length; i++) {
-        if (authoritySet[i] == "52") {
+        if (authoritySet[i] == "37") {
             $scope.isShow = 1;
         }
     }
 
-        $scope.timeInterval;  //间隔时间
-        $scope.lightDuration;  //点灯超过时间
-        $scope.sacrificeStartTimeHour;  
-        $scope.sacrificeStartTimeMinute;
-        $scope.sacrificeEndTimeHour;
-        $scope.sacrificeEndTimeMinute;
+
+        //定义需要修改的值
+        $scope.config={"companyName":"","copyRight":"","companyMobile":"","companyAddress":""};
+        //弹出对话框
+        $scope.showAlert = function (txt) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title(txt)
+                    .ok('确定')
+            )
+
+        }
+
+        //表单回显
+        $http.post('http://localhost:8080/blue-server/' + 'config/getConfigById.do',{},{params:{
+            configId:1  //管理员Id
+        }}).success( function (data){   
+            if(data.code == 0){
+                $scope.config = data.result; 
+                console.log($scope.config);
+            } else {
+                $scope.showAlert(data.message);
+            }
+        });
+
+
 
         //修改系统参数
         $scope.modifySetting=function(){
-            if ($scope.timeInterval=="") {
-                $scope.timeInterval=undefined;
-            }
-
-            if ($scope.lightDuration=="") {
-                $scope.lightDuration=undefined;
-            }
-            
-            var p1=/^\d+$/;
-            if (!p1.test($scope.lightDuration)||!p1.test($scope.timeInterval)) {
-                alert("时间间隔和超时时间必须是数字!");
-                return;
-            }
-
-            // console.log($scope.sacrificeStartTimeHour+"--"+$scope.sacrificeStartTimeMinute+"---"+$scope.sacrificeEndTimeHour+"--"+$scope.sacrificeEndTimeMinute);
-           var pattern=/^\d{2}$/;  //正则
-           // console.log(pattern.test($scope.sacrificeStartTime));
-           if(!pattern.test($scope.sacrificeStartTimeHour)||!pattern.test($scope.sacrificeStartTimeMinute)||!pattern.test($scope.sacrificeEndTimeHour)||!pattern.test($scope.sacrificeEndTimeMinute))
-           {
-                alert("小时和分钟必须是两位数字");
-                return;
-           }
-
-           var sacrificeStartTime=$scope.sacrificeStartTimeHour+":"+$scope.sacrificeStartTimeMinute;
-           var sacrificeEndTime=$scope.sacrificeEndTimeHour+":"+$scope.sacrificeEndTimeMinute;
-
-
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'setting/modifySetting.do',{},{params:{
-                lightDuration:$scope.lightDuration,  
-                sacrificeStartTime:sacrificeStartTime,   
-                sacrificeEndTime:sacrificeEndTime,   
-                timeInterval:$scope.timeInterval,    
+            $http.post('http://localhost:8080/blue-server/' + 'config/modifyConfig.do',{},{params:{
+                configId:1,
+                copyRight:$scope.config.copyRight,
+                companyPhone:$scope.config.companyMobile,
+                companyAddress:$scope.config.companyAddress,
+                companyName:$scope.config.companyName
             }}).success(function (data) {
-               if (data.successCode == 100200) {
-                    alert(data.successMessage);
+               if (data.code == 0) {
+                    $scope.showAlert("修改成功");
             }else{
-                alert(data.errorMessage);
+                // alert(data.message);
+                $scope.showAlert(data.message);
             }
         });
 
@@ -134,7 +131,7 @@
                 $scope.status=undefined;
             }
              console.log('$scope.settingName=='+$scope.settingName  + ", " + $scope.account+"---"+$scope.status);
-             $http.post('http://localhost:8080/lifecrystal-server/' + 'setting/getSettingList.do',{},{params:{
+             $http.post('http://localhost:8080/blue-server/' + 'setting/getSettingList.do',{},{params:{
                 settingName:$scope.kwSettingName,   //用户名
                 status:$scope.status,   //状态
                 account:$scope.account,   //账号
@@ -273,7 +270,7 @@
             // getRoleList(1, 100);
 
             // console.log(:$scope.kwSettingName+"----"+$scope.account+);
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'setting/getSettingList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'setting/getSettingList.do',{},{params:{
                 // settingName:$scope.kwSettingName,
                 // account:$scope.account,
                 // status:$scope.status,
@@ -323,7 +320,7 @@
 
         //重置密码
         $scope.resetPassWord=function(id){
-            $http.post("http://localhost:8080/lifecrystal-server/"+"setting/resetPassword.do?",{},{params:{
+            $http.post("http://localhost:8080/blue-server/"+"setting/resetPassword.do?",{},{params:{
                             settingId:id
                         }}).success(function (data){
                             if(data.successCode == 100200){
@@ -349,7 +346,7 @@
                                 .cancel('取消');
                                 $mdDialog.show(confirm).then(function() {
                         // console.log('确定')
-                        $http.post("http://localhost:8080/lifecrystal-server/"+"setting/startSetting.do?",{},{params:{
+                        $http.post("http://localhost:8080/blue-server/"+"setting/startSetting.do?",{},{params:{
                             settingId:id
                         }}).success(function (data){
                             if(data.successCode == 100200){
@@ -395,7 +392,7 @@
                                 .cancel('取消');
                                 $mdDialog.show(confirm).then(function() {
                         // console.log('确定')
-                        $http.post("http://localhost:8080/lifecrystal-server/"+"setting/logout.do?",{},{params:{
+                        $http.post("http://localhost:8080/blue-server/"+"setting/logout.do?",{},{params:{
                             settingId:id
                         }}).success(function (data){
                         	if(data.successCode == 100200){
@@ -569,7 +566,7 @@
         });
 
         // 获取权限列表
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'authority/getAuthorityList.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'authority/getAuthorityList.do',{},{params:{
             pageSize:100,
             pageNum:1
         }}).success(function (data) {

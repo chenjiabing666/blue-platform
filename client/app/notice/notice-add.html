@@ -1,0 +1,83 @@
+
+
+<section class="page-form-ele page" ng-controller="noticeAddCtrl">
+
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加模块</h2> </div>
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12" ng-show="isShow == 0">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row notice-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="noticeForm" class="noticeForm">
+
+                                       <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模块名称：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="noticeName" ng-model="moduleName">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模块描述：</label>
+                                            <div class="col-sm-9">
+                                                <textarea rows="20" cols="60" ng-model="description"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">高分：</label>
+                                            <div class="col-sm-9">
+                                                <input  class="noticeName" ng-model="highScoreMin">分--
+                                                <input  class="noticeName" ng-model="highScoreMax">分
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">中等：</label>
+                                            <div class="col-sm-9">
+                                                <input  class="noticeName" ng-model="mediumScoreMin">分--
+                                                <input  class="noticeName" ng-model="mediumScoreMax">分
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">低分：</label>
+                                            <div class="col-sm-9">
+                                                <input  class="noticeName" ng-model="lowScoreMin">分--
+                                                <input  class="noticeName" ng-model="lowScoreMax">分
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addnotice()">确定添加模块</md-button><div class="divider"></div>
+                                        </div>
+
+
+                                        <div layout layout-sm='column' class="changeConfirm add-btn" ng-show="showAddSolution==1">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addnotice()">添加企业解决方案</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+
+
+
+
+    </div>
+</section>
+

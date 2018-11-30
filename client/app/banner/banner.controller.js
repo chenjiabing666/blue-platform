@@ -53,12 +53,13 @@
 
 
        // bannerName,bannerLocation,bannerType,activated,startDate,endDate
-       $scope.bannerName;
-       $scope.bannerLocation;
-       $scope.bannerType;
-       $scope.activated;
-       $scope.startDate;
-       $scope.endDate;
+       $scope.bannerName="";
+       $scope.bannerLocation="";
+       $scope.bannerType="";
+       $scope.activated="";
+       $scope.startDate="";
+       $scope.endDate="";
+       $scope.platform="";
 
 
         $scope.getTable = function() {
@@ -70,7 +71,7 @@
         $scope.isShow = 0;
         var authoritySet = sessionStorage.authoritySet.split(',');
         for (var i = 0; i < authoritySet.length; i++) {
-            if (authoritySet[i] == "47") {
+            if (authoritySet[i] == "50") {
                 $scope.isShow = 1;
             }
         }
@@ -78,52 +79,22 @@
 
         //获取广告列表
         function getBannerList(pageNum, pageSize) {
-            // console.log($scope.bannerType=="");
-            // console.log($scope.bannerType+"---"+$scope.bannerLocation+"----"+$scope.activated);
-            console.log($scope.endDate+"---"+$scope.startDate);
-            if ($scope.bannerName=="") {
-                $scope.bannerName=undefined;
-            }
+            
 
-            if ($scope.bannerLocation=="") {
-                $scope.bannerLocation=undefined;
-            }
-
-            if ($scope.bannerType=="") {
-                $scope.bannerType=undefined;
-            }
-
-            if ($scope.activated=="") {
-                $scope.activated=undefined;
-            }
-
-            if ($scope.startDate=="") {
-                $scope.startDate=undefined;
-            }
-
-
-            if ($scope.endDate=="") {
-                $scope.endDate=undefined;
-            }
-
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'banner/getBannerList.do', {}, {
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'banner/getBannerList.do', {}, {
                 params: {
                     pageNum: pageNum,
                     pageSize: pageSize,
-                    bannerName:$scope.bannerName,
-                    bannerLocation:$scope.bannerLocation,
-                    bannerType:$scope.bannerType,
-                    activated:$scope.activated,
-                    startDate:$scope.startDate,
-                    endDate:$scope.endDate
+                    platform:$scope.platform
                 }
             }).success(function(data) {
-                if (data.successCode == 0) {
+                if (data.code == 0) {
                     $scope.stores = data.result;
                     $scope.currentPageStores = data.result;
                     $scope.filteredStores = data.result;
                     $scope.currentPageStores.$apply;
                     $scope.total = data.total;
+                    console.log($scope.stores);
                 }else{
                     $scope.stores = null;
                 }
@@ -169,7 +140,7 @@
                     // //console.log('确定')
                     $http({
                         method: 'post',
-                        url: 'http://localhost:8080/lifecrystal-server/' + 'banner/topBanner.do',
+                        url: 'http://localhost:8080/applicationMarket-server/' + 'banner/topBanner.do',
                         data: $.param({
                             bannerId: id
                             // activated: 2
@@ -179,7 +150,7 @@
                         }
                     }).success(function(data) {
                         // console.log(data.errorCode)
-                        if (data.successCode==100200) {
+                        if (data.code==0) {
                             $scope.showAlert("置顶成功");
                             init();
                             
@@ -225,7 +196,7 @@
                     // //console.log('确定')
                     $http({
                         method: 'post',
-                        url: 'http://localhost:8080/lifecrystal-server/' + 'banner/upBanner.do',
+                        url: 'http://localhost:8080/applicationMarket-server/' + 'banner/upBanner.do',
                         data: $.param({
                             bannerId: id
                             // activated: 2
@@ -235,7 +206,7 @@
                         }
                     }).success(function(data) {
                         // console.log(data.errorCode)
-                        if (data.successCode==100200) {
+                        if (data.code==0) {
                             $scope.showAlert("上线成功");
                             for(var i=0;i<$scope.stores.length;i++){
                                 if ($scope.stores[i].bannerId==id) {
@@ -283,7 +254,7 @@
                     // //console.log('确定')
                     $http({
                         method: 'post',
-                        url: 'http://localhost:8080/lifecrystal-server/' + 'banner/downBanner.do',
+                        url: 'http://localhost:8080/applicationMarket-server/' + 'banner/downBanner.do',
                         data: $.param({
                             bannerId: id
                             // activated: 1
@@ -292,7 +263,7 @@
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     }).success(function(data) {
-                        if (data.successCode=100200) {
+                        if (data.code=0) {
                             $scope.showAlert("下线成功");
                             for(var i=0;i<$scope.stores.length;i++){
                                 if ($scope.stores[i].bannerId==id) {
@@ -328,13 +299,13 @@
             $scope.showConfirm();
         }
         init = function() {
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'banner/getBannerList.do', {}, {
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'banner/getBannerList.do', {}, {
                 params: {
                     pageNum: 1,
                     pageSize: $scope.numPerPage
                 }
             }).success(function(data) {
-                if (data.successCode == 0) {
+                if (data.code == 0) {
                     console.log(data.result);
                     console.log("type:"+$scope.bannerType);
                     $scope.stores = data.result;
@@ -357,27 +328,21 @@
                     .ok('确定').cancel('取消');
                 $mdDialog.show(confirm).then(function() {
                     // //console.log('确定')
-                    $http({
-                        method: 'post',
-                        url: 'http://localhost:8080/lifecrystal-server/' + 'banner/deleteBanner.do',
-                        data: $.param({
-                            bannerId: id
-                        }),
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }).success(function(data) {
-                        if (data.successCode == 0) {
-                            $scope.showAlert("删除广告成功");
-                            // getBannerList($scope.currentPage, $scope.numPerPage);
-                            $(".delete-"+id).remove();
-                        } else {
-                            $scope.showAlert(data.errorMessage);
-                        }
-                    })
+                    $http.post('http://localhost:8080/applicationMarket-server/' + 'banner/deleteBanner.do', {}, {
+                params: {
+                    bannerId:id
+                }
+            }).success(function(data) {
+                if (data.code == 0) {
+                    $scope.showAlert("删除成功");
+                    $(".delete-"+id).remove();
+                }else{
+                    $scope.showAlert(data.message);
+                }
+            });
                 }, function() {
                     // //console.log('取消')
-                    $scope.showAlert("取消删除图片");
+                    $scope.showAlert("取消删除广告");
                 });
             };
 
@@ -421,7 +386,7 @@
         function initall(pageNum, pageSize) {
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/lifecrystal-server/' + 'banner/getBannerList.do',
+                url: 'http://localhost:8080/applicationMarket-server/' + 'banner/getBannerList.do',
                 data: $.param({
                     pageNum: 1,
                     pageSize: 200
@@ -657,11 +622,16 @@
     }
 
     function AddBannerCtrl($scope, $http, $mdDialog, $location) {
-        $scope.isAddBanner = 0;
+
+        // //如果返回列表
+        // $scope.backClick = function () {
+        //     $location.path("/banner/banner-list");
+        // }
+        $scope.isShow = 0;
         var AuthoritySet = sessionStorage.authoritySet.split(',');
         for (var i = 0; i < AuthoritySet.length; i++) {
-            if (AuthoritySet[i] == "addBanner") {
-                $scope.isAddBanner = 1;
+            if (AuthoritySet[i] == "51") {
+                $scope.isShow = 1;
             }
         }
         $scope.banner = {
@@ -673,6 +643,68 @@
         $scope.doUploadVideo = function(element) {
             $scope.videoFileObj = element.files[0];
         }
+
+        $scope.bannerName="";
+       $scope.bannerLocation="";
+       $scope.bannerType="";
+       $scope.activated="";
+       $scope.startDate="";
+       $scope.endDate="";
+       $scope.banner={"appId":"","bannerLocation":"","LinkUrl":"","activated":""}
+       $scope.platform="";
+        
+
+        $scope.searchShow=0;
+
+        //根据应用名称查找
+        $scope.searchApp=function(){
+             $scope.searchShow=1;
+            if ($scope.appName==undefined) {
+                $scope.appName="";
+            }
+
+            $http.post("http://localhost:8080/applicationMarket-server/"+"app/searchByAppName.do?",{},{params:{
+                        appName:$scope.appName,
+                        platform:$scope.platform
+                    }}).success(function (data){
+                        if(data.code == 0){
+                            
+                            $scope.appInfo=data.result;
+                            console.log($scope.appInfo);
+                        }else{
+                            $scope.appInfo=null;
+                        }
+                    })
+
+
+
+        }
+
+
+         $scope.clickContent=function(appId){
+            console.log(appId);
+                for (var i = 0; i < $scope.appInfo.length; i++) {
+                    if ($scope.appInfo[i].appId==appId) {
+                        // console.log(appId)
+                        $scope.appName=$scope.appInfo[i].name;
+                        $scope.banner.appId=$scope.appInfo[i].appId;
+                        $scope.appInfo=null;
+                        $scope.searchShow=0;
+                        return;
+                    }
+                }
+            }
+
+            $scope.mouseOver=function(appId){
+                $("#app-"+appId).css("background-color","gray");
+            }
+
+            $scope.mouseLeave=function(appId){
+                $("#app-"+appId).css("background-color","rgb(0,0,0,0)");
+            }
+
+
+        //添加广告
         $scope.addBanner = function() {
             //console.log($scope.banner.file);
             $scope.showConfirm = function() {
@@ -682,102 +714,17 @@
                     // .targetEvent(ev)
                     .ok('确定').cancel('取消');
                 $mdDialog.show(confirm).then(function() {
-                    var addBannerUrl = "http://localhost:8080/lifecrystal-server/" + "banner/addBanner.do"; // 接收上传文件的后台地址
-                    $scope.banner.startDate=$("#startDate").val();
-                    $scope.banner.endDate=$("#endDate").val();
-                    if ($scope.banner.bannerName==undefined||$scope.banner.bannerName=="") {
-                        $scope.showAlert("广告名称不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerType==undefined||$scope.banner.bannerType=="") {
-                        $scope.showAlert("广告类型不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerLocation==undefined||$scope.banner.bannerLocation=="") {
-                        $scope.showAlert("广告位置不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.activated==undefined||$scope.banner.activated=="") {
-                        $scope.showAlert("上线/下线不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerType==1&&($scope.imageFileObj==undefined||$scope.imageFileObj=="")) {
-                        $scope.showAlert("图片文件不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerType==2&&($scope.videoFileObj==undefined||$scope.videoFileObj=="")) {
-                        $scope.showAlert("视频文件不能为空!");
-                        return;
-                    }
-
-                    // if($scope.banner.bannerType==2&&($scope.banner.LinkUrl!="")){
-                    //     $scope.showAlert("视频类型的文件不可以添加链接!");
-                    //     return;
-                    // }
-
-
-                    if ($scope.banner.bannerType==undefined) {
-                        $scope.banner.bannerType="";
-                    }
-
-                    if ($scope.banner.bannerName==undefined) {
-                        $scope.banner.bannerName="";
-                    }
-
-                    if ($scope.banner.bannerLocation==undefined) {
-                        $scope.banner.bannerLocation="";
-                    }
-
-                    if ($scope.banner.startDate==undefined) {
-                        $scope.banner.startDate="";
-                    }
-
-                    if ($scope.banner.endDate==undefined) {
-                        $scope.banner.endDate="";
-                    }
-
-                    if ($scope.banner.activated==undefined) {
-                        $scope.banner.activated="";
-                    }
-
-                    if ($scope.banner.bannerType==undefined) {
-                        $scope.banner.bannerType="";
-                    }
-
-                    if ($scope.banner.LinkUrl==undefined) {
-                        $scope.banner.LinkUrl="";
-                    }
-
-                    // $scope.banner.bannerType=null;
+                    var addBannerUrl = "http://localhost:8080/applicationMarket-server/" + "banner/addBanner.do"; // 接收上传文件的后台地址
 
                     var form = new FormData();
-                    form.append("bannerType", $scope.banner.bannerType); // 可以增加表单数据 bannerName
-                    form.append("bannerName", $scope.banner.bannerName);
-                    form.append("bannerLocation", $scope.banner.bannerLocation);  
-                    form.append("startDate", $scope.banner.startDate);
-                    form.append("endDate", $scope.banner.endDate);
-                    form.append("activated", $scope.banner.activated);   
-                    form.append("bannerType", $scope.banner.bannerType);   
-
+                    // form.append("page", $scope.banner.page); // 可以增加表单数据 bannerName
+                    form.append("location", $scope.banner.bannerLocation);
+                    // form.append("bannerLocation", $scope.banner.bannerLocation);  
+                    form.append("appId", $scope.banner.appId);
+                    form.append("activated", $scope.banner.activated);
+                    form.append("file", $scope.imageFileObj);
+                    form.append("platform", $scope.platform);
                     
-                    if ($scope.banner.bannerType==2) {
-                        // console.log("videoFileObj");
-                        form.append("file", $scope.videoFileObj);
-                    }else{
-                        // console.log("imageFileObj");
-                        form.append("file", $scope.imageFileObj);
-                    }
-                    
-                    
-                    form.append("linkUrl", $scope.banner.LinkUrl);
-                    // console.log(form)
-
-                    // form.append("sortIndex",$scope.banner.sortIndex);
                     var xhr = new XMLHttpRequest();
                     var response;
                     xhr.open("post", addBannerUrl, true);
@@ -791,13 +738,13 @@
                                 //将xmlHttpReg.responseText的值赋给ID为resText的元素
                                 var date=eval("("+xhr.responseText+")")
                                 // console.log(date);
-                                // console.log("--->"+date.successCode);
-                                if(date.successCode==100200){
+                                // console.log("--->"+date.code);
+                                if(date.code==0){
                                     $scope.showAlert("广告上传成功");
                                     // // console.log("广告上传成功");
                                     // alert("广告上传成功");
                                 }else{
-                                    $scope.showAlert(date.errorMessage);
+                                    $scope.showAlert(date.message);
                                     // alert(date.errorMessage);
                                 }
                                 // console.log("---->"+xhr.responseText);
@@ -888,7 +835,7 @@
                     .ok('确定').cancel('取消');
                 $mdDialog.show(confirm).then(function() {
                     // $http.post("http://139.196.7.76:8080/chinatravel-server/"+"Banner/addBanner",{})
-                    var addImageUrl = "http://localhost:8080/lifecrystal-server/" + "image/addImage.do"; // 接收上传文件的后台地址
+                    var addImageUrl = "http://localhost:8080/applicationMarket-server/" + "image/addImage.do"; // 接收上传文件的后台地址
                     // FormData 对象
                     var form = new FormData();
                     //console.log($scope.banner.type);
@@ -969,7 +916,7 @@
         }
 
         function getAwardList(pageNum, pageSize) {
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getImageList.do', {}, {
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getImageList.do', {}, {
                 params: {
                     pageNum: pageNum,
                     pageSize: pageSize
@@ -1011,7 +958,7 @@
         };
         init = function() {
             console.log($scope.numPerPage);
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getImageList.do', {}, {
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getImageList.do', {}, {
                 params: {
                     pageNum: 1,
                     pageSize: $scope.numPerPage,
@@ -1036,7 +983,7 @@
                     .ok('确定').cancel('取消');
                 $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/lifecrystal-server/" + "image/deleteImage.do?", {}, {
+                    $http.post("http://localhost:8080/applicationMarket-server/" + "image/deleteImage.do?", {}, {
                         params: {
                             imageId: id
                         }
@@ -1069,7 +1016,7 @@
                     // .targetEvent(ev)
                     .ok('确定').cancel('取消');
                 $mdDialog.show(confirm).then(function() {
-                    $http.post("http://localhost:8080/lifecrystal-server/" + "award/modifyAward.do?", {}, {
+                    $http.post("http://localhost:8080/applicationMarket-server/" + "award/modifyAward.do?", {}, {
                         params: {
                             awardId: $scope.awardId,
                             awardName: $scope.awardName,
@@ -1108,32 +1055,88 @@ function ChangeBannerCtrl($scope,$http,$location,$mdDialog,$timeout){
             $location.path('')
         }
     }
-
+    $scope.platform="" ;  //平台信息
     $scope.bannerId = $location.search().id;
-    $http.post("http://localhost:8080/lifecrystal-server/"+"banner/getBannerById.do?",{},{params:{
+    $http.post("http://localhost:8080/applicationMarket-server/"+"banner/getBanner.do?",{},{params:{
         bannerId:$scope.bannerId
     }}).success(function (data){
-        if(data.successCode == 0){
-            $scope.banner = data.result;
-            console.log($scope.banner);
-            console.log("  " + $scope.banner);
+        if(data.code == 0){
+            console.log(data.result);
+            $scope.banner = data.result.banner;
+            $scope.app=data.result.app;
+            $scope.platform=$scope.app.plateform;
+            console.log($scope.app);
+            // console.log($scope.banner);
+            // console.log("  " + $scope.banner);
         } else {
-            $scope.showAlert1(data.errorMessage)
+            $scope.showAlert1(data.message)
         }                        
     })
 
+        $scope.searchShow=0;
+        $scope.selectShow=0;
+        $scope.appId="";  //应用的Id
 
-        $scope.banner = {
-            'jumpUrl': ''
-        };
-        $scope.doUploadPhoto = function(element) {
-            $scope.imageFileObj = element.files[0];
+        $scope.modApp=function(){
+            $scope.selectShow=1;
         }
-        $scope.doUploadVideo = function(element) {
-            $scope.videoFileObj = element.files[0];
+
+        //根据应用名称查找
+        $scope.searchApp=function(){
+             $scope.searchShow=1;
+            if ($scope.appName==undefined) {
+                $scope.appName="";
+            }
+
+            $http.post("http://localhost:8080/applicationMarket-server/"+"app/searchByAppName.do?",{},{params:{
+                        appName:$scope.appName,
+                        platform:$scope.app.plateform
+                    }}).success(function (data){
+                        if(data.code == 0){
+                            
+                            $scope.appInfo=data.result;
+                            console.log($scope.appInfo);
+                        }else{
+                            $scope.appInfo=null;
+                        }
+                    })
+
+
+
         }
+
+
+         $scope.clickContent=function(appId){
+            console.log(appId);
+                for (var i = 0; i < $scope.appInfo.length; i++) {
+                    if ($scope.appInfo[i].appId==appId) {
+                        // console.log(appId)
+                        $scope.appName=$scope.appInfo[i].name;
+                        $scope.appId=$scope.appInfo[i].appId;
+                        $scope.appInfo=null;
+                        $scope.searchShow=0;
+                        return;
+                    }
+                }
+            }
+
+            $scope.mouseOver=function(appId){
+                $("#app-"+appId).css("background-color","gray");
+            }
+
+            $scope.mouseLeave=function(appId){
+                $("#app-"+appId).css("background-color","rgb(0,0,0,0)");
+            }
+
+
+            $scope.doUploadPhoto = function(element) {
+                $scope.imageFileObj = element.files[0];
+        }
+
+
 
     $scope.changeBanner = function(){
+        console.log($scope.banner.bannerId+"---"+$scope.banner.bannerLocation+"---"+$scope.banner.linkUrl+"---"+$scope.banner.activated+"---"+$scope.banner.bannerLocation);
         $scope.showConfirm = function() {
                             // 确定
                             var confirm = $mdDialog.confirm()
@@ -1144,97 +1147,24 @@ function ChangeBannerCtrl($scope,$http,$location,$mdDialog,$timeout){
                             .cancel('取消修改');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    var changeBannerUrl ="http://localhost:8080/lifecrystal-server/" + "banner/modifyBanner.do?";  
-                    if ($scope.banner.bannerName==undefined||$scope.banner.bannerName=="") {
-                        $scope.showAlert("广告名称不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerType==undefined||$scope.banner.bannerType=="") {
-                        $scope.showAlert("广告类型不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.bannerLocation==undefined||$scope.banner.bannerLocation=="") {
-                        $scope.showAlert("广告位置不能为空!");
-                        return;
-                    }
-
-                    if ($scope.banner.activated==undefined||$scope.banner.activated=="") {
-                        $scope.showAlert("上线/下线不能为空!");
-                        return;
-                    }
-
-                    // if ($scope.banner.bannerType==1&&($scope.imageFileObj==undefined||$scope.imageFileObj=="")) {
-                    //     $scope.showAlert("图片文件不能为空!");
-                    //     return;
-                    // }
-
-                    // if ($scope.banner.bannerType==2&&($scope.videoFileObj==undefined||$scope.videoFileObj=="")) {
-                    //     $scope.showAlert("视频文件不能为空!");
-                    //     return;
-                    // }
-
-                    if($scope.banner.bannerType==2&&($scope.banner.linkUrl!="")){
-                        $scope.showAlert("视频类型的文件不可以添加广告链接!");
-                        return;
-                    }
-
-
-                    if ($scope.banner.bannerType==undefined) {
-                        $scope.banner.bannerType="";
-                    }
-
-                    if ($scope.banner.bannerName==undefined) {
-                        $scope.banner.bannerName="";
-                    }
-
-                    if ($scope.banner.bannerLocation==undefined) {
-                        $scope.banner.bannerLocation="";
-                    }
-
-                    if ($scope.banner.startDate==undefined) {
-                        $scope.banner.startDate="";
-                    }
-
-                    if ($scope.banner.endDate==undefined) {
-                        $scope.banner.endDate="";
-                    }
-
-                    if ($scope.banner.activated==undefined) {
-                        $scope.banner.activated="";
-                    }
-
-                    if ($scope.banner.bannerType==undefined) {
-                        $scope.banner.bannerType="";
-                    }
-
-                    if ($scope.banner.linkUrl==undefined) {
-                        $scope.banner.linkUrl="";
-                    }
-
-                    // $scope.banner.bannerType=null;
+                    var changeBannerUrl ="http://localhost:8080/applicationMarket-server/" + "banner/modifyBanner.do?";
 
                     var form = new FormData();
-                    form.append("bannerType", $scope.banner.bannerType); // 可以增加表单数据 bannerName
-                    form.append("bannerName", $scope.banner.bannerName);
-                    form.append("bannerLocation", $scope.banner.bannerLocation);  
-                    form.append("startDate", $scope.banner.startDate);
-                    form.append("endDate", $scope.banner.endDate);
-                    form.append("activated", $scope.banner.activated);   
-                    form.append("bannerType", $scope.banner.bannerType); 
-                    form.append("bannerId", $scope.banner.bannerId);     
+                     // form.append("page", $scope.banner.bannerPageLocation); // 可以增加表单数据 bannerName
+                    form.append("location", $scope.banner.bannerLocation);
+                    // form.append("bannerLocation", $scope.banner.bannerLocation);  
+                    // form.append("linkUrl", $scope.banner.linkUrl);
+                    form.append("activated", $scope.banner.activated);
+                    form.append("file", $scope.imageFileObj);   
+                    form.append("bannerId",$scope.bannerId);
+                    form.append("platform",$scope.platform);  //平台
 
-                    
-                    if ($scope.banner.bannerType==2) {
-                        form.append("file", $scope.videoFileObj);
-                    }else{
-                        form.append("file", $scope.imageFileObj);
-                    }
-                    
-                    
-                    form.append("linkUrl", $scope.banner.linkUrl);
+                    //如果修改了应用
+                    // if ($scope.selectShow==1) {
+                            form.append("appId",$scope.appId);
+                    // }
 
+                    // form.append("appId")
 
                     var xhr = new XMLHttpRequest();
                     var response;
@@ -1246,21 +1176,24 @@ function ChangeBannerCtrl($scope,$http,$location,$mdDialog,$timeout){
 
                     function doResult() {
 
-                        if (xhr.readyState == 4) {//4代表执行完成
-
-                            console.log(xhr.responseText);
-                            if (xhr.status == 200) {//200代表执行成功
-                           //将xmlHttpReg.responseText的值赋给ID为resText的元素
-                           if (xhr.responseText.successCode=100200) {
-                                $scope.showAlert("修改Banner信息成功");       
-                           }else{
-                             $scope.showAlert(xhr.responseText.errorMessage);
-                           }
-                           
-                                          
-
-                       }
-                   }
+                        if (xhr.readyState == 4) { //4代表执行完成
+                            if (xhr.status == 200) { //200代表执行成功
+                                //将xmlHttpReg.responseText的值赋给ID为resText的元素
+                                var date=eval("("+xhr.responseText+")")
+                                // console.log(date);
+                                // console.log("--->"+date.code);
+                                if(date.code==0){
+                                    $scope.showAlert("广告修改成功");
+                                    // // console.log("广告上传成功");
+                                    // alert("广告上传成功");
+                                }else{
+                                    $scope.showAlert(date.message);
+                                    // alert(date.errorMessage);
+                                }
+                                // console.log("---->"+xhr.responseText);
+                               
+                            }
+                        }
 
                }
 

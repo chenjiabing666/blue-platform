@@ -117,10 +117,10 @@
 
     //根据adminId获取管理员信息
     $scope.getAdminInfo=function(){
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'admin/getAdminById.do',{},{params:{
+        $http.post('http://localhost:8080/applicationMarket-server/' + 'admin/getAdminById.do',{},{params:{
             adminId:sessionStorage.adminId
         }}).success(function (data) {
-         if (data.successCode == 0) {
+         if (data.successCode == 100200) {
                 $scope.adminInfo=data.result;
              }else {
                 // showAlert(data.errorMessage);
@@ -133,7 +133,7 @@
     // 审核驳回需要提示确定
     $scope.reviewImage=function(imageId,activated){
         console.log(imageId+"---"+activated+"---");
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'image/modifyImage.do',{},{params:{
+        $http.post('http://localhost:8080/applicationMarket-server/' + 'image/modifyImage.do',{},{params:{
             imageId:imageId,
             activated:activated,
             adminId:sessionStorage.adminId
@@ -206,7 +206,7 @@
             $scope.activated=undefined;
         }
 
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getImageList.do',{},{params:{
+        $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getImageList.do',{},{params:{
             mobile:$scope.mobile,
             endDate:$scope.endDate,
             startDate:$scope.startDate,
@@ -214,7 +214,7 @@
             pageNum:pageNum,
             pageSize:pageSize
         }}).success(function (data) {
-         if (data.successCode == 0) {
+         if (data.successCode == 100200) {
            $scope.imageLists=data.result;
            $scope.stores=data.result;
            $scope.image=data.result;
@@ -315,7 +315,7 @@
                     
                     // console.log($scope.adminInfo);
                     // console.log("adminId:"+sessionStorage.admin.adminName);
-                    $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getImageList.do',{},{params:{
+                    $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getImageList.do',{},{params:{
                         mobile:$scope.mobile,
                         endDate:$scope.endDate,
                         startDate:$scope.startDate,
@@ -323,7 +323,7 @@
                         pageNum:1,
                         pageSize:$scope.numPerPage
                     }}).success(function (data) {
-                     if (data.successCode == 0) {
+                     if (data.successCode == 100200) {
                        $scope.stores=data.result;
                        $scope.total = data.total;
                        console.log($scope.stores);
@@ -558,9 +558,9 @@ $scope.exportExcel = function(){
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
 
-                var url="http://localhost:8080/lifecrystal-server/"+"image/exportExcel.do?";
+                var url="http://localhost:8080/applicationMarket-server/"+"image/exportExcel.do?";
 
-                // var modifyTopicUrl ="http://localhost:8080/lifecrystal-server/"+"image/exportExcel.do";// 接收上传文件的后台地址
+                // var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"image/exportExcel.do";// 接收上传文件的后台地址
                 // console.log($scope.selected);
                 // var temp = "";
 
@@ -630,7 +630,7 @@ $scope.deleteList = function(){
                     // console.log('确定')
 
 
-                var modifyTopicUrl ="http://localhost:8080/lifecrystal-server/"+"image/deleteImageBatch.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"image/deleteImageBatch.do";// 接收上传文件的后台地址
                 console.log($scope.selected);
                 var temp = "";
 
@@ -746,10 +746,10 @@ $scope.deleteList = function(){
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/lifecrystal-server/"+"image/deleteImage.do?",{},{params:{
+                    $http.post("http://localhost:8080/applicationMarket-server/"+"image/deleteImage.do?",{},{params:{
                         imageId:id
                     }}).success(function (data){
-                        if(data.successCode == 0){
+                        if(data.successCode == 100200){
                             $scope.showAlert("删除用户成功");
                             $(".delete-"+id).css("display","none");
                             $scope.total--;
@@ -904,10 +904,10 @@ $scope.deleteList = function(){
         $scope.imageId = $location.search().id;   //获取用户id
         console.log("id="+$scope.imageId);
         //根据用户id获取用户详细信息
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getImageById.do',{},{params:{
+        $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getImageById.do',{},{params:{
             imageId:$scope.imageId   //用户id
         }}).success( function (data){   
-            if(data.successCode == 0){
+            if(data.successCode == 100200){
                 $scope.image = data.result;
                 console.log($scope.image.imageIcon);
                 if($scope.image.sex=='1'){
@@ -932,7 +932,7 @@ $scope.deleteList = function(){
 
 
         //根据用户id获取其绑定的逝者信息
-        $http.post('http://localhost:8080/lifecrystal-server/' + 'image/getDetailedInformation.do',{},{params:{
+        $http.post('http://localhost:8080/applicationMarket-server/' + 'image/getDetailedInformation.do',{},{params:{
             imageId:$scope.imageId   //用户id
         }}).success( function (data){   
             if(data.successCode == 100200){
@@ -964,7 +964,7 @@ $scope.deleteList = function(){
                                 .ok('确定')
                                 .cancel('取消');
                                 $mdDialog.show(confirm).then(function() {
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'image/unbindingImage.do',{},{params:{
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'image/unbindingImage.do',{},{params:{
             imageId:$scope.imageId,  //用户id
             imageId:imageId
         }}).success( function (data){   
@@ -992,7 +992,7 @@ $scope.deleteList = function(){
                                 .ok('确定')
                                 .cancel('取消');
                                 $mdDialog.show(confirm).then(function() {
-            $http.post('http://localhost:8080/lifecrystal-server/' + 'image/restPassword.do',{},{params:{
+            $http.post('http://localhost:8080/applicationMarket-server/' + 'image/restPassword.do',{},{params:{
             imageId:$scope.imageId  //用户id
         }}).success( function (data){   
             if(data.successCode == 100200){  //解除成功
@@ -1298,7 +1298,7 @@ $scope.deleteList = function(){
 
         $scope.sendCode=function(mobile){
             console.log(mobile);
-            $http.post("http://localhost:8080/lifecrystal-server/"+"image/genAuthCode.do?",{},{params:{
+            $http.post("http://localhost:8080/applicationMarket-server/"+"image/genAuthCode.do?",{},{params:{
                         mobile:mobile
                     }}).success(function (data){
                         if(data.successCode == 112000){
@@ -1330,7 +1330,7 @@ $scope.deleteList = function(){
 
 
 
-                    $http.post("http://localhost:8080/lifecrystal-server/"+"image/addImage.do?",{},{params:{
+                    $http.post("http://localhost:8080/applicationMarket-server/"+"image/addImage.do?",{},{params:{
 
                         mobile:$scope.image.mobile,
                         imageName:$scope.image.imageName,

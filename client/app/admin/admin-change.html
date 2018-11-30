@@ -5,7 +5,7 @@
 
     <div class="row ui-section">
         <div class="col-md-12"></div>
-        <div class="col-md-8 clearfix"> <h2 class="section-header">修改密码</h2> </div>
+        <div class="col-md-8 clearfix"> <h2 class="section-header">修改管理员</h2> </div>
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
         </div>
@@ -19,19 +19,19 @@
                                 <md-content layout-padding>
                                     <form name="bannerForm" id="bannerForm">
                                         
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">管理员ID：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="bannerId" ng-model="adminId"  disabled>
-                                            </div>
-                                        </div>
- -->
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">原密码：</label>
+                                            <label for="" class="col-sm-3 control-label">邮箱账号：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="bannerType" ng-model="oldPassword">
+                                                <input class="form-control" class="bannerId" ng-model="admin.email">
                                             </div>
                                         </div>
+
+                                        <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">新密码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerType" ng-model="newPassword">
+                                            </div>
+                                        </div> -->
                                         <!-- <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">角色ID：</label>
                                             <div class="col-sm-9">
@@ -44,26 +44,53 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">新密码：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="bannerLink" ng-model="newPassword">
+                                                <input class="form-control" class="bannerLink" ng-model="admin.newPassword">
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">确认密码：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="bannerLink" ng-model="confirmPassword">
+                                                <input class="form-control" class="bannerLink" ng-model="admin.confirmPassword">
                                             </div>
                                         </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">管理员账号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="admin.account">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">手机号码：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="bannerLink" ng-model="admin.mobile">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">账号状态：</label>
+                                            <div class="col-sm-9">
+                                                <select ng-model="admin.activated" class="form-controller bannerLink" style="width: 294px;">
+                                                    <option value="1" ng-selected="admin.activated==1">启用</option>
+                                                    <option value="0" ng-selected="admin.activated==0">禁用</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
                                         <!-- <div class=" rolexia1 clearfix">
                                                 <label class="col-sm-3 control-label">权限设置：</label>
                                         </div> -->
-                                        <div class="form-group col-sm-12 col-sm-offset-1" ng-repeat="auth in authorityList">
+                                       <!--  <div class="form-group col-sm-12 col-sm-offset-1" ng-repeat="auth in authorityList">
                                             <div class="col-sm-3 ">{{auth.description}}:</div>
                                             <div class="col-sm-3" ng-repeat="son in auth.authorityList">
                                             <input name='authoritys' style="width: 10px;" type="checkbox" value='{{son.authorityId}}'>
                                             <span>{{son.pageName}}</span>
                                             </div>
-                                        </div>
+                                        </div> -->
+
                                         <div class="form-group text-center clearfix">
                                             <md-button class="md-raised btn-w-md md-primary" ng-click="modifyPassword()">确定修改</md-button><div class="divider"></div>
                                         </div>

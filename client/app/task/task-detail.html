@@ -4,7 +4,7 @@
 
 
     <div class="row ui-section"  >
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">订单详情</h2> </div>
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">任务详情</h2> </div>
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
         </div>
@@ -17,110 +17,136 @@
                             <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                                 <md-content layout-padding>
                                 <form name="surnameForm" class="surnameForm">
+
                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">订单Id：</label>
+                                        <label for="" class="col-sm-3 control-label">任务名称：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="surnameId" ng-model="task.taskId" ng-disabled="true">
+                                            <input class="form-control" class="invitation" ng-model="task.taskName">
                                         </div>
-                                    </div>                              
+                                    </div>
+
                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">订单号：</label>
+                                        <label for="" class="col-sm-3 control-label">任务简介：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="hallName" ng-model="task.orderCode" ng-disabled="true">
+                                            <textarea class="form-control" ng-model="task.introduction" cols="40" rows="10" ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">任务类别：</label>
+                                        <div class="col-sm-9">
+                                            <!-- <select ng-model="task.taskTypeId" class="form-control">
+                                                <option value="{{type.taskTypeId}}" ng-repeat="type in types" ng-selected="task.taskTypeId==type.taskTypeId">{{type.typeName}}</option>
+                                            </select> -->
+
+                                              <select ng-model="task.taskTypeId" class="form-control"
+                                                ng-options="type.taskTypeId as type.typeName for type in types" disabled>
+                                                </select>
+                                        </div>
+                                </div>
+
+
+
+                                    <div class="form-group clearfix" ng-show="task.taskTypeId==1">
+                                        <label for="" class="col-sm-3 control-label">应用Id：</label>
+                                        <div class="col-sm-7">
+                                            <input class="form-control" class="invitation" ng-model="task.appId" disabled>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-danger" ng-click="mod()">修改应用</button>
                                         </div>
                                     </div>
+
+                                    <div class="form-group clearfix" ng-show="modapp==1">
+                                          <label for="" class="col-sm-3 control-label">应用名称：</label>
+                                          <div class="col-sm-9">
+                                              <input class="form-control" class="userId" ng-model="appName" ng-change="searchApp()" style="width: 300px;font-size: 10px;" placeholder="通过应用名称搜索">
+
+                                              <ul style="overflow: auto;width: 300px;height: 100px" ng-if="searchShow==1">
+                                                <li ng-repeat="app in appInfo" id="app-{{app.appId}}" ng-click="clickContent(app.appId)" ng-mouseover="mouseOver(app.appId)" ng-mouseleave="mouseLeave(app.appId)">{{app.name}}</li>
+                                              </ul>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group clearfix" ng-show="task.taskTypeId!=1">
+                                        <label for="" class="col-sm-3 control-label">链接：</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="invitation" ng-model="task.link">
+                                        </div>
+                                    </div>
+
                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">商户订单资金号：</label>
+                                        <label for="" class="col-sm-3 control-label">奖励类型：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.outOuderNo" ng-disabled="true">
+                                            <select ng-model="task.activated" class="form-control">
+                                                <option value="1" ng-selected="task.activated==1">墨客币</option>
+                                                <option value="2" ng-selected="task.activated==2">井通</option>
+                                            </select>
                                         </div>
                                     </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">发布者用户ID：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.userId" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                      <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">创建时间：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.createdDate | date:'yyyy-MM-dd HH:mm:ss' " ng-disabled="true">
-                                        </div>
-                                    </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">约会标题：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.taskTitle" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                      <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">约会时间：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.time" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                      <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">约会时长：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.duration" ng-disabled="true">
-                                        </div>
-                                    </div>
+
                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">约会地点：</label>
+                                        <label for="" class="col-sm-3 control-label">奖励数量：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.address" ng-disabled="true">
+                                            <input class="form-control" class="invitation" ng-model="task.rewardMoney">
                                         </div>
                                     </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">性别要求：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.requireGender" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">人数上线：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.requirePeopleNumber" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">是否礼仪性饮酒：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.isDrink" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">打赏金额：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.rewardMoney" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                      <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">订单状态：</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="origin" ng-model="task.status" ng-disabled="true">
-                                        </div>
-                                    </div>
-                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">地点备注：</label>
-                                    </div>
+
                                     <div class="form-group clearfix">
-                                        <section class="panel panel-default">
-                                            <div class="panel-body">
-                                                <div class="col-sm-12">
-                                                    <textarea style="width: 100%;min-height: 150px;padding: 15px;" ng-model="task.addressRemark" class="ui-editor" ng-disabled="true"></textarea>
-                                                </div>
+                                        <label for="" class="col-sm-3 control-label">允许完成次数：</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" class="invitation" ng-model="task.allowNumber">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">弹窗级别：</label>
+                                        <div class="col-sm-9">
+                                            <select ng-model="task.poupLeve" class="form-control">
+                                                <option value="1" ng-selected="task.poupLeve==1">1级</option>
+                                                <option value="2" ng-selected="task.poupLeve==2">2级</option>
+                                                <option value="3" ng-selected="task.poupLeve==3">3级</option>
+                                                <option value="4" ng-selected="task.poupLeve==4">4级</option>
+                                                <option value="5" ng-selected="task.poupLeve==5">不弹窗</option>
+                                            </select>
+                                        </div>
+                                </div>
+
+
+                                <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">开始时间：</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="startDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control"
+                        data-ng-model="task.startDate"  data-ng-keyup="search()" placeholder="开始日期">
+                                        </div>
+                                </div>
+
+                                <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">结束时间：</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="endDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control"
+                        data-ng-model="task.endDate"  data-ng-keyup="search()" placeholder="结束日期">
+                                        </div>
+                                </div>
+
+
+                                <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">状态</label>
+                                        <div class="col-sm-9">
+                                            <select ng-model="task.status" class="form-control">
+                                                <option value="1" ng-selected="task.status==1">正常</option>
+                                                <option value="0" ng-selected="task.status==0">失效</option>
+                                            </select>
+                                        </div>
+                                </div>
 
 
 
-
-
-
-
-
-
-                                        </section>
-                                    </div>                                                  
+                                <div layout layout-sm='column' class="changeConfirm add-btn">
+                                    <md-button class="md-raised btn-w-md md-primary" ng-click="modtask()">确定修改</md-button><div class="divider"></div>
+                                </div>
+                                                 
                                 </form>
                             </md-content>
                         </div>

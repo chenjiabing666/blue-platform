@@ -1,123 +1,188 @@
 
+<style type="text/css">
+    .input-w-50 {
+    width: 142px;
+}
+</style>
 <div class="page page-table" ng-controller="FeedbackCtrl">
 
-    <div class="row ui-section">
+    <<div class="row ui-section">
+    <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">反馈列表</h2>
+            <h2 class="section-header">企业审核</h2>
         </div>
-    <div class="col-md-12" ng-show="isShow == 1">
+
+    </div ng-show="isShow == 1">
+    <div class="col-md-12" >
         <section class="panel panel-default table-dynamic">
-            <div class="table-filters">
-                <div class="row">
-                    <div class="col-sm-12 col-xs-12" >
-                        <!-- <form class="question_list_header">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="user_list_header">
 
-                            <label class="col-sm-3 col-xs-3">
-                                <span >投诉搜索:</span>
-                                <input type="text" id="nickName" placeholder="输入投诉ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                                data-ng-model="kwQuestionName" data-ng-keyup="search()">
-                            </label>
-                        </form> -->
-                    </div>
+                   <!-- <label class="col-sm-2 col-xs-2">
+                        <span >用 户 ID:</span>
+                        <input type="text" id="userId" placeholder="输入用户ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="userId" data-ng-keyup="search()" style="width: 150px;">
+                   </label> -->
 
-                    <div class="col-md-4 clearfix">
-                        <!-- <a class=" md-primary add-product"  href="#/question/question-add" >录入问题</a> -->
-                        <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
-                    </div>
+                   
+                   <label class="col-sm-2 col-xs-2">
+                        <span >用户账号:</span>
+                        <input type="text" id="userId" placeholder="输入用户手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="userName" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
 
-                </div>
+                   <label class="col-sm-2 col-xs-2">
+                        <span >公司名称:</span>
+                        <input type="text" id="companyName" placeholder="输入公司名称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="companyName" data-ng-keyup="search()"  style="width: 150px;">
+                   </label>
+
+                <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >审核状态：</span>
+                    <select name="select" id="vipType" data-ng-change="search()" data-ng-model="status">
+                        <option value="" >全部</option>
+                        <option value="1">通过</option>
+                        <option value="0">未通过</option>
+                    </select>
+                </label>
+
+                <!-- <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >用户类型：</span>
+                    <select name="select" id="userType" data-ng-change="search()" data-ng-model="userType" >
+                        <option value="">全部</option>
+                        <option value="1">普通用户</option>
+                        <option value="2">企业用户</option>
+                        <option value="3">vip用户</option>
+                    </select>
+                </label> -->
+
+
+                  
+                </form>
+                <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
             </div>
 
-            <table class="table table-bordered table-striped table-responsive">
-                <thead>
-                    <tr>
-                        <!-- <th>
-                        <div class="th">
-                        <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
-                        </div>
-                        </th> -->
-                        <th><div class="th">
-                            反馈ID
-                        </div></th>
-                        <th><div class="th">
-                            用户Id
-                        </div></th>
-                        <th><div class="th">
-                            标题
-                        </div></th>
-                        <th><div class="th">
-                            图片
-                        </div></th>
-                        <th><div class="th">
-                            内容
-                        </div></th>
-                        <!-- <th><div class="th">
-                            手机号
-                        </div></th> -->
-                        <th><div class="th">
-                            管理员id
-                        </div></th>
-                        <th><div class="th">
-                            管理员备注
-                        </div></th>
-                        <th><div class="th">
-                            创建时间
-                        </div></th>
-                        <th><div class="th">
-                            操作
-                        </div></th>
-                    </tr>
+            <div class="col-md-4 clearfix">
+                <!-- <a class=" md-primary add-product" href="#/user/user-add">添加用户</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/applicationMarket-server/user/exportExcel.do?userIds={{userIdsExcel}}" >导出到Excel</a> -->
+                <a ng-click="modifyAuth(1)" class=" md-primary add-product">批量通过</a>
+                <a ng-click="modifyAuth(0)" class=" md-primary add-product">批量不通过</a>
+            </div>
 
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.feedbackId}}">
-                        <!--  <td> <md-checkbox ng-click="selectItem(store.feedbackId)" ng-checked="selected[store.feedbackId]"></md-checkbox></td> -->
-                        <td ng-bind="store.feedbackId"></td>
-                        <td ng-bind="store.userId"></td>
-                        <td ng-bind="store.title" class="product-buyer-name"></td>
-                        <td ><img ng-src="{{store.image}}" alt="" style="width: 120px;max-height: 100px;"></td>
-                        <td ng-bind="store.content"></td>
-                       <!--  <td ng-bind="store.mobile"></td> -->
-                        <td ng-bind="store.adminId"></td>
-                        <td ng-bind="store.adminDescription"></td>
-                        <td ng-bind="store.createdDate | date:'yyyy-MM-dd hh:mm:ss'"></td>
-                        <td class="opertation">
-                            <a href="#/feedback/feedback-change?id={{store.feedbackId}}">修改</a>
-                            <a href="" ng-click="deleteFeedBack(store.feedbackId)">删除</a></td>
-                        </tr>
+            </div>
+        </div>
 
-                    </tbody>
-                </table>
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+                <!-- <th><div class="th">
+                用户ID
+                </div></th> -->
+                <th><div class="th">
+                用户账号
+                </div></th>
+                <th><div class="th">
+                公司名称
+                </div></th>
+                <th><div class="th">
+                请求时间
+                </div></th>
+                
+                <!-- <th><div class="th">
+                积分
+                </div></th>
+ -->
+                <!-- <th><div class="th">
+                用户类型
+                </div></th> -->
 
-                <footer class="table-footer">
-                    <div class="row">
-                        <div class="col-md-6 page-num-info">
-                            <span>
-                                显示
-                                <select data-ng-model="numPerPage"
-                                data-ng-options="num for num in numPerPageOpt"
-                                data-ng-change="onNumPerPageChange()">
-                            </select>
-                            条
-                            当前页{{filteredStores.length}}条/总{{total}}条
-                        </span>
-                    </div>
-                    <div class="col-md-6 text-right pagination-container">
-                        <uib-pagination class="pagination-sm"
-                        ng-model="currentPage"
-                        total-items="total"
-                        max-size="4"
-                        ng-change="select(currentPage)"
-                        items-per-page="numPerPage"
-                        rotate="false"
-                        previous-text="&lsaquo;" next-text="&rsaquo;"
-                        boundary-links="true"></uib-pagination>
-                    </div>
-                </div>
-            </footer>
+                <th><div class="th">
+                状态
+                </div></th>
+                
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.enterpriseAuthId}}">
+                <td> <md-checkbox ng-click="selectItem(store.enterpriseAuthId)" ng-checked="selected[store.enterpriseAuthId]"></md-checkbox></td>
+                <!-- <td ng-bind="store.userId"></td> -->
+                <!-- <td ng-bind="store.userType | parseUserType"></td> -->
+                <td ng-bind="store.mobile"></td>
+                <!-- <td ng-bind="store.nickName"></td> -->
+                <!-- <td>
+                    <p ng-if="store.gender==1">男</p>
+                    <p ng-if="store.gender==2">女</p>
+                </td> -->
+                 <td ng-bind="store.companyName"></td>
+                <td ng-bind="store.createdDate"></td>
+
+                <td>
+                    <p ng-show="store.status==1">通过</p>
+                    <p ng-show="store.status==0">未通过</p>
+                </td>
+                <!-- <td ng-bind="store.swtcBalance ||'0'"></td> -->
+
+                <!-- <td>
+                    <p ng-if="store.userType==1">普通用户</p>
+                    <p ng-if="store.userType==2">企业用户</p>
+                    <p ng-if="store.userType==3">vip用户</p>
+
+                </td> -->
+
+                <td class="opertation">
+                    <!-- <a href="#/user/user-change?id={{store.userId}}">编辑</a> -->
+                    <!-- <a href="" ng-click="deleteUser(store.userId)">删除</a> -->
+                    <a href="#/feedback/feedback-change?id={{store.enterpriseAuthId}}">详情</a>
+                    <!-- <a href="" ng-click="setElite(store.userId)">设为精英</a> -->
+                </td>
+                 <!-- <a href="" ng-click="deleteUser(store.userId)">删除</a></td> -->
+              </tr>
+
+
+
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
         </section>
     </div>
-</div>
+    </div>
 
 </div>
 <style>

@@ -1,57 +1,39 @@
 
 
-<section class="page-form-ele page" ng-controller="AddQuestionCtrl">
+<section class="page-form-ele page" ng-controller="ChangeFeedbackCtrl">
 
 
-    <div class="row ui-section">
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加问题</h2> </div>
+     <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">回复反馈</h2> </div>
 
         <div class="col-md-8 clearfix"> 
-            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+            <button class="btn btn-primary btn-lg changeClick" ng-click="backClick()">返回</button><div class="divider"></div>
         </div>
-        <div class="col-md-12">
+        
+        <div class="col-md-12" ng-show="isShow==1">
             <section class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row user-detail" >
+                    <div class="row banner-detail" >
                         <div class="col-lg-8 col-lg-offset-2">
+                            <div class="form-group">
+                                <label>回复内容</label>
+                                <div class="form-controller">
+                                    <textarea cols="60" rows="20" ng-model="content"></textarea>
+                                </div>
+                            </div>
 
-                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
-                                <md-content layout-padding>
-                                <form name="userForm" class="userForm">
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-lg" ng-click="reply()">回复</button>
+                            </div>
 
-                                    <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">问题</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" class="questionName" ng-model="question.questionName">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">问题简答：</label>
-                                        </div>
-                                        <div class="form-group clearfix">
-                                            <section class="panel panel-default">
-                                                <div class="panel-body">
-                                                <div class="col-sm-12">
-                                                        <textarea style="width: 100%;min-height: 150px;padding: 15px;" ng-model="question.questionText" class="ui-editor"></textarea>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-
-                                    <div layout layout-sm='column' class="changeConfirm add-btn">
-                                        <md-button class="md-raised btn-w-md md-primary" ng-click="addQuestion()">确定发布</md-button><div class="divider"></div>
-                                    </div>
-                                    
-                                </form>
-                            </md-content>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>    
+            </section>    
+        </div>
+
+
     </div>
-</div>
 </section>
 
 <style type="text/css">

@@ -1,0 +1,117 @@
+
+<div class="page page-table" ng-controller="RecommendCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">推荐分类标题列表</h2>
+        </div>
+
+    </div ng-show="isShow == 1">
+    
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="user_list_header">
+                    <label class="col-sm-3 col-xs-3">
+                        <span >分类标题:</span>
+                        <input type="text" id="account" placeholder="分类标题" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="title" data-ng-keyup="search()">
+                    </label> 
+                </form>
+               
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/recommend/recommend-add">添加分类</a>
+                
+            </div>
+
+            </div>
+        </div>
+
+<table class="table table-bordered table-striped table-responsive" >
+            <thead>
+            <tr>
+               
+                <th><div class="th">
+                ID
+                </div></th>
+
+                <th><div class="th">
+                标题
+                </div></th>
+
+                <th><div class="th">
+                应用数量
+                </div></th>
+
+                <th><div class="th">
+                首页展示顺序
+                </div></th>
+                
+               
+               
+                <th><div class="th">
+                    操作
+                </div></th>
+            </tr>
+            
+            </thead>
+
+            <tbody>
+                <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.recommendTypeId}}">
+                    <td ng-bind="store.recommendTypeId
+"></td>
+                    <td ng-bind="store.title"></td>
+                    <td ng-bind="store.count"></td>
+                    <td ng-bind="store.sort"></td>
+                    
+                    <td class="opertation">
+                        <a href="#/recommend/recommend-change?id={{store.recommendTypeId}}">编辑</a> 
+                        <a href="" ng-click="deleteRecommend(store.recommendTypeId)">删除</a> 
+                        <!-- <a ng-if="store.deleted==2" href="" ng-click="startRecommend(store.recommendId)" id="operation-{{store.recommendId}}">启用</a>
+                        <a ng-if="store.deleted==1" href="" ng-click="deleteRecommend(store.recommendId)" id="operation-{{store.recommendId}}">注销</a> -->
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

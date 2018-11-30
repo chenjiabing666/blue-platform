@@ -1,65 +1,173 @@
 
-<section class="page-form-ele page" ng-controller="UserchangeCtrl">
+<div class="page page-table" ng-controller="UserchangeCtrl">
 
-
-    <div class="row ui-section" ng-controller="UserchangeCtrl" >
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">绑定逝者</h2> </div>
-
+    <div class="row ui-section">
+    <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+            <h2 class="section-header">用户钱包</h2>
         </div>
-        <div class="col-md-12">
-            <section class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row user-detail" >
-                        <div class="col-lg-8 col-lg-offset-2">
 
-                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
-                                <md-content layout-padding>
-                                    <form name="userForm" class="userForm">
+    </div ng-show="isShow == 1">
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="user_list_header">
 
-                                        <div class="form-group clearfix">
-                                          <label for="" class="col-sm-3 control-label">绑定逝者：</label>
-                                          <div class="col-sm-9">
-                                              <input class="form-control" class="userId" ng-model="content" ng-change="searchDecedent()" style="width: 300px;font-size: 10px;" placeholder="可以通过逝者姓名，逝者身份证，逝者id查询">
-                                              <ul style="overflow: auto;width: 300px;height: 300px">
-                                               
-                                                <li ng-repeat="decedent in result" id="decedent-{{decedent.decedentId}}" ng-click="clickContent(decedent.decedentId)" ng-mouseover="mouseOver(decedent.decedentId)" ng-mouseleave="mouseLeave(decedent.decedentId)">{{decedent.decedentName}}&nbsp;&nbsp;&nbsp;{{decedent.idCard}}&nbsp;&nbsp;&nbsp;{{decedent.decedentId}}</li>
-                                              </ul>
-                                          </div>
-                                        </div>
-                                      
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">账号状态：</label>
-                                            <div class="col-sm-9">
-                                              <select name="select" class='form-control' id="statue" data-ng-model="user.deleted" style="width:50%;">
-                                                  <option value="1">正常</option>
-                                                  <option value="2">封号</option>
-                                                  <option value="3">暂停使用</option>
+                   <label class="col-sm-2 col-xs-2">
+                        <span >钱包类型:</span>
+                        <select name="select" id="vipType" data-ng-change="search()" data-ng-model="walletType" >
+                            <option value="" >全部</option>
+                            <option value="1">MOAC</option>
+                            <option value="2">SWTC</option>
+                        </select>
+                   </label>
 
+                   
+                  <!--  <label class="col-sm-2 col-xs-2">
+                        <span >用户账号:</span>
+                        <input type="text" id="userId" placeholder="输入用户手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="userName" data-ng-keyup="search()" style="width: 150px;">
+                   </label> -->
 
-                                              </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">礼物图片：</label>
-                                            <div class="col-sm-9">
-                                                <input type="file" class="activityIcon" ng-model="user.approveVideoUrl" accept="video/*" ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
-                                            </div>
-                                        </div> -->
+                   <label class="col-sm-3 col-xs-3">
+                        <span >钱包地址:</span>
+                        <input type="text" id="nickName" class="border-radius-5 border-default ml-10 input-default input-w-100"
+                        data-ng-model="address" data-ng-keyup="search()"  style="width: 300px;">
+                   </label>
+
+                
 
 
-                                        <div layout layout-sm='column' class="changeConfirm add-btn">
-                                            <md-button class="md-raised btn-w-md md-primary" ng-click="bindingDecedent()">确定</md-button><div class="divider"></div>
-                                        </div>
+                  
+                </form>
+                <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
+            </div>
 
-                                    </form>
-                                </md-content>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="col-md-4 clearfix">
+
+                <a class=" md-primary add-product"  href="" ng-click="backClick()">返回</a>
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/applicationMarket-server/user/exportExcel.do?userIds={{userIdsExcel}}" >导出到Excel</a> -->
+               <!--  <a ng-click="export()" class=" md-primary add-product">导出</a> -->
+            </div>
+
+            </div>
         </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <!-- <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th> -->
+                <th><div class="th">
+                交易号
+                </div></th>
+                <th><div class="th">
+                金额
+                </div></th>
+                <th><div class="th">
+                发款方
+                </div></th>
+                <th><div class="th">
+                收款方
+                </div></th>
+                
+                <th><div class="th">
+                旷工费用
+                </div></th>
+
+                <th><div class="th">
+                区块
+                </div></th>
+
+                <th><div class="th">
+                交易时间
+                </div></th>
+
+               <!--  <th><div class="th">
+                URL
+                </div></th> -->
+                
+                <th><div class="th">
+                备注
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.userId}}">
+               <!--  <td> <md-checkbox ng-click="selectItem(store.userId)" ng-checked="selected[store.userId]"></md-checkbox></td> -->
+                <td ng-bind="store.hash" style="word-wrap:break-word;word-break:break-all;"></td>
+                <!-- <td ng-bind="store.userType | parseUserType"></td> -->
+                <td ng-bind="store.money"></td>
+                <td ng-bind="store.fromAddress" style="word-wrap:break-word;word-break:break-all;"></td>
+                <td ng-bind="store.toAddress" style="word-wrap:break-word;word-break:break-all;"></td>
+                <td ng-bind="store.fee"></td>
+                <td ng-bind="store.block"></td>
+                <td ng-bind="store.transactionDate"></td>
+                <!-- <td>
+                    <p ng-if="store.gender==1">男</p>
+                    <p ng-if="store.gender==2">女</p>
+                </td> -->
+
+                <!-- <td>
+                  <a href="{{store.url}}">点击查账</a>
+                </td> -->
+                <td ng-bind="store.remark"></td>
+
+                <!-- <td>
+                    <p ng-if="store.isDeveloper==1">是</p>
+                    <p ng-if="store.isDeveloper==2">是</p>
+                    <p ng-if="store.isDeveloper==0">否</p>
+
+                </td> -->
+
+                
+                 
+              </tr>
+
+
+
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
     </div>
-</section>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

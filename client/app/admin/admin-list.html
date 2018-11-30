@@ -6,67 +6,60 @@
         <div class="col-md-8 clearfix">
             <h2 class="section-header">管理员列表</h2>
         </div>
-        
-    </div>
-    <div class="col-md-12" ng-if="isShow == 1">
+
+    </div ng-show="isShow == 1">
+    <div class="col-md-12" >
         <section class="panel panel-default table-dynamic">
           <div class="table-filters">
             <div class="row">
             <div class="col-sm-12 col-xs-12" >
                 <form class="user_list_header">
-                    
                     <label class="col-sm-3 col-xs-3">
                         <span >管理员账号:</span>
                         <input type="text" id="account" placeholder="输入管理员账号" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="account" data-ng-keyup="search()">
                     </label> 
-
-                    <label class="col-sm-3 col-xs-3">
-                        <span >管理员姓名:</span>
-                        <input type="text" id="kwAdminName" placeholder="输入账号归属人姓名" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="kwAdminName" data-ng-keyup="search()">
-                    </label> 
-
-
-                    <label class="col-sm-4 col-xs-4">
-                        <span >账号状态:</span>
-                        <select name="select" id="status" data-ng-change="search()" data-ng-model="status">
-                            <option value="0" >全部</option>
-                            <option value="1" >正常</option>
-                            <option value="2" >已注销</option>
-                        </select>                  
-                    </label>
-
                 </form>
-            </div>
-            <div class="col-md-4 clearfix">    
-                <a class=" md-primary add-product" href="#/admin/admin-add">添加管理员</a>
-                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
-            <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+               
             </div>
 
-       <!--  <div class="col-md-4 clearfix">    
-            <a class=" md-primary add-product"  ng-click="export()" >导出</a>
-        </div> -->
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/admin/admin-add">添加管理员</a>
+                
+            </div>
+
             </div>
         </div>
-        <table class="table table-bordered table-striped table-responsive" >
+
+<table class="table table-bordered table-striped table-responsive" >
             <thead>
             <tr>
                
                 <th><div class="th">
                 编号
                 </div></th>
+
                 <th><div class="th">
                 管理员账号
                 </div></th>
+
                 <th><div class="th">
-                管理员姓名
+                邮箱账号
+                </div></th>
+
+                <th><div class="th">
+                手机号码
                 </div></th>
                 
                 <th><div class="th">
                 权限描述
                 </div></th>
+
                 <th><div class="th">
                 账户状态
+                </div></th>
+
+                <th><div class="th">
+                创建时间
                 </div></th>
 
                <!-- <th><div class="th">
@@ -89,18 +82,23 @@
                 <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.adminId}}">
                     <td ng-bind="store.adminId"></td>
                     <td ng-bind="store.account"></td>
-                    <td ng-bind="store.adminName"></td>
+                    <td ng-bind="store.email"></td>
+                    <td ng-bind="store.mobile"></td>
                     <!-- <td ng-bind="store.roleName"></td>
                     <td ng-bind="store.description"></td> -->
                     <td ng-bind="store.description"></td>
 
-                    <td ng-if="store.deleted==1" id="status-{{store.adminId}}">正常</td>
-                    <td ng-if="store.deleted==2" id="status-{{store.adminId}}">已注销</td>
+                    <td ng-if="store.activated==1" id="status-{{store.adminId}}" >启用</td>
+                    <td ng-if="store.activated==0" id="status-{{store.adminId}}" >禁用</td>
+                    
+                    <td ng-bind="store.createdDate"></td>
+
 
                     <td class="opertation">
-                        <a href="" ng-click="resetPassWord(store.adminId)">重置密码</a> 
-                        <a ng-if="store.deleted==2" href="" ng-click="startAdmin(store.adminId)" id="operation-{{store.adminId}}">启用</a>
-                        <a ng-if="store.deleted==1" href="" ng-click="deleteAdmin(store.adminId)" id="operation-{{store.adminId}}">注销</a>
+                        <a href="#/admin/admin-change?id={{store.adminId}}">修改</a> 
+                        <a href="" ng-click="deleteAdmin(store.adminId)">删除</a> 
+                        <!-- <a ng-if="store.deleted==2" href="" ng-click="startAdmin(store.adminId)" id="operation-{{store.adminId}}">启用</a>
+                        <a ng-if="store.deleted==1" href="" ng-click="deleteAdmin(store.adminId)" id="operation-{{store.adminId}}">注销</a> -->
                     </td>
                 </tr>
             </tbody>
@@ -111,12 +109,12 @@
             <div class="row">
             <div class="col-md-6 page-num-info">
                 <span>
-                显示 
+                显示
                 <select data-ng-model="numPerPage"
                     data-ng-options="num for num in numPerPageOpt"
                     data-ng-change="onNumPerPageChange()">
                 </select>
-                条 
+                条
                 当前页{{filteredStores.length}}条/总{{total}}条
                 </span>
             </div>
@@ -136,5 +134,10 @@
         </section>
     </div>
     </div>
-    
+
 </div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

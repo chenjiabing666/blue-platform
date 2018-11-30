@@ -1,0 +1,146 @@
+
+<div class="page page-table" ng-controller="noticeCtrl">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">模块列表</h2>
+        </div>
+
+    </div ng-show="isShow == 1">
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          
+
+         <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <!-- <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th> -->
+                <th><div class="th">
+                序号
+                </div></th>
+               <!--  <th><div class="th">
+                逝者手机
+                </div></th> -->
+                <!-- <th><div class="th">
+                昵称
+                </div></th> -->
+                <th><div class="th">
+                模块
+                </div></th>
+                <!-- <th><div class="th">
+                密码
+                </div></th> -->
+                <!-- <th><div class="th">
+                年龄
+                </div></th>
+                <th><div class="th">
+                账户状态
+                </div></th> -->
+                
+                <th><div class="th">
+                问题数量
+                </div></th>
+
+                <!-- <th><div class="th">
+                忌日
+                </div></th>
+                <th><div class="th">
+                身份证号
+                </div></th> -->
+                
+                <th><div class="th">
+                操作
+                </div></th>
+                <!-- <th><div class="th">
+                性别
+                </div></th> -->
+               <!--  <th><div class="th">
+                真实姓名
+                </div></th>
+                <th><div class="th">
+                身份证号
+                </div></th>
+                <th><div class="th">
+                身份证正面照
+                </div></th>
+                 <th><div class="th">
+                身份证背面照
+                </div></th> -->
+                <!-- <th><div class="th">
+                审核状态
+                </div></th> -->
+                <!-- <th><div class="th">
+                审核
+                </div></th> -->
+                
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.moduleId}}">
+               <!--  <td> <md-checkbox ng-click="selectItem(store.noticeId)" ng-checked="selected[store.noticeId]"></md-checkbox></td> -->
+                <td ng-bind="store.moduleId"></td>
+                <!-- <td ng-bind="store.noticeType | parsenoticeType"></td> -->
+                <td ng-bind="store.moduleName"></td>
+                <!-- <td ng-bind="store.account"></td> -->
+               <!--  <td ng-if="store.noticeGender==1">男</td>
+                <td ng-if="store.noticeGender==2">女</td>
+                <td ng-if="store.noticeGender==3">保密</td> -->
+
+                <td ng-bind="store.questionNum"></td>
+
+                <td class="opertation">
+                    <!-- <a href="#/notice/notice-change?id={{store.noticeId}}">编辑</a> -->
+                    <a href="" ng-click="deletenotice(store.moduleId)">删除</a>
+                    <a href="#/notice/notice-detail?id={{store.moduleId}}">详情</a>
+                    <a href="#/notice/notice-change?id={{store.moduleId}}">添加解决方案</a>
+                    <!-- <a href="" ng-click="topNotice(store.noticeId)">置顶</a> -->
+                    <!-- <a href="" ng-click="setElite(store.noticeId)">设为精英</a> -->
+                </td>
+                 <!-- <a href="" ng-click="deletenotice(store.noticeId)">删除</a></td> -->
+              </tr>
+
+
+
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

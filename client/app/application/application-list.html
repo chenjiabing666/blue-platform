@@ -1,0 +1,216 @@
+
+<div class="page page-table" ng-controller="ApplicationCtrl">
+
+    <div class="row ui-section">
+        <div class="col-md-12">
+            <div class="col-md-8 clearfix">
+                <h2 class="section-header">应用列表</h2>
+            </div>
+
+        </div ng-show="isShow == 1">
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="user_list_header">
+                    
+                    <label class="col-sm-3 col-xs-3">
+                        <span >ID:</span>
+                        <input type="text" id="account" placeholder="应用ID" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="ID" data-ng-keyup="search()">
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span >应用名称:</span>
+                        <input type="text" id="account" placeholder="应用名称" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="AppName" data-ng-keyup="search()">
+                    </label> 
+                    
+                    <label class="col-sm-3 col-xs-3">
+                        <span >平台:</span>
+                        
+                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="Plateform" data-ng-change="search()">
+                          <option value="1">移动应用Android</option>
+                          <option  value="2" >移动应用IOS</option>
+                        </select> 
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span >发布人账号:</span>
+                        <input type="text" id="account" placeholder="发布人" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="Account" data-ng-keyup="search()">
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span>审核状态:</span>
+                        <select class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="ExaminStatus" data-ng-change="search()">
+                            <option value="4">不限</option>
+                            <option value="2">未审核</option>
+                            <option value="1">审核成功</option>
+                            <option value="3">审核失败</option>
+                        </select>
+                    </label> 
+
+
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span>上架状态:</span>
+                        <select class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="GroudStatus" data-ng-change="search()">
+                            <option value="3">不限</option>
+                            <option value="1">上架</option>
+                            <option value="2">下架</option>
+                        </select>
+                    </label> 
+
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span>推荐状态:</span>
+                        <select class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="IsRecommend" data-ng-change="search()">
+                            <option value="3">不限</option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </label> 
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span>必备:</span>
+                        <select class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="isMust" data-ng-change="search()">
+                            <option value="">不限</option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </label> 
+                </form>
+               
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" ng-click="deleteList()">批量删除</a>
+            </div>
+
+            </div>
+        </div>
+
+<table class="table table-bordered table-striped table-responsive" >
+            <thead>
+            <tr>
+            <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th>
+               
+                <th><div class="th">
+                ID
+                </div></th>
+
+                <th><div class="th">
+                应用名称
+                </div></th>
+
+                <th><div class="th">
+                平台
+                </div></th>
+
+                <th><div class="th">
+                上架时间
+                </div></th>
+                
+                <th><div class="th">
+                发布人
+                </div></th>
+
+                <th><div class="th">
+                推荐状态
+                </div></th>
+
+                <th><div class="th">
+                审核状态
+                </div></th>
+
+                <th><div class="th">
+                上架状态
+                </div></th>
+                <th><div class="th">
+                    操作
+                </div></th>
+            </tr>
+            
+            </thead>
+
+            <tbody>
+                <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.appId}}">
+                <td> <md-checkbox ng-click="selectItem(store.appId)" ng-checked="selected[store.appId]"></md-checkbox></td>
+                    <td ng-bind="store.appId"></td>
+                    <td ng-bind="store.appName"></td>
+                    <td>
+                        <span ng-if="store.plateform==1">移动应用Android</span>
+                        <span ng-if="store.plateform==2">移动应用IOS</span>
+                    </td>
+                    <td ng-bind="store.publishDate"></td>
+                    <td ng-bind="store.account"></td>
+                    <!-- <td ng-bind="store.roleName"></td>
+                    <td ng-bind="store.description"></td> -->
+                    <td>
+                        <span ng-if="store.isRecommend==1">是</span>
+                        <span ng-if="store.isRecommend==0">否</span>
+                    </td>
+
+                    <td>
+                        <span ng-if="store.examinStatus==1">审核通过</span>
+                        <span ng-if="store.examinStatus==2">未审核</span>
+                        <span ng-if="store.examinStatus==3">审核失败</span>
+                    </td>
+
+                    <td>
+                        <span ng-if="store.groundStatus==1">已上架</span>
+                        <span ng-if="store.groundStatus==2">未上架</span>
+                    </td>
+
+                    <td class="opertation">
+                        <a href="" ng-if="store.groundStatus==1" ng-click="under(store.appId)">下架</a> 
+                        <a href="" ng-if="store.groundStatus==2" ng-click="ground(store.appId)">上架</a>
+                        <a href="#/application/application-detail?id={{store.appId}}">详情</a> 
+                        <a href="#/application/application-recommend?id={{store.appId}}" ng-if="store.isRecommend==0">推荐</a> 
+                        <a href="javascript:void(0);" ng-if="store.isRecommend==1" ng-click="cancel(store.appId)" >取消推荐</a> 
+                        <a href="#/application/application-change?id={{store.appId}}&platform={{store.plateform}}">更新安装包</a> 
+                        <a href="" ng-if="store.isMust==0" ng-click="setMust(store.appId,1)">设为必备</a>
+                        <a href="" ng-if="store.isMust==1" ng-click="setMust(store.appId,0)">取消必备</a>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>

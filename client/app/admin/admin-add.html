@@ -20,25 +20,45 @@
                                 <md-content layout-padding>
                                     <form name="userForm">
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">管理员姓名：</label>
+                                            <label for="" class="col-sm-3 control-label">邮箱：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminName" ng-model="admin.adminName">
+                                                <input class="form-control" class="adminName" ng-model="admin.email">
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">管理员账号：</label>
+                                            <label for="" class="col-sm-3 control-label">手机号码：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="account" ng-model="admin.account">
+                                                <input class="form-control" class="account" ng-model="admin.mobile">
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">管理员密码：</label>
+                                            <label for="" class="col-sm-3 control-label">账号：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="adminPsd" ng-model="admin.account">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">密码：</label>
                                             <div class="col-sm-9">
                                                 <input class="form-control" class="adminPsd" ng-model="admin.password">
                                             </div>
                                         </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">账号状态：</label>
+                                            <div class="col-sm-9">
+                                                <select ng-model="admin.activated" class="form-controller bannerLink">
+                                                    <option value="1">启用</option>
+                                                    <option value="0" >禁用</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
 
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">权限描述：</label>
@@ -71,11 +91,11 @@
                                         <div class="form-group col-sm-12 col-sm-offset-1" >
                                             <div class="col-sm-3 col-md-3">管理员模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
+                                            <div class="col-sm-3 col-md-3">
                                                 <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="1" />管理员列表
                                             </div>
 
-                                            <div class="col-sm-4 col-md-4">
+                                            <div class="col-sm-3 col-md-3">
                                                 <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="2" />添加管理员
                                             </div>
                                         </div>
@@ -83,11 +103,11 @@
                                         <div class="form-group col-sm-12 col-sm-offset-1" >
                                             <div class="col-sm-3 col-md-3">用户模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
+                                            <div class="col-sm-3 col-md-3">
                                                 <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="3,36,49" />用户列表
                                             </div>
 
-                                            <div class="col-sm-4 col-md-4">
+                                            <div class="col-sm-3 col-md-3">
                                                 <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="50" />重置密码
                                             </div>
 
@@ -95,46 +115,104 @@
 
 
                                         <div class="form-group col-sm-12 col-sm-offset-1" >
-                                            <div class="col-sm-3 col-md-3">逝者模块：</div>
+                                            <div class="col-sm-3 col-md-3">配置模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
-                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="37,38,51" />逝者列表
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="37" />配置修改
                                             </div>
                                         </div>
 
 
                                          <div class="form-group col-sm-12 col-sm-offset-1" >
-                                            <div class="col-sm-3 col-md-3">照片模块：</div>
+                                            <div class="col-sm-3 col-md-3">用户反馈模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
-                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="39,40,41,42" />照片审核
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="38" />反馈列表
                                             </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="39" />回复
+                                            </div>
+
                                         </div>
 
                                          <div class="form-group col-sm-12 col-sm-offset-1" >
-                                            <div class="col-sm-3 col-md-3">视频模块：</div>
+                                            <div class="col-sm-3 col-md-3">应用模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
-                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="43,44,45,46" />视频审核
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="40" />应用列表
+                                            </div>
+
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="41" />添加应用
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="42" />更新安装包
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group col-sm-12 col-sm-offset-1" >
+                                            <div class="col-sm-3 col-md-3">推荐分类模块：</div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="43" />推荐分类列表
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="44" />添加推荐分类
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group col-sm-12 col-sm-offset-1" >
+                                            <div class="col-sm-3 col-md-3">任务模块：</div>
+                                             <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="45" /> 任务列表
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="46" />添加任务
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group col-sm-12 col-sm-offset-1" >
+                                            <div class="col-sm-3 col-md-3">认证模块：</div>
+                                             <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="47" /> 开发者认证审核
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="48" />认证开发者
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="49" />应用认证审核
                                             </div>
                                         </div>
 
 
                                         <div class="form-group col-sm-12 col-sm-offset-1" >
-                                            <div class="col-sm-3 col-md-3">系统设置模块：</div>
+                                            <div class="col-sm-3 col-md-3">广告模块：</div>
+                                             <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="50" /> 广告列表
+                                            </div>
 
-                                            <div class="col-sm-4 col-md-4">
-                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="52" />系统参数设置
+                                            <div class="col-sm-3 col-md-3">
+                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="51" />添加广告
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-sm-12 col-sm-offset-1" >
-                                            <div class="col-sm-3 col-md-3">广告管理模块：</div>
 
-                                            <div class="col-sm-4 col-md-4">
-                                                <input type="checkbox" class="form-controller" style="margin-right:-40px" name="authoritys" value="47,48" />广告列表
-                                            </div>
-                                        </div>
+                                        
+
+
+
 
                                         
                                        <!--  <div class="form-group col-sm-12 col-sm-offset-1" ng-repeat="auth in authorityList">

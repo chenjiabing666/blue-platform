@@ -18,71 +18,52 @@
                    <label class="col-sm-2 col-xs-2">
                         <span >用 户 ID:</span>
                         <input type="text" id="userId" placeholder="输入用户ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwUserId" data-ng-keyup="search()" style="width: 150px;">
+                        data-ng-model="userId" data-ng-keyup="search()" style="width: 150px;">
                    </label>
 
+                   
                    <label class="col-sm-2 col-xs-2">
-                        <span >昵称:</span>
-                        <input type="text" id="nickName" placeholder="输入用户昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwNickName" data-ng-keyup="search()"  style="width: 150px;">
-                   </label>
-
-                   <label class="col-sm-2 col-xs-2">
-                        <span >手机号:</span>
+                        <span >用户账号:</span>
                         <input type="text" id="userId" placeholder="输入用户手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwMobile" data-ng-keyup="search()" style="width: 150px;">
-                   </label>
-
-                   <label class="col-sm-2 col-xs-2">
-                        <span >姓名:</span>
-                        <input type="text" id="userName" placeholder="输入用户姓名" class="border-radius-5 border-default ml-10 input-default input-w-50"
                         data-ng-model="userName" data-ng-keyup="search()" style="width: 150px;">
                    </label>
-                  
-                    <!-- <label class="col-sm-2 col-xs-2" style="text-align: center;">
-                        <span >性别:</span>
-                    <select name="select" id="level" data-ng-change="search()" data-ng-model="kwSex">
-                        <option value="">全部</option>
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >用户名称:</span>
+                        <input type="text" id="nickName" placeholder="输入用户昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="nickName" data-ng-keyup="search()"  style="width: 150px;">
+                   </label>
+
+                <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >性别</span>
+                    <select name="select" id="vipType" data-ng-change="search()" data-ng-model="gender">
+                        <option value="" >全部</option>
                         <option value="1">男</option>
                         <option value="2">女</option>
-                        <option value="3">保密</option>
                     </select>
-                    </label> -->
+                </label>
+
+                <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >用户类型：</span>
+                    <select name="select" id="userType" data-ng-change="search()" data-ng-model="userType" >
+                        <option value="">全部</option>
+                        <option value="1">普通用户</option>
+                        <option value="2">企业用户</option>
+                        <option value="3">vip用户</option>
+                    </select>
+                </label>
 
 
-                    <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
-                        <span >用户类型</span>
-                    <select name="select" id="vipType" data-ng-change="search()" data-ng-model="vipType" style="height: 26px;width: 126px;">
-                        <option value="" >全部</option>
-                        <option value="1">普通会员</option>
-                        <option value="2">藏晶苑会员</option>
-                    </select>
-                    </label>
                   
-                    <!-- <label class="col-sm-5 col-xs-5">
-                        <span >注册时间:</span>
-                        <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="KwStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日">
-                        <span>-</span>
-                        <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="KwEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日">                
-                    </label>                     
-                    <div class="col-sm-2 col-xs-2 search" data-name="search" data-code="f1c3" ng-click="search()" >
-                        <i class="zmdi zmdi-search"></i>
-                    </div>                   
-                    <label class="col-sm-2 col-xs-2" style="margin-left:30px; ">
-                        <div ng-click="emptyCondition()" ><span >清空条件</span></div>
-                    </label>     -->
-                    
                 </form>
                 <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
             </div>
 
             <div class="col-md-4 clearfix">
-                <a class=" md-primary add-product" href="#/user/user-add">添加用户</a>
+                <!-- <a class=" md-primary add-product" href="#/user/user-add">添加用户</a> -->
                 <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
-                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
-                <!-- <a class=" md-primary add-product" href="http://localhost:8080/lifecrystal-server/user/exportExcel.do?userIds={{userIdsExcel}}" >导出到Excel</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/applicationMarket-server/user/exportExcel.do?userIds={{userIdsExcel}}" >导出到Excel</a> -->
                 <a ng-click="exportExcel()" class=" md-primary add-product">导出</a>
             </div>
 
@@ -99,56 +80,30 @@
                 用户ID
                 </div></th>
                 <th><div class="th">
-                用户手机
+                用户账号
                 </div></th>
                 <th><div class="th">
-                昵称
+                用户名称
                 </div></th>
                 <th><div class="th">
-                用户姓名
+                性别
                 </div></th>
-                <!-- <th><div class="th">
-                密码
-                </div></th> -->
-                <!-- <th><div class="th">
-                年龄
-                </div></th>
+                
                 <th><div class="th">
-                账户状态
-                </div></th> -->
-                <th><div class="th">
-                注册日期
+                积分
                 </div></th>
 
                 <th><div class="th">
                 用户类型
                 </div></th>
+
+               <!--  <th><div class="th">
+                是否开发者
+                </div></th> -->
                 
                 <th><div class="th">
                 操作
                 </div></th>
-                <!-- <th><div class="th">
-                性别
-                </div></th> -->
-               <!--  <th><div class="th">
-                真实姓名
-                </div></th>
-                <th><div class="th">
-                身份证号
-                </div></th>
-                <th><div class="th">
-                身份证正面照
-                </div></th>
-                 <th><div class="th">
-                身份证背面照
-                </div></th> -->
-                <!-- <th><div class="th">
-                审核状态
-                </div></th> -->
-                <!-- <th><div class="th">
-                审核
-                </div></th> -->
-                
             </tr>
 
             </thead>
@@ -159,23 +114,21 @@
                 <!-- <td ng-bind="store.userType | parseUserType"></td> -->
                 <td ng-bind="store.mobile"></td>
                 <td ng-bind="store.nickName"></td>
-                <td ng-bind="store.userName"></td>
-                <!-- <td ng-bind="store.age"></td>
-                <td ng-bind="store.deleted | parseUserStatus"></td> -->
-                <td ng-bind="store.createdDate|date:'yyyy-MM-dd'"></td>
-                <td ng-if="store.vipType==1">普通会员</td>
-                <td ng-if="store.vipType==2">藏晶苑会员</td>
-                <!-- <td ng-bind="store.gender"></td> -->
-                <!-- <td ng-bind="store.realName"></td>
-                <td ng-bind="store.idNumber"></td>
-                <td><img class="showImg" ng-src="{{store.frontPhoto}}" alt=""></td>
-                <td><img class="showImg" ng-src="{{store.backPhoto}}" alt=""></td> -->
-                <!-- <td ng-bind="store.activated | parseUserActivated"></td> -->
-                <!-- <td class="opertation">
-                    <a href="" ng-click="adopt(store.userId)">通过</a>
-                    <a href="" ng-click="refuse(store.userId)">拒绝</a>
-                </td> -->
-                <!-- <td ng-bind="store.gender | parseGender"></td> -->
+                <td>
+                    <p ng-if="store.gender==1">男</p>
+                    <p ng-if="store.gender==2">女</p>
+                </td>
+
+                <td ng-bind="store.point||'0'"></td>
+                <!-- <td ng-bind="store.swtcBalance ||'0'"></td> -->
+
+                <td>
+                    <p ng-if="store.userType==1">普通用户</p>
+                    <p ng-if="store.userType==2">企业用户</p>
+                    <p ng-if="store.userType==3">vip用户</p>
+
+                </td>
+
                 <td class="opertation">
                     <!-- <a href="#/user/user-change?id={{store.userId}}">编辑</a> -->
                     <a href="" ng-click="deleteUser(store.userId)">删除</a>
