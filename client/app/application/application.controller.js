@@ -44,7 +44,7 @@
 
              var xhr = new XMLHttpRequest();
                     var response;
-                    xhr.open("post", "http://localhost:8080/applicationMarket-server/app/export.do", true);
+                    xhr.open("post", "http://localhost:8080/blue-server/app/export.do", true);
                     xhr.send(form);
                     xhr.onreadystatechange = doResult;
                     function doResult() {
@@ -103,7 +103,7 @@
         
         
         //表单回显
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'recommendType/getRecommendTypeList.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'recommendType/getRecommendTypeList.do',{},{params:{
             pageNum:1,
             pageSize:20
 
@@ -119,7 +119,7 @@
         //推荐
         $scope.recommend = function () {
 
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/recommend.do', {}, {
+            $http.post('http://localhost:8080/blue-server/' + 'app/recommend.do', {}, {
                 params: {
                     appId:$scope.applicationId,
                     recommendTypeId:$scope.typeId
@@ -138,7 +138,43 @@
 
     function ApplicationDetailCtrl($scope, $http, $mdDialog, $location, $timeout) {
 
-        
+        var E = window.wangEditor
+            var editor = new E('#editor')
+            // 或者 var editor = new E( document.getElementById('editor') )
+            editor.customConfig.menus = [
+                // 'head',  // 标题
+                'bold',  // 粗体
+                'fontSize',  // 字号
+                'fontName',  // 字体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'strikeThrough',  // 删除线
+                'foreColor',  // 文字颜色
+                'backColor',  // 背景颜色
+                'link',  // 插入链接
+                'list',  // 列表
+                'justify',  // 对齐方式
+                'quote',  // 引用
+                'emoticon',  // 表情
+                'image',  // 插入图片
+                'table',  // 表格
+                // 'video',  // 插入视频
+                // 'code',  // 插入代码
+                'undo',  // 撤销
+                'redo'  // 重复
+            ];
+
+            //指定上传的文件名，这里必须和后端代码对应
+            editor.customConfig.uploadFileName = 'myFile'
+            editor.customConfig.uploadImgServer = "http://localhost:8080/blue-server/information/uploadImage.do"  // 上传图片到服务器
+
+            // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+            
+            // 隐藏“网络图片”tab
+            editor.customConfig.showLinkImg = false;
+            editor.customConfig.zIndex =1;
+
+            editor.create();
 
        
 
@@ -158,109 +194,98 @@
         }
 
 
-        $scope.applicationId = $location.search().id;   //获取管理员Id
+        $scope.informationId = $location.search().id;   //获取管理员Id
         
+        $scope.doUploadPhoto = function(element) {
+            $scope.imageFileObj = element.files[0];
+        }
+
+        // //获取类别
+        $http.post('http://localhost:8080/blue-server/' + 'module/getModuleList.do', {}, {
+            params: {
+                pageSize:100,
+                pageNum:1
+            }
+        }).success(function (data) {
+            if (data.code == 0) {
+                $scope.moduleList = data.result;
+                console.log($scope.moduleList);
+            }
+            ;
+        });
         
         //表单回显
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getAppDetailInfo.do',{},{params:{
-            appId:$scope.applicationId   //管理员Id
+        $http.post('http://localhost:8080/blue-server/' + 'information/getInformationById.do',{},{params:{
+            informationId:$scope.informationId   
         }}).success( function (data){   
             if(data.code == 0){
                 // console.log(data.result)
-                $scope.app=data.result.app;
-                
-                $scope.last=data.result.appVersion;
-                // console.log($scope.last)
-                $scope.historyVersions=data.result.historyVersions;
-                $scope.images=data.result.images;
-                $scope.appType=data.result.appType;
-                // console.log($appType);
+                $scope.information=data.result;
+                console.log($scope.information)
+                editor.txt.html($scope.information.content);  //html内容
             } else {
                 $scope.showAlert(data.message);
             }
         });
 
-        //获取类别
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'appType/getAppTypeList.do', {}, {
-            params: {
-            }
-        }).success(function (data) {
-            if (data.code == 0) {
-                $scope.apptypes = data.result.allTypes;
-                console.log($scope.apptypes);
-
-            }
-            ;
-        });
-
-        //修改密码
-        $scope.modifyPassword = function () {
-            // console.log($scope.application);
-            console.log($scope.application.newPassword==undefined);
-
-            if (($scope.application.newPassword!=undefined&&$scope.application.newPassword!="")&&$scope.application.newPassword.length<6) {
-                $scope.showAlert("密码不能少于6位")
-                return;
+        $scope.modifyInfo=function(){
+            if ($scope.information.point==undefined) {
+                $scope.information.point="";
             }
 
-            if (($scope.application.newPassword!=undefined&&$scope.application.newPassword!="")&&$scope.application.newPassword!=$scope.application.confirmPassword) {
-                $scope.showAlert("新密码和确认密码不同，请重新输入");
-                return;
+            if ($scope.information.price==undefined) {
+                $scope.information.price="";
             }
 
+            var form = new FormData();
+            form.append("title",$scope.information.title);
+            form.append("price",$scope.information.price);
+            form.append("point",$scope.information.point);
+            form.append("moduleId",$scope.information.moduleId);
+            form.append("file",$scope.imageFileObj);
+            form.append("informationId",$scope.informationId);
+            $scope.payTypes="";
+            $("input:radio[name='payType']:checked").each(function() {
+                        $scope.payTypes+= $(this).val();
+                });
+            form.append("payType",$scope.payTypes);
+            var typeV=$("input[name='type']:checked").val();
+            form.append("type",typeV);
 
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'application/modifApplication.do', {}, {
-                params: {
-                    email: $scope.application.email,
-                    newPwd: $scope.application.newPassword,
-                    account: $scope.application.account,
-                    mobile:$scope.application.mobile,
-                    activated:$scope.application.activated,
-                    applicationId:$scope.application.applicationId
-                }
-            }).success(function (data) {
-                if (data.code == 0) {
-                    $scope.showAlert("修改成功");
-                } else {
-                    // $scope.currentPageStores=null;    //变成null，及时更新到页面中
-                    // alert(data.message);
-                    $scope.showAlert(data.message);
-                }
-            });
+            var html=editor.txt.html();  //html内容
+            form.append("content",html);
+            // form.append("adminId",$scope.information.adminId);
 
+
+            var xhr = new XMLHttpRequest();
+                    var response;
+                    xhr.open("post", "http://localhost:8080/blue-server/information/modifyInformation.do", true);
+                    xhr.send(form);
+                    xhr.onreadystatechange = doResult;
+                    function doResult() {
+                        if (xhr.readyState == 4) { //4代表执行完成
+                            if (xhr.status == 200) { //200代表执行成功
+                                //将xmlHttpReg.responseText的值赋给ID为resText的元素
+                                var date=eval("("+xhr.responseText+")")
+                                // console.log(date);
+                                // console.log("--->"+date.code);
+                                if(date.code==0){
+                                    $scope.showAlert("修改成功");
+                                }else{
+                                    $scope.showAlert(date.message);
+                                    
+                                }
+                                
+                               
+                            }
+                        }
+
+
+                 }
+            
         }
 
-
-        //修改信息
-        $scope.updateApp=function(){
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/modifyAppById.do', {}, {
-                params: {
-                    appId: $scope.applicationId,
-                    appName: $scope.app.name,
-                    downloadUrl: $scope.last.downloadUrl,
-                    packageName:$scope.last.packageName,
-                    versionName:$scope.last.versionName,
-                    versionNum:$scope.last.versionNumber,
-                    type:$scope.appType.appTypeId,
-                    personalRecommend:$scope.app.personalRecommend,
-                    supportLanguage:$scope.app.supportLanguage,
-                    tariffType:$scope.app.tariffType,
-                    introduction:$scope.app.introduction,
-                    versionIntro:$scope.last.introduction,
-                    versionFeatures:$scope.last.versionFeatures,
-                    supportSys:$scope.last.supportSys,
-                    privacy:$scope.app.privacy,
-                }
-            }).success(function (data) {
-                if (data.code == 0) {
-                    $scope.showAlert("修改成功");
-                } else {
-                    // $scope.currentPageStores=null;    //变成null，及时更新到页面中
-                    // alert(data.message);
-                    $scope.showAlert(data.message);
-                }
-            });
-        }
+        
 
 
 
@@ -440,7 +465,7 @@
 
             var xhr = new XMLHttpRequest();
                     var response;
-                    xhr.open("post", "http://localhost:8080/applicationMarket-server/app/updateApp.do", true);
+                    xhr.open("post", "http://localhost:8080/blue-server/app/updateApp.do", true);
                     xhr.send(form);
                     xhr.onreadystatechange = doResult;
                     function doResult() {
@@ -469,7 +494,7 @@
                  }
 
             //获取类别
-            // $http.post('http://localhost:8080/applicationMarket-server/' + 'app/addApp.do', {}, {
+            // $http.post('http://localhost:8080/blue-server/' + 'app/addApp.do', {}, {
             //     params: {
             //     }
             // }).success(function (data) {
@@ -531,18 +556,13 @@
         //
         function getApplicationList(pageNum, pageSize) {
          
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getAppList.do', {}, {
+            $http.post('http://localhost:8080/blue-server/' + 'information/getInformationListBack.do', {}, {
                 params: {
-                    appId:$scope.ID,
-                    appName:$scope.AppName,
-                    platform:$scope.Plateform,
-                    publishAccount:$scope.Account,
-                    examinStatus:$scope.ExaminStatus,
-                    groundStatus:$scope.GroudStatus,
-                    isRecommend:$scope.IsRecommend,
                     pageNum: pageNum,    //当前页数
                     pageSize: pageSize,    //每页显示的大小
-                    isMust:$scope.isMust
+                    title:$scope.title,
+                    payType:$scope.payType,
+                    type:$scope.type
                 }
             }).success(function (data) {
                 if (data.code == 0) {
@@ -553,7 +573,7 @@
                     // console.log($scope.currentPageStores);
 
                     $scope.filteredStores = data.result;
-                    $scope.currentPageStores.$apply;
+                    // $scope.currentPageStores.$apply;
                     $scope.total = data.total;
                     // console.log($scope.stores);
                 } else {
@@ -563,19 +583,15 @@
         }
 
 
-        $scope.cancel=function(id){
-            $http.post('http://localhost:8080/applicationMarket- 0/' + 'app/cancelRecommend.do', {}, {
+        $scope.delete=function(id){
+            $http.post('http://localhost:8080/blue-server/' + 'information/deleteInformationById.do', {}, {
                 params: {
-                    appId:id
+                    informationId:id
                 }
             }).success(function (data) {
                 if (data.code == 0) {
-                    for (var i = 0; i < $scope.currentPageStores.length; i++) {
-                        if ($scope.currentPageStores[i].appId==id) {
-                            $scope.currentPageStores[i].isRecommend=0;
-                        }
-                    }
-                    $scope.showAlert("取消成功");
+                    $scope.showAlert("删除成功");
+                    $(".delete-"+id).css("display","none");
                 } else {
                     $scope.showAlert(data.message);
                 }
@@ -628,7 +644,7 @@
 
 
         $scope.setMust=function(id,status){
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/setMust.do', {}, {
+            $http.post('http://localhost:8080/blue-server/' + 'app/setMust.do', {}, {
                 params: {
                     appId:id,
                     status:status
@@ -746,7 +762,7 @@
             // getRoleList(1, 100);
 
             // console.log(:$scope.kwApplicationName+"----"+$scope.account+);
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getAppList.do', {}, {
+            $http.post('http://localhost:8080/blue-server/' + 'information/getInformationListBack.do', {}, {
                 params: {
                     pageNum: 1,
                     pageSize: $scope.numPerPage
@@ -910,7 +926,7 @@ $scope.selectAll = function () {
                     // console.log('确定')
 
 
-                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"app/deleteAppBatch.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"app/deleteAppBatch.do";// 接收上传文件的后台地址
                     // console.log($scope.selected);
                     var temp = "";
 
@@ -983,7 +999,7 @@ $scope.selectAll = function () {
                     .cancel('取消');
                 $mdDialog.show(confirm).then(function () {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/applicationMarket-server/" + "app/under.do?", {}, {
+                    $http.post("http://localhost:8080/blue-server/" + "app/under.do?", {}, {
                         params: {
                             appId: id
                         }
@@ -1019,7 +1035,7 @@ $scope.selectAll = function () {
                     .cancel('取消');
                 $mdDialog.show(confirm).then(function () {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/applicationMarket-server/" + "app/ground.do?", {}, {
+                    $http.post("http://localhost:8080/blue-server/" + "app/ground.do?", {}, {
                         params: {
                             appId: id
                         }
@@ -1156,8 +1172,43 @@ $scope.selectAll = function () {
         $scope.isAddApplication = 0;
         $scope.isShow = 0;
         $scope.selectAuthories;
+        var E = window.wangEditor
+            var editor = new E('#editor')
+            // 或者 var editor = new E( document.getElementById('editor') )
+            editor.customConfig.menus = [
+                // 'head',  // 标题
+                'bold',  // 粗体
+                'fontSize',  // 字号
+                'fontName',  // 字体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'strikeThrough',  // 删除线
+                'foreColor',  // 文字颜色
+                'backColor',  // 背景颜色
+                'link',  // 插入链接
+                'list',  // 列表
+                'justify',  // 对齐方式
+                'quote',  // 引用
+                'emoticon',  // 表情
+                'image',  // 插入图片
+                'table',  // 表格
+                'video',  // 插入视频
+                // 'code',  // 插入代码
+                'undo',  // 撤销
+                'redo'  // 重复
+            ];
 
+            //指定上传的文件名，这里必须和后端代码对应
+            editor.customConfig.uploadFileName = 'myFile'
+            editor.customConfig.uploadImgServer = "http://localhost:8080/blue-server/information/uploadImage.do"  // 上传图片到服务器
 
+            // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+            
+            // 隐藏“网络图片”tab
+            editor.customConfig.showLinkImg = false;
+            editor.customConfig.zIndex =1;
+
+            editor.create();
 
 
         // 上传授权书(浏览器--只从相册中选择)
@@ -1192,36 +1243,8 @@ $scope.selectAll = function () {
             }
         }
         
-        //上传安装包
-        $scope.doPackage=function(element){
-            // console.log("-----"+element.files.length);
-            $scope.packageObj = element.files[0];  //取出第一个文件
-        }
-
-        //上传资质许可证明
-        $scope.doUploadlicense=function(element){
-                $scope.licenseObj = element.files[0];   //取出第一个文件
-        }
-
-        $scope.jietu=1;
-
-        //上传截图 4-5张
-        $scope.doUploadappImage=function(element){
-                $scope.appImageObj = element.files; //上传数组
-                for (var i = 0; i < $scope.appImageObj.length; i++) {
-                    $('#jietu-'+(i+1)).attr('src',getbjectURL($scope.appImageObj[i]));
-                }
-
-                // $scope.jietu=0;
-                // console.log(element.files);
-        }
-
-        //上传应用图标
-        $scope.doUploadlogo=function(element){
-                $scope.logoObj = element.files[0];  //第一文件即可
-                // console.log(getbjectURL($scope.logoObj))
-                $('#icon').attr('src',getbjectURL($scope.logoObj))
-                // $scope.jietu=1;
+       $scope.doUploadPhoto = function(element) {
+            $scope.imageFileObj = element.files[0];
         }
 
 
@@ -1236,15 +1259,16 @@ $scope.selectAll = function () {
 
 
         
-        //获取类别
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'appType/getAppTypeList.do', {}, {
+        // //获取类别
+        $http.post('http://localhost:8080/blue-server/' + 'module/getModuleList.do', {}, {
             params: {
+                pageSize:100,
+                pageNum:1
             }
         }).success(function (data) {
             if (data.code == 0) {
-                $scope.apptypes = data.result.allTypes;
-                console.log($scope.apptypes);
-
+                $scope.moduleList = data.result;
+                console.log($scope.moduleList);
             }
             ;
         });
@@ -1252,169 +1276,38 @@ $scope.selectAll = function () {
 
         $scope.reshow=0;
 
-        //添加应用
-        $scope.addApp=function(){
-
-           
-            if ($scope.platform==undefined) {
-                $scope.showAlert("选择平台不能为空");
-                return;
+        //添加
+        $scope.addInfo=function(){
+            if ($scope.point==undefined) {
+                $scope.point="";
             }
 
-            // if ($scope.packageName==undefined) {
-            //     $scope.showAlert("安装包名不能为空");
-            //     return;
-            // }
-
-            if ($scope.versionName==undefined) {
-                $scope.showAlert("版本名称不能为空");
-                return;
+            if ($scope.price==undefined) {
+                $scope.price="";
             }
-
-            if ($scope.versionNumber==undefined) {
-                $scope.showAlert("版本号不能为空");
-                return;
-            }
-
-            if ($scope.apptype==undefined) {
-                $scope.showAlert("软件分类不能为空");
-                return;
-            }
-            if ($scope.personalRecommend==undefined) {
-                $scope.showAlert("个性推荐语不能为空");
-                return;
-            }
-            if ($scope.supportLanguage==undefined) {
-                $scope.showAlert("支持语言不能为空");
-                return;
-            }
-            if ($scope.tariffType==undefined) {
-                $scope.showAlert("资费类型不能为空");
-                return;
-            }
-            if ($scope.introduction==undefined) {
-                $scope.showAlert("应用简介不能为空");
-                return;
-            }
-
-            if ($scope.versionIntroduction==undefined) {
-                $scope.showAlert("当前版本介绍不能为空");
-                return;
-            }
-
-            if ($scope.supportSystem==undefined) {
-                $scope.showAlert("支持系统不能为空");
-                return;
-            }
-            if ($scope.privacy==undefined) {
-                $scope.showAlert("隐私权限说明不能为空");
-                return;
-            }
-            if ($scope.publishType==undefined) {
-                $scope.showAlert("发布时间不能为空");
-                return;
-            }
-
-            if ($scope.examineExplain==undefined) {
-                $scope.examineExplain="";
-            }
-            if ($scope.appName==undefined) {
-                $scope.showAlert("应用名称不能为空");
-                return;
-            }
-
-            if ($scope.versionFeatures==undefined) {
-                $scope.showAlert("新版特性不能为空");
-                return;
-            }
-
-            if ($scope.company==undefined) {
-                $scope.showAlert("开发商不能为空");
-                return;
-            }
-
-            if ($scope.platform==2&&$scope.appUrl==undefined) {
-                $scope.showAlert("应用下载链接不能为空");
-                return;
-            }
-
-              if ($scope.platform==2&&$scope.size==undefined) {
-                $scope.showAlert("安装包大小不能为空");
-                return;
-            }
-
-            if ($scope.platform==1&&$scope.packageName==undefined) {
-                $scope.showAlert("包名不能为空");
-                return;
-            }
-
-
-
-            if (($scope.publishType=="2"&&$scope.day==undefined)||($scope.publishType=="2"&&$scope.time==undefined)) {
-                $showAlert("定时发布的准确时间不能为空");
-                return;
-            }
-
-            if ($scope.day==undefined) {
-                $scope.day="";
-            }
-            if ($scope.time==undefined) {
-                $scope.time="";
-            }
-
-            if ($scope.downloadMoney==undefined) {
-                $scope.downloadMoney="";
-            }
-
-            if ($scope.userAccount==undefined) {
-                $scope.userAccount="";
-            }
-
-             $scope.reshow=1;
 
             var form = new FormData();
-            form.append("platform",$scope.platform);
-            
-            //如果是安卓应用，必须上传安装包
-            if ($scope.platform==1) {
-                form.append("packageFile",$scope.packageObj);
-            }
+            form.append("title",$scope.title);
+            form.append("price",$scope.price);
+            form.append("point",$scope.point);
+            form.append("moduleId",$scope.moduleId);
+            form.append("file",$scope.imageFileObj);
+            $scope.payTypes="";
+            $("input:radio[name='payType']:checked").each(function() {
+                        $scope.payTypes+= $(this).val();
+                });
+            form.append("payType",$scope.payTypes);
+            var typeV=$("input[name='type']:checked").val();
+            form.append("type",typeV);
 
-            // form.append("packageName",$scope.packageName);
-            form.append("versionName",$scope.versionName);
-            form.append("versionNum",$scope.versionNumber);
-            form.append("appTypeId",$scope.apptype);
-            form.append("personalRecommend",$scope.personalRecommend);
-            form.append("licenseFile",$scope.licenseObj);
-            form.append("supportLanguage",$scope.supportLanguage);
-            form.append("tariffType",$scope.tariffType);
-            form.append("appIntroduction",$scope.introduction);
-            form.append("versionIntroduction",$scope.versionIntroduction);
-            form.append("supportSystem",$scope.supportSystem);
-            form.append("privacy",$scope.privacy);
-            form.append("logoFile",$scope.logoObj);
-            form.append("publishId",sessionStorage.adminId);
-            form.append("appName",$scope.appName);
-            form.append("examineExplain",$scope.examineExplain);
-            form.append("publishType",$scope.publishType);
-            form.append("publishDay",$scope.day);
-            form.append("publishTime",$scope.time);
-            // form.append("downloadMoney",$scope.downloadMoney);
-            form.append("userAccount",$scope.userAccount);
-            form.append("versionFeaturs",$scope.versionFeatures);
-            form.append("appUrl",$scope.appUrl);
-            form.append("size",$scope.size);
-            form.append("developCompany",$scope.company);
-            form.append("packageName",$scope.packageName);
+            var html=editor.txt.html();  //html内容
+            form.append("content",html);
+            form.append("adminId",sessionStorage.adminId);
 
-
-            for (var i = 0; i < $scope.appImageObj.length; i++) {
-                form.append("appImage",$scope.appImageObj[i]);
-            }
 
             var xhr = new XMLHttpRequest();
                     var response;
-                    xhr.open("post", "http://localhost:8080/applicationMarket-server/app/addApp.do", true);
+                    xhr.open("post", "http://localhost:8080/blue-server/information/addInformation.do", true);
                     xhr.send(form);
                     xhr.onreadystatechange = doResult;
                     function doResult() {
@@ -1426,15 +1319,11 @@ $scope.selectAll = function () {
                                 // console.log("--->"+date.code);
                                 if(date.code==0){
                                     $scope.showAlert("添加成功");
-                                    // // console.log("广告上传成功");
-                                    // alert("广告上传成功");
-                                    $scope.reshow=0;
                                 }else{
                                     $scope.showAlert(date.message);
-                                    $scope.reshow=0;
-                                    // alert(date.errorMessage);
+                                    
                                 }
-                                // console.log("---->"+xhr.responseText);
+                                
                                
                             }
                         }
@@ -1443,7 +1332,7 @@ $scope.selectAll = function () {
                  }
 
             //获取类别
-            // $http.post('http://localhost:8080/applicationMarket-server/' + 'app/addApp.do', {}, {
+            // $http.post('http://localhost:8080/blue-server/' + 'app/addApp.do', {}, {
             //     params: {
             //     }
             // }).success(function (data) {

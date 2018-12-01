@@ -6,6 +6,7 @@
         ,'app.message'
         ,'app.user'
         ,'app.expert'
+        ,'app.question'
         ,'app.setting'
         ,'app.image'
         ,'app.video'

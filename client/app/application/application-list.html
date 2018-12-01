@@ -4,7 +4,7 @@
     <div class="row ui-section">
         <div class="col-md-12">
             <div class="col-md-8 clearfix">
-                <h2 class="section-header">应用列表</h2>
+                <h2 class="section-header">资料库列表</h2>
             </div>
 
         </div ng-show="isShow == 1">
@@ -16,25 +16,38 @@
                 <form class="user_list_header">
                     
                     <label class="col-sm-3 col-xs-3">
-                        <span >ID:</span>
-                        <input type="text" id="account" placeholder="应用ID" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="ID" data-ng-keyup="search()">
+                        <span >标题：</span>
+                        <input type="text" id="account" placeholder="标题" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="title" data-ng-keyup="search()">
                     </label> 
-
+<!-- 
                     <label class="col-sm-3 col-xs-3">
                         <span >应用名称:</span>
                         <input type="text" id="account" placeholder="应用名称" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="AppName" data-ng-keyup="search()">
-                    </label> 
+                    </label>  -->
                     
                     <label class="col-sm-3 col-xs-3">
-                        <span >平台:</span>
+                        <span >付费形式:</span>
                         
-                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="Plateform" data-ng-change="search()">
-                          <option value="1">移动应用Android</option>
-                          <option  value="2" >移动应用IOS</option>
+                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="payType" data-ng-change="search()">
+                            <option value="">全部</option>
+                          <option value="1">免费</option>
+                          <option  value="2" >企业</option>
+                          <option  value="3" >会员</option>
+                          <option  value="4" >付费</option>
                         </select> 
                     </label> 
 
                     <label class="col-sm-3 col-xs-3">
+                        <span >分类:</span>
+                        
+                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="type" data-ng-change="search()">
+                            <option value="">全部</option>
+                          <option value="1">视频</option>
+                          <option  value="2" >文件</option>
+                        </select> 
+                    </label>
+
+                    <!-- <label class="col-sm-3 col-xs-3">
                         <span >发布人账号:</span>
                         <input type="text" id="account" placeholder="发布人" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="Account" data-ng-keyup="search()">
                     </label> 
@@ -77,14 +90,14 @@
                             <option value="1">是</option>
                             <option value="0">否</option>
                         </select>
-                    </label> 
+                    </label>  -->
                 </form>
                
             </div>
 
-            <div class="col-md-4 clearfix">
+            <!-- <div class="col-md-4 clearfix">
                 <a class=" md-primary add-product" ng-click="deleteList()">批量删除</a>
-            </div>
+            </div> -->
 
             </div>
         </div>
@@ -92,31 +105,31 @@
 <table class="table table-bordered table-striped table-responsive" >
             <thead>
             <tr>
-            <th><div class="th">
+            <!-- <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
-                </div></th>
+                </div></th> -->
                
                 <th><div class="th">
                 ID
                 </div></th>
 
                 <th><div class="th">
-                应用名称
+                标题
                 </div></th>
 
                 <th><div class="th">
-                平台
+                分类
                 </div></th>
 
                 <th><div class="th">
-                上架时间
+                付费形式
                 </div></th>
                 
                 <th><div class="th">
                 发布人
                 </div></th>
 
-                <th><div class="th">
+               <!--  <th><div class="th">
                 推荐状态
                 </div></th>
 
@@ -126,7 +139,7 @@
 
                 <th><div class="th">
                 上架状态
-                </div></th>
+                </div></th> -->
                 <th><div class="th">
                     操作
                 </div></th>
@@ -135,43 +148,40 @@
             </thead>
 
             <tbody>
-                <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.appId}}">
-                <td> <md-checkbox ng-click="selectItem(store.appId)" ng-checked="selected[store.appId]"></md-checkbox></td>
-                    <td ng-bind="store.appId"></td>
-                    <td ng-bind="store.appName"></td>
+                <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.informationId}}">
+                <!-- <td> <md-checkbox ng-click="selectItem(store.informationId)" ng-checked="selected[store.informationId]"></md-checkbox></td> -->
+                    <td ng-bind="store.informationId"></td>
+                    <td ng-bind="store.title"></td>
                     <td>
-                        <span ng-if="store.plateform==1">移动应用Android</span>
-                        <span ng-if="store.plateform==2">移动应用IOS</span>
+                        <span ng-if="store.type==1">视频</span>
+                        <span ng-if="store.type==2">文件</span>
                     </td>
-                    <td ng-bind="store.publishDate"></td>
-                    <td ng-bind="store.account"></td>
+
+                    <td>
+                        <span ng-if="store.payType.indexOf(1)!=-1">免费、</span>
+                        <span ng-if="store.payType.indexOf(2)!=-1">企业、</span>
+                         <span ng-if="store.payType.indexOf(3)!=-1">会员、</span>
+                          <span ng-if="store.payType.indexOf(4)!=-1">付费、</span>
+                    </td>
+
+                    <td ng-bind="store.adminName"></td>
+
+                    <!-- <td ng-bind="store.publishDate"></td>
+                    <td ng-bind="store.account"></td> -->
                     <!-- <td ng-bind="store.roleName"></td>
                     <td ng-bind="store.description"></td> -->
-                    <td>
-                        <span ng-if="store.isRecommend==1">是</span>
-                        <span ng-if="store.isRecommend==0">否</span>
-                    </td>
-
-                    <td>
-                        <span ng-if="store.examinStatus==1">审核通过</span>
-                        <span ng-if="store.examinStatus==2">未审核</span>
-                        <span ng-if="store.examinStatus==3">审核失败</span>
-                    </td>
-
-                    <td>
-                        <span ng-if="store.groundStatus==1">已上架</span>
-                        <span ng-if="store.groundStatus==2">未上架</span>
-                    </td>
+                   
 
                     <td class="opertation">
-                        <a href="" ng-if="store.groundStatus==1" ng-click="under(store.appId)">下架</a> 
-                        <a href="" ng-if="store.groundStatus==2" ng-click="ground(store.appId)">上架</a>
-                        <a href="#/application/application-detail?id={{store.appId}}">详情</a> 
-                        <a href="#/application/application-recommend?id={{store.appId}}" ng-if="store.isRecommend==0">推荐</a> 
+                       <!--  <a href="" ng-if="store.groundStatus==1" ng-click="under(store.appId)">下架</a> 
+                        <a href="" ng-if="store.groundStatus==2" ng-click="ground(store.appId)">上架</a> -->
+                        <a href="#/application/application-detail?id={{store.informationId}}">详情</a>
+                        <a href="" ng-click="delete(store.informationId)">删除</a>  
+                       <!--  <a href="#/application/application-recommend?id={{store.appId}}" ng-if="store.isRecommend==0">推荐</a> 
                         <a href="javascript:void(0);" ng-if="store.isRecommend==1" ng-click="cancel(store.appId)" >取消推荐</a> 
                         <a href="#/application/application-change?id={{store.appId}}&platform={{store.plateform}}">更新安装包</a> 
                         <a href="" ng-if="store.isMust==0" ng-click="setMust(store.appId,1)">设为必备</a>
-                        <a href="" ng-if="store.isMust==1" ng-click="setMust(store.appId,0)">取消必备</a>
+                        <a href="" ng-if="store.isMust==1" ng-click="setMust(store.appId,0)">取消必备</a> -->
                     </td>
                 </tr>
             </tbody>

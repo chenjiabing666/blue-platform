@@ -1,0 +1,152 @@
+
+<div class="page page-table" ng-controller="QuestionCtrl">
+    <div class="row ui-section" ng-show="isShow==1">
+        <div class="col-md-12">
+            <div class="col-md-6 clearfix">
+                <h2 class="section-header">
+                    问题列表
+                </h2>
+            </div>
+        </div>
+        
+
+         <div class="row">
+
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span >问题:</span>
+                        <input  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="content" data-ng-change="search()" />
+                    </label>
+                    
+                    <label class="col-sm-3 col-xs-3">
+                        <span >模块:</span>
+                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="moduleId" data-ng-change="search()">
+                          <option value="">全部</option>
+                          <option value="{{module.moduleId}}" ng-repeat="module in moduleList" >{{module.moduleName}}</option>
+                        </select> 
+                    </label>
+
+                    <label class="col-sm-3 col-xs-3">
+                        <span >状态:</span>
+                        
+                        <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="status" data-ng-change="search()">
+                          <option value="">全部</option>
+                          <option value="1">整体</option>
+                          <option  value="0" >非整体</option>
+                        </select> 
+                    </label>
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 clearfix">
+                <a class=" md-primary add-product" href="#/question/question-add">
+                    添加问题
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12">
+            <section class="panel panel-default table-dynamic">
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="th">
+                                    ID
+                                </div>
+                            </th>
+                            <!-- <th>
+                                <div class="th">
+                                    平台
+                                </div>
+                            </th> -->
+                            <th>
+                                <div class="th">
+                                    模块
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                    问题
+                                </div>
+                            </th>
+                            <th>
+                                <div class="th">
+                                   状态
+                                </div>
+                            </th>
+                            <!-- <th>
+                                <div class="th">
+                                    创建时间
+                                </div>
+                            </th> -->
+                            
+                            <th>
+                                <div class="th">
+                                    操作
+                                </div>
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="delete-{{store.questionId}}" data-ng-repeat="store in stores">
+                            <td ng-bind="store.questionId"></td>
+                           
+                            <td class="questionLink"  ng-bind="store.moduleName">
+                            </td>
+
+                            <td ng-bind="store.content"></td>
+
+                            <td class="questionlink">
+                                <p ng-if="store.status==1">整体</p>
+                                <p ng-if="store.status==0">非整体</p>
+                            </td>
+
+                                
+                               <!--  <td class="questionlink" ng-bind="store.createdDate"></td>
+ -->
+                                <td class="opertation" nowrap="nowrap">
+                                    
+                                    <a href="#/question/question-change?id={{store.questionId}}">
+                                        修改
+                                    </a>
+                                    <!-- <a href="" ng-click="topQuestion(store.questionId)">
+                                        置顶
+                                    </a> -->
+
+                                    <a href="" ng-click="deleteQuestion(store.questionId)">
+                                        删除
+                                    </a>
+                                </td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                显示
+                                <select data-ng-change="onNumPerPageChange()" data-ng-model="numPerPage" data-ng-options="num for num in numPerPageOpt">
+                                </select>
+                                条 
+                当前页{{filteredStores.length}}条/总{{total}}条
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <uib-pagination boundary-links="true" class="pagination-sm" items-per-page="numPerPage" max-size="4" next-text="›" ng-change="select(currentPage)" ng-model="currentPage" previous-text="‹" rotate="false" total-items="total">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>

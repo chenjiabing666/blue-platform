@@ -73,15 +73,19 @@
         <table class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
-            <th><div class="th">
+            <!-- <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
-                </div></th>
+                </div></th> -->
                 <th><div class="th">
                 专家ID
                 </div></th>
                 <th><div class="th">
                 专家名称
                 </div></th>
+                <th><div class="th">
+                照片
+                </div></th>
+
                 <th><div class="th">
                 专家排序
                 </div></th>
@@ -112,11 +116,17 @@
             </thead>
             <tbody>
               <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.expertId}}">
-                <td> <md-checkbox ng-click="selectItem(store.expertId)" ng-checked="selected[store.expertId]"></md-checkbox></td>
+                <!-- <td> <md-checkbox ng-click="selectItem(store.expertId)" ng-checked="selected[store.expertId]"></md-checkbox></td> -->
                 <td ng-bind="store.expertId"></td>
                 <!-- <td ng-bind="store.expertType | parseExpertType"></td> -->
                 <td ng-bind="store.expertName"></td>
+                <td>
+                    <a href="{{store.expertPhoto}}" target="_blank">
+                        <img src="{{store.expertPhoto}}" style="height: 100px;width: 100px">
+                    </a>
+                </td>
                 <td ng-bind="store.expertSort"></td>
+
                 <!-- <td>
                     <p ng-if="store.gender==1">男</p>
                     <p ng-if="store.gender==2">女</p>

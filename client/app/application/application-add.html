@@ -21,285 +21,71 @@
                                     <form name="userForm">
                                         
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户账号：</label>
+                                            <label for="" class="col-sm-3 control-label">标题：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="userAccount">
+                                                <input class="form-control" class="adminPsd" ng-model="title">
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">选择平台</label>
+                                            <label for="" class="col-sm-3 control-label">模块：</label>
                                             <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="platform">
-                                                    <option value="1">移动应用Android</option>
-                                                    <option  value="2" >移动应用IOS</option>
-                                                </select> 
+                                                <select ng-model="moduleId">
+                                                    <option ng-repeat="module in moduleList" value="{{module.moduleId}}">{{module.moduleName}}</option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">应用名称：</label>
+                                            <label for="" class="col-sm-3 control-label">付费形式：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="appName">
+                                                <span><input type="radio" name="payType" value="1">免费&nbsp&nbsp&nbsp</span>
+                                                <span><input type="radio" name="payType" value="2">企业&nbsp&nbsp&nbsp</span>
+                                                <span><input type="radio" name="payType" value="3">会员&nbsp&nbsp&nbsp</span>
+                                                <span><input type="radio" name="payType" value="4">付费&nbsp&nbsp&nbsp</span>
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">开发商：</label>
+                                            <label for="" class="col-sm-3 control-label">价格：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="company">
+                                                <input class="form-control" class="adminPsd" ng-model="price">
                                             </div>
                                         </div>
 
-                                        <div class="form-group clearfix" ng-show="platform==2">
-                                            <label for="" class="col-sm-3 control-label">应用下载链接：</label>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">积分：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="appUrl">
+                                                <input class="form-control" class="adminPsd" ng-model="point">
                                             </div>
                                         </div>
 
-                                        <div class="form-group clearfix" ng-show="platform==2">
-                                            <label for="" class="col-sm-3 control-label">安装包大小：</label>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分类：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="size" placeholder="请输入单位">
+                                               <input type="radio" name="type" value="1">视频
+                                               <input type="radio" name="type" value="2">文件
                                             </div>
                                         </div>
 
-                                        <div class="form-group clearfix" ng-show="platform==1">
-                                            <label for="" class="col-sm-3 control-label">软件安装包：</label>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">内容</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="bannerFile" ng-model="package" multiple ng-submit="doPackage()" onchange="angular.element(this).scope().doPackage(this)">
+                                              <div id="editor"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="bannerFile" ng-model="banner.file" accept="image/*" multiple ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
                                                 <ul class="img-list"  style="height: 100px;"> </ul>
                                             </div>
                                         </div>
-
-                                        <div class="form-group clearfix" ng-show="platform==1">
-                                            <label for="" class="col-sm-3 control-label">包名：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="packageName">
-                                            </div>
-                                        </div>
-
-
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">安装包名：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="packageName">
-                                            </div>
-                                        </div> -->
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">版本名称：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="versionName">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">版本号：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="versionNumber">
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">软件分类</label>
-                                            <div class="col-sm-9">
-                                                <select  class="form-control" data-ng-model="apptype">
-                                                    <option value="{{type.appTypeId}}" ng-repeat="type in apptypes">{{type.typeName}}</option>
-                                                </select> 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">个性推荐语：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="personalRecommend">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">资质许可证明：</label>
-                                            <div class="col-sm-9">
-                                                <input type="file" class="bannerFile" ng-model="license" multiple ng-submit="doUploadlicense()" onchange="angular.element(this).scope().doUploadlicense(this)">
-                                                <ul class="img-list"  style="height: 100px;"> </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">支持语言：</label>
-                                            <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="supportLanguage">
-                                                    <option value="1">简体中文</option>
-                                                    <option  value="2" >繁体中文</option>
-                                                    <option  value="3" >英文</option>
-                                                </select> 
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">资费类型：</label>
-                                            <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="tariffType">
-                                                    <option value="1">功能付费</option>
-                                                    <option  value="2" >免费软件</option>
-                                                    <option  value="3" >免费试用</option>
-                                                    <option  value="4" >部分功能付费</option>
-                                                    <option  value="5" >部分内容付费</option>
-                                                    <option  value="6" >内容付费</option>
-                                                </select> 
-                                            </div>
-                                        </div>
-
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">下载所需的钱：</label>
-                                            
-                                            <div class="col-sm-9">
-                                                <input class="form-control" ng-model="downloadMoney" placeholder="免费的类型不需要填" />
-                                            </div>
-                                        </div> -->
-
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">应用简介：</label>
-                                            <div class="col-sm-9">
-                                                <textarea class="form-control" ng-model="introduction" cols="40" rows="10"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">当前版本介绍：</label>
-                                            <div class="col-sm-9">
-                                                <textarea class="form-control" ng-model="versionIntroduction" cols="40" rows="10"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">新版特性：</label>
-                                            <div class="col-sm-9">
-                                                <textarea class="form-control" ng-model="versionFeatures" cols="40" rows="10" placeholder="请输入新版特性，每条用中文分号分隔"></textarea>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">支持系统：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="adminPsd" ng-model="supportSystem">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">隐私权限说明：</label>
-                                            <div class="col-sm-9">
-                                           <!--  <button class="btn btn-info" style="left: 300px;position: relative;top: 35px;" ng-click="addPrivace()">添加</button> -->
-                                                <textarea class="form-control" ng-model="privacy" cols="40" rows="10" placeholder="请输入权限说明，每条以分号分割"></textarea>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">应用图标：</label>
-                                            <div class="col-sm-9">
-
-                                                <img id="icon" style="width: 100px;height: 100px" src="" alt="">
-
-                                                <input type="file" class="bannerFile" ng-model="logo" multiple ng-submit="doUploadlogo()" onchange="angular.element(this).scope().doUploadlogo(this)" accept="image/png">
-                                                <ul class="img-list"  style="height: 100px;"> </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">应用截图：</label>
-                                            <div class="col-sm-9">
-                                                
-                                                <img id="jietu-1" style="width: 100px;height: 100px" src="" alt="" ng-show="jietu==1">
-                                                <img id="jietu-2" style="width: 100px;height: 100px" src="" alt="" ng-show="jietu==1">
-                                                <img id="jietu-3" style="width: 100px;height: 100px" src="" alt="" ng-show="jietu==1">
-                                                <img id="jietu-4" style="width: 100px;height: 100px" src="" alt="" ng-show="jietu==1">
-                                                <img id="jietu-5" style="width: 100px;height: 100px" src="" alt="" ng-show="jietu==1">
-                                                <input type="file" class="bannerFile" ng-model="appImage" multiple ng-submit="doUploadappImage()" onchange="angular.element(this).scope().doUploadappImage(this)" accept="image/*">
-                                                <ul class="img-list"  style="height: 100px;"> </ul>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">审核辅助说明（选填）：</label>
-                                            <div class="col-sm-9">
-                                                <textarea class="form-control" ng-model="examineExplain" cols="40" rows="10" placeholder="最多不超过400字。"></textarea>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">发布时间</label>
-                                            <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="publishType">
-                                                    <option value="1">审核后立即发布</option>
-                                                    <option  value="2" >定时发布</option>
-                                                </select> 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix" ng-if="publishType==2">
-                                            <label for="" class="col-sm-3 control-label">审核通过后的第几天发布：</label>
-                                            <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="day">
-                                                    <option value="1">1</option>
-                                                    <option  value="2" >2</option>
-                                                    <option  value="3" >3</option>
-                                                    <option  value="4" >4</option>
-                                                    <option  value="5" >5</option>
-                                                </select> 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix" ng-if="publishType==2">
-                                            <label for="" class="col-sm-3 control-label">准确时间:</label>
-                                            <div class="col-sm-9">
-                                                 <select  class="form-control" data-ng-model="time">
-                                                    <option value="0">00:00</option>
-                                                    <option value="1">01:00</option>
-                                                    <option value="2">02:00</option>
-                                                    <option value="3">03:00</option>
-                                                    <option value="4">04:00</option>
-                                                    <option value="5">05:00</option>
-                                                    <option value="6">06:00</option>
-                                                    <option value="7">07:00</option>
-                                                    <option value="8">08:00</option>
-                                                    <option value="9">09:00</option>
-                                                    <option value="10">10:00</option>
-                                                    <option value="11">11:00</option>
-                                                    <option value="12">12:00</option>
-                                                    <option value="13">13:00</option>
-                                                    <option value="14">14:00</option>
-                                                    <option value="15">15:00</option>
-                                                    <option value="16">16:00</option>
-                                                    <option value="17">17:00</option>
-                                                    <option value="18">18:00</option>
-                                                    <option value="19">19:00</option>
-                                                    <option value="20">20:00</option>
-                                                    <option value="21">21:00</option>
-                                                    <option value="22">22:00</option>
-                                                    <option value="23">23:00</option>
-
-                                                </select> 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix" ng-show="reshow==1">
-                                            <label for="" class="col-sm-4 control-label"></label>
-                                            <label for="" class="col-sm-8 control-label" style="color: red">应用正在上传中，请耐心等待.......</label>
-                                            
-                                        </div>
-                                    
                                         
                                         <div layout layout-sm='column' class="changeConfirm add-btn">
-                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addApp()">提交审核</md-button><div class="divider"></div>
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addInfo()">提交审核</md-button><div class="divider"></div>
                                         </div>
 
                                     </form>

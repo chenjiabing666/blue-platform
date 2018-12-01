@@ -26,169 +26,74 @@
                                     <form name="expertForm" class="expertForm">
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">头像：</label>
-                                            <div class="col-sm-2">
-                                                <img class="showImage scaleImg" src="{{expert.expertIcon}}" alt="" >
+                                            <label for="" class="col-sm-3 control-label">专家姓名：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="expertName" ng-model="expert.expertName">
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户Id：</label>
+                                            <label for="" class="col-sm-3 control-label">专家介绍：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="expertId" ng-model="expert.expertId" ng-disabled="true">
-                                            </div>
-                                        </div>
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户账号：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="expertId" ng-model="expert.expertName" ng-disabled="true">
-                                            </div>
-                                        </div>
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户密码：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="expertPsd" ng-model="expert.password" ng-disabled="true">
-                                            </div>
-                                        </div> -->
-
-                                       <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户名称：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="nickName" ng-model="expert.nickName" ng-disabled="true">
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户等级：</label>
-                                            <div class="col-sm-9">
-                                                  <input class="form-control" class="level" ng-model="expert.level" ng-disabled="true">
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">姓名：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="realName" ng-model="expert.expertName" ng-disabled="true">
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">年龄：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="mobile" ng-model="expert.age" ng-disabled="true">
-                                            </div>
-                                        </div> -->
-                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">性别：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="gender" ng-model="expert.gender" ng-disabled="true">
+                                                <!-- <input class="form-control" class="expertPsd" ng-model="expert.mobile"> -->
+                                                <textarea cols="60" rows="10" ng-model="expert.expertIntroduction"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">地址：</label>
+                                            <label for="" class="col-sm-3 control-label">专家电话：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="vipType" ng-model="expert.address" ng-disabled="true">
+                                                <input class="form-control" class="expertName" ng-model="expert.mobile">
                                             </div>
                                         </div>
                                         
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户类型：</label>
+                                            <label for="" class="col-sm-3 control-label">擅长技能：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="createdDate" ng-model="expert.expertType" ng-disabled="true">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">用户注册时间：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="lastLoginTime" ng-model="expert.createdDate" ng-disabled="true">
+                                                <span ng-repeat="skill in skillList">
+                                                    <input type="checkbox" name="skill" value="{{skill.skillId}}" ng-checked="expert.expertSkill.indexOf(skill.skillId)!=-1">{{skill.content}}&nbsp&nbsp&nbsp&nbsp
+                                                </span>
                                             </div>
                                         </div>
 
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">最后登录时间：</label>
+                                            <label for="" class="col-sm-3 control-label">专家图片：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="lastLoginTime" ng-model="expert.lastLoginDate" ng-disabled="true">
+                                                <input type="file" class="bannerFile" ng-model="expert.expertPhoto" accept="image/*" multiple ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
                                             </div>
                                         </div>
 
-                                       
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">头像：</label>
-                                            <div class="col-sm-2">
-                                                <img class="showImage scaleImg" src="{{expert.expertIcon}}" alt="" >
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">视频：</label>
-                                            <div class="col-sm-9">
-                                              
-                                                <video ng-click="videoClick()" ng-if="videoImg" class="myVideo" ng-src="{{videoUrl(expert.approveVideoUrl)}}" width="320" height="240">
-                                                </video>
-                                            </div>
-                                           
-                                        </div> -->
-
-
-                                         
-                                        <!--  <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">身份证号：</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" class="idNumber" ng-model="expert.idNumber" ng-disabled="true">
-                                            </div>
-                                        </div>
                                         <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">银行卡号：</label>
+                                            <label for="" class="col-sm-3 control-label">专家排序：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="bankCard" ng-model="expert.bankCard" ng-disabled="true">
+                                                <input class="form-control" class="expertName" ng-model="expert.expertSort">
                                             </div>
-                                        </div> -->
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">专家价格：</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" class="expertName" ng-model="expert.price">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">状态：</label>
+                                            <div class="col-sm-9">
+                                                <!-- <input class="form-control" class="userPsd" ng-model="user.mobile"> -->
+                                                <select name="status" ng-model="expert.status">
+                                                    <option value="1" ng-selected="expert.status==1">启用</option>
+                                                    <option value="0" ng-selected="expert.status==0">关闭</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    <div layout layout-sm='column' class="changeConfirm add-btn">
+                                        <md-button class="md-raised btn-w-md md-primary" ng-click="modifyExpert()">确定修改</md-button><div class="divider"></div>
+                                    </div>
 
                                     </form>
-
-                                    <!-- <div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-10 col-xs-10">
-                                                <table class="table table-striped">
-  <caption>他完成的任务</caption>
-  <thead>
-    <tr>
-      <th><div class="th">任务Id</div></th>
-      <th><div class="th">完成时间</div></th>
-      <th><div class="th">奖励</div></th>
-      <th><div class="th">状态</div></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr ng-repeat="u in tasks">
-      <td>{{u.taskId}}</td>
-      <td>{{u.createDate}}</td>
-      <td>{{u.money}}</td>
-      <td>
-          <p ng-if="u.status==1">已发放</p>
-          <p ng-if="u.status==2">待发放</p>
-      </td>
-      
-    </tr>
-  </tbody>
-
-</table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </md-content>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>  
-
-        </div> -->
-       <!--  <video class="myVideoBig" ng-if="videoBig" ng-src="{{videoUrl(expert.approveVideoUrl)}}"  controls="controls"  width="50%" height="60%">
-        </video> -->
-<!--         <a class="closeVideo" ng-if="videoBig" ng-click = "closeVideo()">关闭</a> -->
     </div>
 </section>

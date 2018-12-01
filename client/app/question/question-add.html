@@ -1,0 +1,432 @@
+
+
+
+
+<section class="page-form-ele page" ng-controller="AddQuestionCtrl">
+
+
+    <div class="row ui-section" >
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加问题</h2> </div>
+        <!-- <div class="col-lg-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div> -->
+        <div class="col-md-12" ng-show="isShow==1">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row question-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                    <form name="userForm">
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模块：</label>
+                                            <div class="col-sm-9">
+                                                <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="moduleId" data-ng-change="search()">
+                                                     <!--  <option value="">全部</option> -->
+                                                      <option value="{{module.moduleId}}" ng-repeat="module in moduleList" >{{module.moduleName}}</option>
+                                                </select> 
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">问题：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="content"></textarea>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">文件类型：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="fileType" >
+                                                    <option value="">无</option>
+                                                    <option value="1">图片</option>
+                                                    <option value="2">视频</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix" ng-show="fileType==1||fileType==2">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doUploadPhoto()" onchange="angular.element(this).scope().doUploadPhoto(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">状态：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="status" >
+                                                    <option value="1">整体</option>
+                                                    <option value="0">非整体</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <h2 style="font-size: 20px;color: red">答案A：</h2>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项内容：</label>
+                                            <div class="col-sm-9">
+                                               <textarea cols="80" rows="10" ng-model="contentA"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分值级别：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="levelA" >
+                                                    <option value="1">0%</option>
+                                                    <option value="2">25%</option>
+                                                    <option value="3">50%</option>
+                                                    <option value="4">75%</option>
+                                                    <option value="5">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题和原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="questionReasonA"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doquestionReasonA()" onchange="angular.element(this).scope().doquestionReasonA(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="adviseA"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseA()" onchange="angular.element(this).scope().doadviseA(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="analysisA"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doanalysisA()" onchange="angular.element(this).scope().doanalysisA(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                         <hr>
+
+
+                                        <h2 style="font-size: 20px;color: red">答案B：</h2>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项内容：</label>
+                                            <div class="col-sm-9">
+                                               <textarea cols="80" rows="10" ng-model="contentB"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分值级别：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="levelB" >
+                                                    <option value="1">0%</option>
+                                                    <option value="2">25%</option>
+                                                    <option value="3">50%</option>
+                                                    <option value="4">75%</option>
+                                                    <option value="5">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题和原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="questionReasonB"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doquestionReasonB()" onchange="angular.element(this).scope().doquestionReasonB(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="adviseB"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseB()" onchange="angular.element(this).scope().doadviseB(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="analysisB"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doanalysisB()" onchange="angular.element(this).scope().doanalysisB(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+
+                                         <h2 style="font-size: 20px;color: red">答案C：</h2>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项内容：</label>
+                                            <div class="col-sm-9">
+                                               <textarea cols="80" rows="10" ng-model="contentC"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分值级别：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="levelC" >
+                                                    <option value="1">0%</option>
+                                                    <option value="2">25%</option>
+                                                    <option value="3">50%</option>
+                                                    <option value="4">75%</option>
+                                                    <option value="5">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题和原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="questionReasonC"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doquestionReasonC()" onchange="angular.element(this).scope().doquestionReasonC(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="adviseC"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseC()" onchange="angular.element(this).scope().doadviseC(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="analysisC"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doanalysisC()" onchange="angular.element(this).scope().doanalysisC(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+
+                                        <h2 style="font-size: 20px;color: red">答案D：</h2>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项内容：</label>
+                                            <div class="col-sm-9">
+                                               <textarea cols="80" rows="10" ng-model="contentD"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分值级别：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="levelD" >
+                                                    <option value="1">0%</option>
+                                                    <option value="2">25%</option>
+                                                    <option value="3">50%</option>
+                                                    <option value="4">75%</option>
+                                                    <option value="5">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题和原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="questionReasonD"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doquestionReasonD()" onchange="angular.element(this).scope().doquestionReasonD(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="adviseD"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseD()" onchange="angular.element(this).scope().doadviseD(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="analysisD"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doanalysisD()" onchange="angular.element(this).scope().doanalysisD(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+
+                                         <h2 style="font-size: 20px;color: red">答案E：</h2>
+                                         <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">选项内容：</label>
+                                            <div class="col-sm-9">
+                                               <textarea cols="80" rows="10" ng-model="contentE"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">分值级别：</label>
+                                            <div class="col-sm-9">
+                                                <select class="border-radius-5 border-default ml-10 input-default input-w-50" ng-model="levelE" >
+                                                    <option value="1">0%</option>
+                                                    <option value="2">25%</option>
+                                                    <option value="3">50%</option>
+                                                    <option value="4">75%</option>
+                                                    <option value="5">100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">常见问题和原因：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="questionReasonE"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doquestionReasonE()" onchange="angular.element(this).scope().doquestionReasonE(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">建议：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="adviseE"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseE()" onchange="angular.element(this).scope().doadviseE(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">解读：</label>
+                                            <div class="col-sm-9">
+                                                <textarea cols="80" rows="10" ng-model="analysisE"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">上传文件：</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doanalysisE()" onchange="angular.element(this).scope().doanalysisE(this)">
+                                                <ul class="img-list"  style="height: 100px;"> </ul>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div layout layout-sm='column' class="changeConfirm add-btn" style="margin-left: 189px;margin-top: 50px;">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addQuestion()">确定添加</md-button><div class="divider"></div>
+                                        </div>
+                                    </form>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </div>
+    </div>
+</section>
+<style>
+    .img-list li{position: relative;display: inline-block;width: 50px;height: 50px;margin: 5px 5px 0px 0px;border: 1px solid rgb(100,149,198);background: #fff no-repeat center;background-size: cover;}
+    .img-list li a{
+        position: absolute;top:12px;left: 16px;font-size: 27px;
+    }
+    
+</style>

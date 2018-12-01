@@ -798,7 +798,7 @@ $scope.deleteList = function(){
 
 
         $scope.expertId = $location.search().id;   //获取用户id
-        console.log("id="+$scope.expertId);
+        // console.log("id="+$scope.expertId);
         //根据用户id获取用户详细信息
         $http.post('http://localhost:8080/blue-server/' + 'expert/getExpertById.do',{},{params:{
             expertId:$scope.expertId   //用户id
@@ -806,41 +806,99 @@ $scope.deleteList = function(){
             if(data.code == 0){
                 $scope.expert = data.result;
                 console.log($scope.expert);
-                if ($scope.expert.gender==1) {
-                    $scope.expert.gender="男";
-                }else if($scope.expert.gender==2){
-                    $scope.expert.gender="女";
-                }
-
-                if ($scope.expert.expertType==1) {
-                    $scope.expert.expertType="普通用户";
-                }else if ($scope.expert.expertType==2){
-                    $scope.expert.expertType="企业用户";
-                }else{
-                    $scope.expert.expertType="Vip用户";
-                }
-                
             } else {
                 $scope.showAlert(data.message);
             }
         });
 
+        //技能列表
+        $http.post("http://localhost:8080/blue-server/"+"skill/getSkillList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:100
+                    }}).success(function (data){
+                        if(data.code == 0){
+                            $scope.skillList=data.result;
+                            console.log($scope.skillList);
+                        } else {
+                            $scope.showAlert1(data.message)
+                        }
 
+                    });
+
+        $scope.doUploadPhoto = function(element) {
+            $scope.imageFileObj = element.files[0];
+        }
        
 
+        //修改专家
+        $scope.modifyExpert = function(){
+                          // 确定
+                          var confirm = $mdDialog.confirm()
+                          .title('是否确定修改专家')
+                            // .ariaLabel('Lucky day')
+                            // .targetEvent(ev)
+                            .ok('确定')
+                            .cancel('取消修改');
 
-        //获取完成的任务
-        $http.post('http://localhost:8080/blue-server/' + 'expert/getTaskListBack.do',{},{params:{
-            expertId:$scope.expertId   //用户id
-        }}).success( function (data){   
-            if(data.code == 0){
-                $scope.tasks = data.result;
-                console.log($scope.tasks);
+                            $mdDialog.show(confirm).then(function() {
+                    // console.log('确定')
+
+
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"expert/modifyExpert.do";// 接收上传文件的后台地址
+
+                var form = new FormData();
                 
-            } else {
-                // $scope.showAlert(data.message);
-            }
-        });
+                form.append("expertId",$scope.expert.expertId);
+                form.append("expertName",$scope.expert.expertName);
+                form.append("introduction",$scope.expert.expertIntroduction);
+                form.append("sort",$scope.expert.expertSort);
+                form.append("price",$scope.expert.price);
+                form.append("status",$scope.expert.status);
+                form.append("mobile",$scope.expert.mobile);
+                form.append("photo",$scope.imageFileObj);
+                $scope.skillIds="";
+                $("input:checkbox[name='skill']:checked").each(function() {
+                        $scope.skillIds+= $(this).val() + ",";
+                });
+
+                form.append("skillIds",$scope.skillIds);
+
+                     
+
+                    var xhr = new XMLHttpRequest();
+                    var response;
+                    xhr.open("post", modifyTopicUrl, true);
+                    xhr.send(form);
+                    xhr.onreadystatechange = doResult;
+                    function doResult() {
+                        if(xhr.readyState == 4  && xhr.status == 200){
+                            var data=JSON.parse(xhr.responseText);
+                            if (data.code==0) {
+                                $scope.showAlert("修改成功");
+                            }else{
+                                $scope.showAlert(data.message);
+                            }
+                        } else if(xhr.readyState == 4 && xhr.status != 200){
+                         // $scope.showAlert(xhr.message);
+                         $scope.showAlert("修改失败");
+                     }
+                 }
+                    // init();
+                    $scope.showAlert = function(txt) {
+
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                            .clickOutsideToClose(false)
+                            .title(txt)
+                            .ok('确定')
+                            )
+
+                    }
+
+                })
+
+                        }
+
 
 
 
@@ -1953,7 +2011,7 @@ $scope.deleteList = function(){
         }
 
 
-        $scope.expert = {expertName:'', mobile:'', code:'',vipType:'',sex:''};
+        $scope.expert = {expertName:'', mobile:'', sort:'',price:'',status:'',description:""};
 
         $scope.showAlert1 = function(txt) {
                                 $mdDialog.show(
@@ -1983,6 +2041,21 @@ $scope.deleteList = function(){
             $location.path("/expert/expert-list");
         }
 
+
+        //技能列表
+        $http.post("http://localhost:8080/blue-server/"+"skill/getSkillList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:100
+                    }}).success(function (data){
+                        if(data.code == 0){
+                            $scope.skillList=data.result;
+                            console.log($scope.skillList);
+                        } else {
+                            $scope.showAlert1(data.message)
+                        }
+
+                    });
+
         $scope.sendCode=function(mobile){
             console.log(mobile);
             $http.post("http://localhost:8080/blue-server/"+"expert/genAuthCode.do?",{},{params:{
@@ -1997,6 +2070,79 @@ $scope.deleteList = function(){
 
                     });
         }
+
+        $scope.doUploadPhoto = function(element) {
+            $scope.imageFileObj = element.files[0];
+        }
+
+
+        //添加专家
+        $scope.addExpert = function(){
+                          // 确定
+                          var confirm = $mdDialog.confirm()
+                          .title('是否确定添加专家')
+                            // .ariaLabel('Lucky day')
+                            // .targetEvent(ev)
+                            .ok('确定')
+                            .cancel('取消添加');
+
+                            $mdDialog.show(confirm).then(function() {
+                    // console.log('确定')
+
+
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"expert/addExpert.do";// 接收上传文件的后台地址
+
+                var form = new FormData();
+                form.append("expertName",$scope.expert.expertName);
+                form.append("introduction",$scope.expert.description);
+                form.append("sort",$scope.expert.sort);
+                form.append("price",$scope.expert.price);
+                form.append("status",$scope.expert.status);
+                form.append("mobile",$scope.expert.mobile);
+                form.append("photo",$scope.imageFileObj);
+                $scope.skillIds="";
+                $("input:checkbox[name='skill']:checked").each(function() {
+                        $scope.skillIds+= $(this).val() + ",";
+                });
+
+                form.append("skillIds",$scope.skillIds);
+
+                     
+
+                    var xhr = new XMLHttpRequest();
+                    var response;
+                    xhr.open("post", modifyTopicUrl, true);
+                    xhr.send(form);
+                    xhr.onreadystatechange = doResult;
+                    function doResult() {
+                        if(xhr.readyState == 4  && xhr.status == 200){
+                            var data=JSON.parse(xhr.responseText);
+                            if (data.code==0) {
+                                $scope.showAlert("添加成功");
+                            }else{
+                                $scope.showAlert(data.message);
+                            }
+                        } else if(xhr.readyState == 4 && xhr.status != 200){
+                         // $scope.showAlert(xhr.message);
+                         $scope.showAlert("添加失败");
+                     }
+                 }
+                    // init();
+                    $scope.showAlert = function(txt) {
+
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                            .clickOutsideToClose(false)
+                            .title(txt)
+                            .ok('确定')
+                            )
+
+                    }
+
+                })
+
+                        }
+
        
 
 
@@ -2006,7 +2152,7 @@ $scope.deleteList = function(){
             $scope.showConfirm = function() {
                             // 确定
                             var confirm = $mdDialog.confirm()
-                            .title('是否确定添加用户')
+                            .title('是否确定添加专家')
                             // .ariaLabel('Lucky day')
                             // .targetEvent(ev)
                             .ok('确定添加')
@@ -2018,7 +2164,6 @@ $scope.deleteList = function(){
 
 
                     $http.post("http://localhost:8080/blue-server/"+"expert/addExpert.do?",{},{params:{
-
                         mobile:$scope.expert.mobile,
                         expertName:$scope.expert.expertName,
                         code:$scope.expert.code,
@@ -2056,106 +2201,7 @@ $scope.deleteList = function(){
 
 
 
-/*        $scope.cancelClick = function(){
-            $(".cancelClick").css("display","none");
-            $("#myDeal").attr("disabled",true);
-            $("#myManager").attr("disabled",true);
-            $(".changeConfirm").css("display","none");
-            $("#myManager").css("display","block");
-            $(".expert-manager").css("display",'none');
 
-        }*/
-
-
-
-
-
-
-/*        $scope.changeClick = function(){
-            console.log("1");
-            $(".cancelClick").css("display","inline");
-            $("#myDeal").attr("disabled",false);
-            $("#myManager").attr("disabled",false);
-            $(".changeConfirm").css("display","block");
-            $("#myManager").css("display","none");
-            $(".expert-manager").css("display",'inline');
-        }*/
-/*        // 确认修改
-        $scope.changeConfirm = function(){
-
-
-            console.log("$scope.expert.myDeal:"+$scope.expert.myDeal);
-            console.log("$scope.expert.managerId:"+$scope.expert.managerId);
-            console.log("$scope.expertId:"+$scope.expertId);
-
-            $scope.showConfirm = function() {
-                // 确定
-
-                var confirm = $mdDialog.confirm()
-                            .title('是否确定修改用户信息')
-                            // .ariaLabel('Lucky day')
-                            // .targetEvent(ev)
-                            .ok('确定')
-                            .cancel('取消');
-                $mdDialog.show(confirm).then(function() {
-                    // console.log('确定')
-                    $http.post("http://localhost:8080/fenxiao-server/"+"expert/modifyExpertByexpertId.do",{},{params:{
-                        expertId:$scope.expertId,
-                        myDeal:$scope.expert.myDeal,
-                        managerId:$scope.expert.managerId
-                    }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("修改用户信息成功");
-                        } else {
-                            $scope.showAlert1(data.message);
-                        }
-                    })
-                }, function() {
-                    // console.log('取消')
-                    $scope.showAlert1("取消修改用户信息");
-                });
-            };
-
-            $scope.showAlert = function(txt) {
-                 // dialog
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        // .parent(angular.element(document.querySelector('#popupContainer')))
-                        .clickOutsideToClose(false)
-                        .title(txt)
-                        // .content('You can specify some description text in here.')
-                        // .ariaLabel('Alert Dialog Demo')
-                        .ok('确定')
-                        // .targetEvent()
-
-                ).then(function(){
-                    $(".cancelClick").css("display","none");
-                    $("#myDeal").attr("disabled",true);
-                    $("#myManager").attr("disabled",true);
-                    $(".changeConfirm").css("display","none");
-                    $("#myManager").css("display","inline");
-                    $(".expert-manager").css("display",'none');
-                    $scope.managerName = $(".expert-manager").find("option:selected").text();
-                })
-            }
-            $scope.showAlert1 = function(txt) {
-                 // dialog
-                $mdDialog.show(
-                    $mdDialog.alert()
-                        // .parent(angular.element(document.querySelector('#popupContainer')))
-                        .clickOutsideToClose(false)
-                        .title(txt)
-                        // .content('You can specify some description text in here.')
-                        // .ariaLabel('Alert Dialog Demo')
-                        .ok('确定')
-                        // .targetEvent()
-
-                )
-            }
-            $scope.showConfirm();
-        }*/
-
-        
     }
 
 
