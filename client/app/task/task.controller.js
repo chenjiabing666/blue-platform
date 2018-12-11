@@ -76,53 +76,20 @@
 
 
         function gettaskList(pageNum, pageSize){
-                $scope.kwtTaskTitle = $("#taskTitle").val();
-                if ($scope.taskId==undefined) {
-                $scope.taskId=""
-            }
-
-            if ($scope.typeId==undefined) {
-                $scope.typeId=""
-            }
-
-            if ($scope.taskName==undefined) {
-                $scope.taskName=""
-            }
-
-            if ($scope.level==undefined) {
-                $scope.level=""
-            }
-
-            if ($scope.status==undefined) {
-                $scope.status=""
-            }
-
-            $scope.publishDate=$("#dateInput").val();  //发布时间
-
-            if ($scope.publishDate==undefined) {
-                $scope.publishDate=""
-            }
-            console.log($scope.publishDate)
-
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'order/getOrderListBack.do',{},{params:{
                 pageNum:pageNum,
                 pageSize:pageSize,
-                taskId:$scope.taskId,
-                taskName:$scope.taskName,
-                typeId:$scope.typeId,
-                poupLeve:$scope.level,
+                mobile:$scope.mobile,
+                orderNum:$scope.orderNum,
                 status:$scope.status,
-                publishDate:$scope.publishDate
+                userType:$scope.userType,
             }}).success(function (data) {
                 if (data.code == 0) {
-                    //console.log("data.result");
-                    //console.log(data.result[1].duration);
                     $scope.taskLists=data.result;
                     $scope.stores=data.result;
                     $scope.task=data.result;
                     $scope.currentPageStores = data.result;
                     $scope.filteredStores = data.result;
-                    $scope.currentPageStores.$apply;
                     $scope.total = data.total;
                 }else {
                     $scope.currentPageStores = null;
@@ -204,17 +171,16 @@
 
             // console.log($scope.numPerPage);
             console.log($scope.status);
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'order/getOrderListBack.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
                 
-                 // platformType
-                 // status:-1
             }}).success(function (data) {
                 if (data.code == 0) {
                     $scope.stores=data.result;
                     $scope.total = data.total;
                     console.log($scope.stores);
+                    $scope.filteredStores = data.result;
                     // $scope.search();
                     // $scope.searchtask(1,$scope.numPerPage);
                     $scope.currentPageStores = $scope.stores;
@@ -346,7 +312,7 @@
                     // console.log('确定')
 
 
-                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"batch/deleteTaskBatch.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"batch/deleteTaskBatch.do";// 接收上传文件的后台地址
                     console.log($scope.selected);
                     var temp = "";
 
@@ -399,7 +365,7 @@
 
         //生效或者失效
         $scope.UpOrUnderTask=function(id,status){
-                $http.post('http://localhost:8080/applicationMarket-server/' + 'task/UpOrUnderTask.do',{},{params:{
+                $http.post('http://localhost:8080/blue-server/' + 'task/UpOrUnderTask.do',{},{params:{
             taskId:id,
             status:status,
                 
@@ -436,7 +402,7 @@
 
 
 
-           $http.post('http://localhost:8080/applicationMarket-server/' + 'task/gettaskList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'task/gettaskList.do',{},{params:{
             taskId:$scope.kwtaskId,
             nickName:$scope.kwNickName,
                     task:$scope.kwtask,
@@ -482,7 +448,7 @@
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"task/deleteTask.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"task/deleteTask.do?",{},{params:{
                         taskId:id
                     }}).success(function (data){
                         if(data.code == 0){
@@ -520,7 +486,7 @@
                 .ok('确定')
                 .cancel('取消');
                 $mdDialog.show(confirm).then(function(){
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"elite/addElite.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"elite/addElite.do?",{},{params:{
                         taskId:id,
                     }}).success(function(data){
                         if(data.code == 0){
@@ -597,7 +563,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
 
         function gettaskList(pageNum, pageSize){
                 $scope.kwtTaskTitle = $("#taskTitle").val();
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskListPlatform.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'task/getTaskListPlatform.do',{},{params:{
                 mobile:$scope.kwtMobile,
                 status:$scope.kwStatus1,
                 status2:$scope.kwStatus2,
@@ -697,7 +663,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
        //获取所有的订单列表或者根据条件获取订单列表
         init = function() {
             console.log($scope.numPerPage);
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskListPlatform.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'task/getTaskListPlatform.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
                  platformType:1,
@@ -833,7 +799,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                     // console.log('确定')
 
 
-                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"batch/deleteTaskBatch.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"batch/deleteTaskBatch.do";// 接收上传文件的后台地址
                     console.log($scope.selected);
                     var temp = "";
 
@@ -902,7 +868,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
 
 
 
-           $http.post('http://localhost:8080/applicationMarket-server/' + 'task/gettaskList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'task/gettaskList.do',{},{params:{
             taskId:$scope.kwtaskId,
             nickName:$scope.kwNickName,
                     task:$scope.kwtask,
@@ -949,7 +915,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                             $mdDialog.show(confirm).then(function() {
                             $location.path("/task/custom-task-list");
                     // console.log('确定')
-                    // $http.post("http://localhost:8080/applicationMarket-server/"+"task/deleteTask.do?",{},{params:{
+                    // $http.post("http://localhost:8080/blue-server/"+"task/deleteTask.do?",{},{params:{
                     //     taskId:id
                     // }}).success(function (data){
                     //     if(data.code == 0){
@@ -1008,7 +974,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
 
                     $http({
                        method:'post',
-                       url:'http://localhost:8080/applicationMarket-server/' + 'task/reviewTask.do',
+                       url:'http://localhost:8080/blue-server/' + 'task/reviewTask.do',
                        data: $.param({
                             taskId:id,
                             activated:status,
@@ -1018,7 +984,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                     }).success(function (data){
                         if(data){
                            $scope.showAlert("应用成功");
-                           $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskListPlatform.do',{},{params:{
+                           $http.post('http://localhost:8080/blue-server/' + 'task/getTaskListPlatform.do',{},{params:{
                                 pageNum:1,
                                 pageSize:$scope.numPerPage,
                                  platformType:1,
@@ -1076,7 +1042,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
         $scope.modapp=0;
 
         //任务类型
-        $http.post("http://localhost:8080/applicationMarket-server/"+"task/getTaskTypeList.do?",{},{params:{
+        $http.post("http://localhost:8080/blue-server/"+"task/getTaskTypeList.do?",{},{params:{
                        
                     }}).success(function (data){
                         if(data.code == 0){
@@ -1088,7 +1054,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
 
 
         //获取任务详情
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTask.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'task/getTask.do',{},{params:{
             taskId:$scope.taskId
         }}).success( function (data){
             if(data.code == 0){
@@ -1105,7 +1071,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                 $scope.appName="";
             }
 
-            $http.post("http://localhost:8080/applicationMarket-server/"+"app/searchByAppName.do?",{},{params:{
+            $http.post("http://localhost:8080/blue-server/"+"app/searchByAppName.do?",{},{params:{
                         appName:$scope.appName
                     }}).success(function (data){
                         if(data.code == 0){
@@ -1168,7 +1134,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                     .cancel('取消修改');
                     $mdDialog.show(confirm).then(function() {
 
-                        $http.post("http://localhost:8080/applicationMarket-server/"+"task/modifyTask.do?",{},{params:{
+                        $http.post("http://localhost:8080/blue-server/"+"task/modifyTask.do?",{},{params:{
                             taskId:$scope.taskId,
                             taskName:$scope.task.taskName,
                             introduction:$scope.task.introduction,
@@ -1232,7 +1198,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
             $location.path("/task/task-list");
         }
 
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskById.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'task/getTaskById.do',{},{params:{
             taskId:$scope.taskId,
         }}).success( function (data){
                 if(data.code == 0){
@@ -1254,7 +1220,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                 .cancel('取消修改');
 
                 $mdDialog.show(confirm).then(function() {
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"task/modifyTask.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"task/modifyTask.do?",{},{params:{
                         taskId:$scope.taskId,
                         userId:$scope.task.userId,
                         taskTitle:$scope.task.taskTitle,
@@ -1311,7 +1277,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
             $location.path("/task/task-list");
         }
 
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'task/getTaskById.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'task/getTaskById.do',{},{params:{
             taskId:$scope.taskId,
         }}).success( function (data){
                 if(data.code == 0){
@@ -1333,7 +1299,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                 .cancel('取消');
 
                 $mdDialog.show(confirm).then(function() {
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"task/dealTask.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"task/dealTask.do?",{},{params:{
                         dealType:$scope.dealType,
                         taskId:$scope.taskId,
                         userId:$scope.task.userId,
@@ -1411,7 +1377,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
 
 
         //任务类型
-        $http.post("http://localhost:8080/applicationMarket-server/"+"task/getTaskTypeList.do?",{},{params:{
+        $http.post("http://localhost:8080/blue-server/"+"task/getTaskTypeList.do?",{},{params:{
                        
                     }}).success(function (data){
                         if(data.code == 0){
@@ -1429,7 +1395,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                 $scope.appName="";
             }
 
-            $http.post("http://localhost:8080/applicationMarket-server/"+"app/searchByAppName.do?",{},{params:{
+            $http.post("http://localhost:8080/blue-server/"+"app/searchByAppName.do?",{},{params:{
                         appName:$scope.appName
                     }}).success(function (data){
                         if(data.code == 0){
@@ -1488,7 +1454,7 @@ function CustomTaskCtrl($scope,$http,$mdDialog,$location,$timeout){
                 .cancel('取消添加');
                 $mdDialog.show(confirm).then(function() {
 
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"task/addTask.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"task/addTask.do?",{},{params:{
                         taskName:$scope.task.taskName,
                         introduction:$scope.task.introduction,
                         typeId:$scope.task.taskTypeId,

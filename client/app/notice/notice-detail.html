@@ -66,57 +66,62 @@
 
 
                                     <div ng-repeat="industry in industryList">
-                                        <h1 style="font-size: 20px">行业：{{industry.name}}</h1>
+                                        <h1 style="font-size: 20px;color: red">行业：{{industry.name}}</h1>
                                         <div ng-repeat="solution in industry.solutions">
-                                            <h2 style="font-size: 10px" ng-if="solution.type==1">高分解决方案</h2>
+                                            <h2 style="font-size: 10px;" ng-if="solution.type==1">高分解决方案</h2>
                                             <h2 style="font-size: 10px" ng-if="solution.type==2">中等解决方案</h2>
                                             <h2 style="font-size: 10px" ng-if="solution.type==3">低分解决方案</h2>
 
                                             <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">常见问题及原因：</label>
                                                 <div class="col-sm-9">
-                                                    <textarea rows="10" cols="60" ng-model="solution.questionReason" disabled></textarea>
+                                                    <textarea rows="10" cols="60" ng-model="solution.questionReason"></textarea>
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="form-group clearfix">
+                                            <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">上传文件：</label>
                                                 <div class="col-sm-9">
                                                     <input type="file" class="bannerFile" ng-model="cd" multiple ng-submit="doUploadPhoto_q1()" onchange="angular.element(this).scope().doUploadPhoto_q1(this)">
                                                     <ul class="img-list"  style="height: 100px;"> </ul>
                                                 </div>
-                                            </div> -->
+                                            </div>
 
 
                                             <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">建议：</label>
                                                 <div class="col-sm-9">
-                                                    <textarea rows="10" cols="60" ng-model="solution.advise" disabled></textarea>
+                                                    <textarea rows="10" cols="60" ng-model="solution.advise" ></textarea>
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="form-group clearfix">
+                                            <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">上传文件：</label>
                                                 <div class="col-sm-9">
                                                     <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_ad1()" onchange="angular.element(this).scope().doUploadPhoto_ad1(this)">
                                                     <ul class="img-list"  style="height: 100px;"> </ul>
                                                 </div>
-                                            </div> -->
+                                            </div>
 
                                             <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">解读：</label>
                                                 <div class="col-sm-9">
-                                                    <textarea rows="10" cols="60" ng-model="solution.analysis" disabled></textarea>
+                                                    <textarea rows="10" cols="60" ng-model="solution.analysis"></textarea>
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="form-group clearfix">
+                                            <div class="form-group clearfix">
                                                 <label for="" class="col-sm-3 control-label">上传文件：</label>
                                                 <div class="col-sm-9">
                                                     <input type="file" class="bannerFile" ng-model="banner.file" multiple ng-submit="doUploadPhoto_an1()" onchange="angular.element(this).scope().doUploadPhoto_an1(this)">
                                                     <ul class="img-list"  style="height: 100px;"> </ul>
                                                 </div>
-                                            </div> -->
+                                            </div>
+
+                                             <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="modifySolution(solution.solutionId)">修改解决方案</md-button><div class="divider"></div>
+                                        </div>
+
                                              <hr>
 
                                         </div>

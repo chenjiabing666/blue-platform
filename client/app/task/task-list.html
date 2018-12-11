@@ -4,7 +4,7 @@
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">任务管理</h2>
+            <h2 class="section-header">平台收支</h2>
         </div>
         
     </div>
@@ -16,58 +16,53 @@
                 <form class="task_list_header user_list_header">
 
                     <label class="col-sm-3 col-xs-3">
-                        <span >任务ID:</span>
+                        <span >手机号码:</span>
                         <input type="text" id="taskTitle" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="taskId" data-ng-keyup="search()">
+                        data-ng-model="mobile" data-ng-keyup="search()">
                     </label>
 
                     <label class="col-sm-3 col-xs-3">
-                        <span >任务名称:</span>
+                        <span >订单号:</span>
                         <input type="text" id="taskTitle" placeholder="请输入任务名称" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="taskName" data-ng-keyup="search()">
+                        data-ng-model="orderNum" data-ng-keyup="search()">
                     </label> 
                     
                     <label class="col-sm-3 col-xs-3">
-                        <span >任务类别:</span>
-                        <select name="select" id="typeId" data-ng-change="search()" data-ng-model="typeId">
-                        <option value="">不限</option>
-                        <option value="1">下载安装类</option>
-                        <option value="2">登录类</option>
-                        <option value="3">查看类</option>
-                        <option value="4">分享类</option>
-                        <option value="5">邀请类</option>
+                        <span >收支类型:</span>
+                        <select name="select" id="typeId" data-ng-change="search()" data-ng-model="status">
+                        <option value="">全部</option>
+                        <option value="1">支出</option>
+                        <option value="2">收入</option>
                         </select>
                     </label>
 
                     <label class="col-sm-3 col-xs-3" style="height: 28px;">
-                        <span >弹窗级别:</span>
-                        <select name="select" id="level" data-ng-change="search()" data-ng-model="level">
-                        <option value="">不限</option>
-                        <option value="1">1级</option>
-                        <option value="2">2级</option>
-                        <option value="3">3级</option>
-                        <option value="4">4级</option>
-                        <option value="5">不弹窗</option>
+                        <span >用户类型:</span>
+                        <select name="select" id="level" data-ng-change="search()" data-ng-model="userType">
+                            <option value="">全部</option>
+                            <option value="1">普通用户</option>
+                            <option value="2">企业用户</option>
+                            <option value="2">Vip</option>
                         </select>
                     </label>
 
-                    <label class="col-sm-3 col-xs-3" style="height: 28px;">
+                    <!-- <label class="col-sm-3 col-xs-3" style="height: 28px;">
                         <span >状态:</span>
                         <select name="select" id="status" data-ng-change="search()" data-ng-model="status">
                         <option value="">不限</option>
                         <option value="1">正常</option>
                         <option value="0">失效</option>
                         </select>
-                    </label>
+                    </label> -->
 
-                    <label class="col-sm-5 col-xs-5">
+                    <!-- <label class="col-sm-5 col-xs-5">
                         <span >发布时间:</span>
                         <input type="text" id="dateInput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="KwStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分">
+                        data-ng-model="KwStartTime"  onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分"> -->
                         <!-- <span>-</span> -->
                         <!-- <input type="text" id="dateInput1" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
                         data-ng-model="KwEndTime" onchange="" data-ng-keyup="search()" placeholder="年-月-日 时-分">                 -->
-                    </label> 
+                    <!-- </label> --> 
                     <!-- <div class="col-sm-1 col-xs-1 search" data-name="search" data-code="f1c3" ng-click="search()" >
                         <i class="zmdi zmdi-search"></i>
                     </div>
@@ -92,25 +87,25 @@
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
                 </div></th> -->
                 <th><div class="th">
-                任务ID
+                ID
                 </div></th>
                 <th><div class="th">
-                任务名称
+                订单号
                 </div></th>
                 <th><div class="th">
-                任务类别
+                用户账号
                 </div></th>
                 <th><div class="th">
-                发布时间
+                收支类型
                 </div></th>
                 <th><div class="th">
-                发布人
+                金额
                 </div></th>
                 <th><div class="th">
-                弹窗级别
+                详细
                 </div></th>
                 <th><div class="th">
-                状态
+                创建时间
                 </div></th>
                 <!-- <th><div class="th">
                 约会时长
@@ -121,21 +116,27 @@
                 <th><div class="th">
                 管理员id
                 </div></th> -->
-                <th><div class="th">
+                <!-- <th><div class="th">
                 操作
-                </div></th>
+                </div></th> -->
             </tr>
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskId}}">
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.orderId}}">
                <!--  <td> <md-checkbox ng-click="selectItem(store.taskId)" ng-checked="selected[store.taskId]"></md-checkbox></td> -->
-                <td ng-bind="store.taskId"></td>
-                <td ng-bind="store.taskName"></td>
-                <td ng-bind="store.typeName"></td>
-                <td ng-bind="store.publishDate"></td>
-                <td ng-bind="store.publishAccount"></td>
+                <td ng-bind="store.orderId"></td>
+                <td ng-bind="store.orderNum"></td>
+                <td ng-bind="store.mobile"></td>
                 <td>
+                    <p ng-show="store.status==2">收入</p>
+                    <p ng-show="store.status==1">收入</p>
+                </td>
+                <td ng-bind="store.amount"></td>
+                
+                <td ng-bind="store.description"></td>
+                <td ng-bind="store.createdDate"></td>
+               <!--  <td>
                     <p ng-if="store.poupLeve==1">1级</p>
                     <p ng-if="store.poupLeve==2">2级</p>
                     <p ng-if="store.poupLeve==3">3级</p>
@@ -145,20 +146,16 @@
                 <td>
                     <p ng-if="store.status==1">正常</p>
                     <p ng-if="store.status==0">失效</p>
-                </td> 
+                </td>  -->
                 <!-- <td ng-bind="store.time"></td>
                 <td ng-bind="store.duration"></td>
                 <td ng-bind="store.adminDescription"></td>
                 <td ng-bind="store.adminId"></td> -->
-                <td class="opertation">
-                    <!-- <a href="#/task/task-change?taskId={{store.taskId}}&status={{store.status}}">编辑</a> -->
+                <!-- <td class="opertation">
                     <a href="" ng-click="deleteTask(store.taskId)">删除</a>
                     <a href="" ng-click="UpOrUnderTask(store.taskId,0)" ng-if="store.status==1">失效</a>
                     <a href="" ng-click="UpOrUnderTask(store.taskId,1)" ng-if="store.status==0">启用</a>
-                
-                    <a href="#/task/task-detail?id={{store.taskId}}">详情</a>
-                   <!--  <a href="#/task/task-deal?taskId={{store.taskId}}&status={{store.status}}" ng-show="store.status!=1 && store.status!=2 && store.status!=0">处理</a> -->
-                </td>
+                </td> -->
               </tr>
             </tbody>
         </table>

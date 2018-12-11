@@ -63,7 +63,7 @@
 
 
         //获取地区
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'address/getProvinces.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'address/getProvinces.do',{},{params:{
             }}).success(function (data) {
                 if (data.code == 0) {
                     $scope.provinces=data.result;
@@ -77,7 +77,7 @@
             $scope.authDate=$("#authDate").val();
 
 
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getExaminList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'app/getExaminList.do',{},{params:{
                 
                 pageNum:pageNum,
                 pageSize:pageSize,
@@ -159,7 +159,7 @@
 
 
         init = function() {
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getExaminList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'app/getExaminList.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
             }}).success(function (data) {
@@ -296,7 +296,7 @@
             //批量审核成功或者审核成功
             $scope.deleteList = function(status){
 
-                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"app/exmain.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"app/exmain.do";// 接收上传文件的后台地址
                     console.log($scope.selected);
                     var temp = "";
 
@@ -373,7 +373,7 @@
 
 
 
-           $http.post('http://localhost:8080/applicationMarket-server/' + 'taskKind/getTaskKindList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'taskKind/getTaskKindList.do',{},{params:{
             taskKindId:$scope.kwTaskKindId,
 
                 userId:$scope.kwUserId ,
@@ -418,7 +418,7 @@
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"taskKind/deleteTaskKind.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"taskKind/deleteTaskKind.do?",{},{params:{
                         taskKindId:id
                     }}).success(function (data){
                         if(data.errorCode == 0){
@@ -459,7 +459,7 @@
                 .ok('确定')
                 .cancel('取消');
                 $mdDialog.show(confirm).then(function(){
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"elite/addElite.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"elite/addElite.do?",{},{params:{
                         taskKindId:id,
                     }}).success(function(data){
                         if(data.errorCode == 0){
@@ -514,7 +514,7 @@
         $scope.onFilterChange = onFilterChange;
         $scope.onNumPerPageChange = onNumPerPageChange;
         $scope.search = search;
-        $scope.numPerPageOpt = [3, 5, 10, 20];
+        $scope.numPerPageOpt = [2, 5, 10, 20];
         $scope.numPerPage = $scope.numPerPageOpt[2];
         $scope.currentPage = 1;
         $scope.currentPage = [];
@@ -538,13 +538,13 @@
 
 
 
-        //获取地区
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'address/getProvinces.do',{},{params:{
-            }}).success(function (data) {
-                if (data.code == 0) {
-                    $scope.provinces=data.result;
-                }
-            });
+        // //获取地区
+        // $http.post('http://localhost:8080/blue-server/' + 'address/getProvinces.do',{},{params:{
+        //     }}).success(function (data) {
+        //         if (data.code == 0) {
+        //             $scope.provinces=data.result;
+        //         }
+        //     });
 
 
 
@@ -553,16 +553,14 @@
             $scope.authDate=$("#authDate").val();
 
 
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'user/getExaminList.do',{},{params:{
-                
+            $http.post('http://localhost:8080/blue-server/' + 'invoice/getInvoiceList.do',{},{params:{
                 pageNum:pageNum,
                 pageSize:pageSize,
-                userId:$scope.userId,
-                userName:$scope.userName,
-                realName:$scope.realName,
-                provinceCode:$scope.provinceCode,
-                authDate:$scope.authDate,
-                status:$scope.status
+                type:$scope.type,
+                number:$scope.number,
+                mobile:$scope.mobile,
+                status:$scope.status,
+                title:$scope.title,
             }}).success(function (data) {
                 if (data.code == 0) {
                     $scope.taskKindLists=data.result;
@@ -635,17 +633,15 @@
 
 
         init = function() {
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'user/getExaminList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'invoice/getInvoiceList.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
             }}).success(function (data) {
                 if (data.code == 0) {
                     $scope.stores=data.result;
                     $scope.total = data.total;
-                    // $scope.search();
-                    // $scope.searchTaskKind(1,$scope.numPerPage);
+                    $scope.filteredStores = data.result;
                     $scope.currentPageStores = $scope.stores;
-                    // $scope.searchTaskKind(page,$scope.numPerPage);
                     console.log($scope.stores);
                 }
             });
@@ -774,7 +770,7 @@
                     // console.log('确定')
 
 
-                var modifyTopicUrl ="http://localhost:8080/applicationMarket-server/"+"user/exmain.do";// 接收上传文件的后台地址
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"user/exmain.do";// 接收上传文件的后台地址
                     console.log($scope.selected);
                     var temp = "";
 
@@ -854,7 +850,7 @@
 
 
 
-           $http.post('http://localhost:8080/applicationMarket-server/' + 'taskKind/getTaskKindList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'taskKind/getTaskKindList.do',{},{params:{
             taskKindId:$scope.kwTaskKindId,
 
                 userId:$scope.kwUserId ,
@@ -888,34 +884,37 @@
 
 
         // 删除任务品类
-        $scope.deleteTaskKind = function(id){
+        $scope.deleteTaskKind = function(id,status){
             $scope.showConfirm = function() {
                 // 确定
                 var confirm = $mdDialog.confirm()
-                .title('是否确定删除该条任务品类员信息')
+                .title('是否确定操作')
                             // .ariaLabel('Lucky day')
                             // .targetEvent(ev)
                             .ok('确定')
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"taskKind/deleteTaskKind.do?",{},{params:{
-                        taskKindId:id
+                    $http.post("http://localhost:8080/blue-server/"+"invoice/modifyInvoice.do?",{},{params:{
+                        invoiceId:id,
+                        status:status
                     }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("删除任务品类成功");
-                            $(".delete-"+id).css("display","none");
-                            $scope.total--;
+                        if(data.code == 0){
+                            $scope.showAlert("操作成功");
+                            for (var i = 0; i < $scope.stores.length; i++) {
+                                if ($scope.stores[i].invoiceId==id) {
+                                    $scope.stores[i].status=status;
+                                    break;
+                                }
+                            }
                         } else {
-                            $scope.showAlert(data.errorMessage);
-                        }if($scope.total<$scope.numPerPage){
-                            $scope.filteredStores.length=$scope.total;
+                            $scope.showAlert(data.message);
                         }
 
                     })
                 }, function() {
 
-                    $scope.showAlert("取消删除");
+                    $scope.showAlert("取消");
                 });
                         };
                         $scope.showAlert = function(txt) {
@@ -940,7 +939,7 @@
                 .ok('确定')
                 .cancel('取消');
                 $mdDialog.show(confirm).then(function(){
-                    $http.post("http://localhost:8080/applicationMarket-server/"+"elite/addElite.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"elite/addElite.do?",{},{params:{
                         taskKindId:id,
                     }}).success(function(data){
                         if(data.errorCode == 0){
@@ -996,7 +995,7 @@
 
         $scope.taskKindId = $location.search().id;
 
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'user/getUser.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'user/getUser.do',{},{params:{
             userId:$scope.taskKindId
         }}).success( function (data){
             console.log($scope.taskKindId);
@@ -1013,8 +1012,8 @@
         //下载营业执照
         $scope.download=function(path){
             console.log(path);
-            window.location="http://localhost:8080/applicationMarket-server/user/download.do?relativePath="+path;
-        //     $http.post('http://localhost:8080/applicationMarket-server/user/download.do',{},{params:{
+            window.location="http://localhost:8080/blue-server/user/download.do?relativePath="+path;
+        //     $http.post('http://localhost:8080/blue-server/user/download.do',{},{params:{
         //     relativePath:path
         // }}).success( function (data){
         // });
@@ -1050,7 +1049,7 @@
         //审核通过
         $scope.exmainPass=function(){
             //表单回显
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'app/examinPass.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'app/examinPass.do',{},{params:{
             appId:$scope.applicationId   //管理员Id
         }}).success( function (data){   
             if(data.code == 0){
@@ -1065,7 +1064,7 @@
         //审核失败
         $scope.exmainFail=function(){
             
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'app/examinFail.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'app/examinFail.do',{},{params:{
             appId:$scope.applicationId   //管理员Id
         }}).success( function (data){   
             if(data.code == 0){
@@ -1079,7 +1078,7 @@
         
         
         //表单回显
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'app/getAppDetailInfo.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'app/getAppDetailInfo.do',{},{params:{
             appId:$scope.applicationId   //管理员Id
         }}).success( function (data){   
             if(data.code == 0){
@@ -1111,7 +1110,7 @@
             }
 
 
-            $http.post('http://localhost:8080/applicationMarket-server/' + 'application/modifApplication.do', {}, {
+            $http.post('http://localhost:8080/blue-server/' + 'application/modifApplication.do', {}, {
                 params: {
                     email: $scope.application.email,
                     newPwd: $scope.application.newPassword,
@@ -1186,7 +1185,7 @@
 
         //获取地区信息
 
-        $http.post('http://localhost:8080/applicationMarket-server/' + 'address/getProvinces.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'address/getProvinces.do',{},{params:{
             }}).success(function (data) {
                 if (data.code == 0) {
                     $scope.provinces=data.result;
@@ -1204,7 +1203,7 @@
                             .cancel('取消认证');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    var addTaskKindUrl ="http://localhost:8080/applicationMarket-server/" + "user/authentication.do?";
+                    var addTaskKindUrl ="http://localhost:8080/blue-server/" + "user/authentication.do?";
                     // FormData 对象
                     var form = new FormData();
                     form.append("type", $scope.type);

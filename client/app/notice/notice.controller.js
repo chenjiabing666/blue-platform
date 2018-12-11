@@ -786,7 +786,6 @@ $scope.deleteList = function(){
 
         $scope.moduleId = $location.search().id;   //获取逝者id
         
-        //根据逝者id获取逝者详细信息
         $http.post('http://localhost:8080/blue-server/' + 'module/getModuleById.do',{},{params:{
             moduleId:$scope.moduleId   
         }}).success( function (data){   
@@ -799,6 +798,86 @@ $scope.deleteList = function(){
             }
         });
 
+        $scope.doUploadPhoto_q1 = function(element) {
+            $scope.q1_file = element.files[0];
+        }
+        
+        $scope.doUploadPhoto_ad1 = function(element) {
+            $scope.ad1_file = element.files[0];
+        }
+       
+        $scope.doUploadPhoto_an1 = function(element) {
+            $scope.an1_file = element.files[0];
+        }
+
+        $scope.modifySolution = function(id){
+
+
+                          // 确定
+                          var confirm = $mdDialog.confirm()
+                          .title('是否确定修改')
+                            // .ariaLabel('Lucky day')
+                            // .targetEvent(ev)
+                            .ok('确定修改')
+                            .cancel('取消修改');
+
+                            $mdDialog.show(confirm).then(function() {
+                    // console.log('确定')
+
+
+                var modifyTopicUrl ="http://localhost:8080/blue-server/"+"solution/modifySolution.do";// 接收上传文件的后台地址
+                
+                
+                var form = new FormData();
+                for (var i = $scope.industryList.length - 1; i >= 0; i--) {
+                    for (var j = $scope.industryList[i].solutions.length - 1; j >= 0; j--) {
+                        if ($scope.industryList[i].solutions[j].solutionId==id) {
+                                form.append("questionReasons",$scope.industryList[i].solutions[j].questionReason);
+                                form.append("solutionId",$scope.industryList[i].solutions[j].solutionId);
+                                form.append("advise",$scope.industryList[i].solutions[j].advise);
+                                form.append("analysis",$scope.industryList[i].solutions[j].analysis);
+                                form.append("questionReasonFile",$scope.q1_file);
+                                form.append("adviseFile",$scope.ad1_file);
+                                form.append("analysisFile",$scope.an1_file);
+                        }                   
+                    }
+                }
+
+                    var xhr = new XMLHttpRequest();
+                    var response;
+                    xhr.open("post", modifyTopicUrl, true);
+                    xhr.send(form);
+                    xhr.onreadystatechange = doResult;
+                    function doResult() {
+                       
+                        if(xhr.readyState == 4  && xhr.status == 200){
+                             var response=JSON.parse(xhr.responseText);
+                             if (response.code==0) {
+                                $scope.showAlert("修改成功");
+                             }else{
+                                $scope.showAlert(response.message);
+                             }
+                            
+                        } 
+
+
+                 }
+                    // init();
+                    $scope.showAlert = function(txt) {
+
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                            .clickOutsideToClose(false)
+                            .title(txt)
+                            .ok('确定')
+                            )
+
+                    }
+
+                })
+
+                        }
+      
 
         
 
@@ -959,39 +1038,50 @@ $scope.deleteList = function(){
             }
 
 
-
+        $scope.qflag="";
+        $scope.adflag="";
+        $scope.anflag="";
         $scope.doUploadPhoto_q1 = function(element) {
             $scope.q1_file = element.files[0];
+            $scope.qflag=$scope.qflag+"1,";
         }
         $scope.doUploadPhoto_q2 = function(element) {
             $scope.q2_file = element.files[0];
+            $scope.qflag=$scope.qflag+"2,";
         }
         $scope.doUploadPhoto_q3 = function(element) {
             $scope.q3_file = element.files[0];
+            $scope.qflag=$scope.qflag+"3,";
         }
         $scope.doUploadPhoto_ad1 = function(element) {
             $scope.ad1_file = element.files[0];
+            $scope.adflag=$scope.adflag+"1,";
         }
         $scope.doUploadPhoto_ad2 = function(element) {
             $scope.ad2_file = element.files[0];
+            $scope.adflag=$scope.adflag+"2,";
         }
         $scope.doUploadPhoto_ad3 = function(element) {
             $scope.ad3_file = element.files[0];
+            $scope.adflag=$scope.adflag+"3,";
         }
         $scope.doUploadPhoto_an1 = function(element) {
             $scope.an1_file = element.files[0];
+            $scope.anflag=$scope.anflag+"1,";
         }
         $scope.doUploadPhoto_an2 = function(element) {
             $scope.an2_file = element.files[0];
+            $scope.anflag=$scope.anflag+"2,";
         }
         $scope.doUploadPhoto_an3 = function(element) {
             $scope.an3_file = element.files[0];
+            $scope.anflag=$scope.anflag+"3,";
         }
 
 
 
 
-$scope.addSolution = function(){
+        $scope.addSolution = function(){
 
 
                           // 确定
@@ -1077,6 +1167,11 @@ $scope.addSolution = function(){
                 form.append("analysisFiles",$scope.an1_file);
                 form.append("analysisFiles",$scope.an2_file);
                 form.append("analysisFiles",$scope.an3_file);
+
+                form.append("qFlag",$scope.qflag);
+                 form.append("adFlag",$scope.adflag);
+                  form.append("anFlag",$scope.anflag);
+
 
                     var xhr = new XMLHttpRequest();
                     var response;

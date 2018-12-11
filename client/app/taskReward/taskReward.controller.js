@@ -43,20 +43,19 @@
 
         function getTaskRewardList(pageNum, pageSize){
 
-            $http.post('http://localhost:8080/yoyo-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'radar/getRadarList.do',{},{params:{
                 pageNum:pageNum,
                 pageSize:pageSize,
-                interfaceType:1,
-                taskKindId:$scope.taskKindId
+                moduleId:$scope.moduleId,
+                industryId:$scope.industryId
             }}).success(function (data) {
-                if (data.errorCode == 0) {
+                if (data.code == 0) {
                     console.log(data.result);
                     $scope.taskRewardLists=data.result;
                     $scope.stores=data.result;
                     $scope.taskReward=data.result;
                     $scope.currentPageStores = data.result;
                     $scope.filteredStores = data.result;
-                    $scope.currentPageStores.$apply;
                     $scope.total = data.total;
                 }else {
                     $scope.currentPageStores = null;    
@@ -121,18 +120,15 @@
         };
 
         init = function() {  
-
-            
-            $http.post('http://localhost:8080/yoyo-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
-                taskKindId:$scope.taskKindId,            
+            $http.post('http://localhost:8080/blue-server/' + 'radar/getRadarList.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
             }}).success(function (data) {
-                if (data.errorCode == 0) {
+                if (data.code == 0) {
                     $scope.stores=data.result;
                     $scope.total = data.total;
+                    $scope.filteredStores = data.result;
                     console.log($scope.stores);
-                    $scope.search();
                     // $scope.searchTaskReward(1,$scope.numPerPage);
                     $scope.currentPageStores = $scope.stores;
                     // $scope.searchTaskReward(page,$scope.numPerPage);
@@ -263,7 +259,7 @@
                 // console.log('确定')
 
 
-            var modifyTopicUrl ="http://localhost:8080/yoyo-server/"+"batch/deleteTaskRewardBatch.do";// 接收上传文件的后台地址
+            var modifyTopicUrl ="http://localhost:8080/blue-server/"+"batch/deleteTaskRewardBatch.do";// 接收上传文件的后台地址
                 console.log($scope.selected);
                 var temp = "";
 
@@ -291,7 +287,7 @@
                          }
 
                     } else if(xhr.readyState == 4 && xhr.status != 200){
-                     // $scope.showAlert(xhr.errorMessage);
+                     // $scope.showAlert(xhr.message);
                      $scope.showAlert("删除失败");
                 }
 
@@ -331,7 +327,7 @@
 
 
 
-           $http.post('http://localhost:8080/yoyo-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
             taskRewardId:$scope.kwTaskRewardId,
             nickName:$scope.kwNickName,
                     taskReward:$scope.kwTaskReward,
@@ -340,7 +336,7 @@
                     pageNum:pageNum,
                     pageSize:pageSize
                 }}).success(function (data){
-                    if(data.errorCode == 0){
+                    if(data.code == 0){
                         $scope.stores=data.result;
                         $scope.total = data.total;
                         $scope.currentPageStores = $scope.stores;
@@ -370,24 +366,22 @@
             $scope.showConfirm = function() {
                 // 确定
                 var confirm = $mdDialog.confirm()
-                .title('是否确定删除这条打赏金额列表')
+                .title('是否确定删除')
                             // .ariaLabel('Lucky day')
                             // .targetEvent(ev)
                             .ok('确定')
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskReward/deleteTaskReward.do?",{},{params:{
-                        taskRewardId:id
+                    $http.post("http://localhost:8080/blue-server/"+"radar/deleteRadarById.do?",{},{params:{
+                        radarId:id
                     }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("删除打赏金额列表成功");
+                        if(data.code == 0){
+                            $scope.showAlert("删除成功");
                             $(".delete-"+id).css("display","none");
                             $scope.total--;
                         } else {
-                            $scope.showAlert(data.errorMessage);
-                        }if($scope.total<$scope.numPerPage){
-                            $scope.filteredStores.length=$scope.total;
+                            $scope.showAlert(data.message);
                         }
                         
                     })
@@ -418,15 +412,15 @@
                 .ok('确定')
                 .cancel('取消');
                 $mdDialog.show(confirm).then(function(){
-                    $http.post("http://localhost:8080/yoyo-server/"+"elite/addElite.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"elite/addElite.do?",{},{params:{
                         taskRewardId:id,
                     }}).success(function(data){
-                        if(data.errorCode == 0){
+                        if(data.code == 0){
                             $scope.showAlert("设置成功");
                             $(".set-"+id).css("display","none");
                             $scope.total--;
                         }else{
-                            $scope.showAlert(data.errorMessage);
+                            $scope.showAlert(data.message);
                         }if($scope.total<$scope.numPerPage){
                             $scope.filteredStores.length=$scope.total;
                         }
@@ -463,10 +457,10 @@
 
         $scope.taskRewardId = $location.search().id;
         
-        $http.post('http://localhost:8080/yoyo-server/' + 'taskReward/getTaskRewardById.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'taskReward/getTaskRewardById.do',{},{params:{
             taskRewardId:$scope.taskRewardId
         }}).success( function (data){
-            if(data.errorCode == 0){
+            if(data.code == 0){
                 $scope.taskReward = data.result;
             }
         });
@@ -483,14 +477,14 @@
             $location.path('/taskReward/taskReward-list');
         }
 
-        $http.post('http://localhost:8080/yoyo-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'taskReward/getTaskRewardList.do',{},{params:{
             taskKindId:$scope.taskKindId
         }}).success( function (data){
-                if(data.errorCode == 0){
+                if(data.code == 0){
                     $scope.taskReward = data.result;
                     console.log($scope.taskReward);
                 } else {
-                    $scope.showAlert(data.errorMessage);
+                    $scope.showAlert(data.message);
                     console.log($scope.taskReward)
                 }
             });
@@ -508,16 +502,16 @@
                     console.log($scope.taskRewardId);
                     console.log($scope.taskKindId);
                     console.log($scope.taskReward.price);
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskReward/modifyTaskReward.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"taskReward/modifyTaskReward.do?",{},{params:{
                         taskRewardId:$scope.taskRewardId,
                         taskKindId:$scope.taskKindId,
                         price:$scope.taskReward.price,
                      
                     }}).success(function (data){
-                        if(data.errorCode == 0){
+                        if(data.code == 0){
                             $scope.showAlert("修改打赏金额成功");
                         } else {
-                            $scope.showAlert1(data.errorMessage)
+                            $scope.showAlert1(data.message)
                         }
                         
                     })
@@ -564,25 +558,48 @@
         $scope.backClick = function(){
             $location.path("/taskReward/taskReward-list");
         }
+
+        $http.post("http://localhost:8080/blue-server/"+"module/getModuleList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:20
+                    }}).success(function (data){
+                        if(data.code == 0){
+                               $scope.moduleList=data.result;
+                               console.log($scope.moduleList);
+                        }
+
+                    });
+
+        $http.post("http://localhost:8080/blue-server/"+"industry/getIndustryList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:20
+                    }}).success(function (data){
+                        if(data.code == 0){
+                               $scope.industryList=data.result;
+                               console.log($scope.industryList);
+                        }
+
+                    });
         
         $scope.addtaskReward = function(){
 
             $scope.showConfirm = function() {
                 // 确定
                 var confirm = $mdDialog.confirm()
-                .title('是否确定添加打赏金额')
+                .title('是否确定添加')
                 .ok('确定添加')
                 .cancel('取消添加');
                 $mdDialog.show(confirm).then(function() {
 
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskReward/addTaskReward.do?",{},{params:{
-                        taskKindId:$location.search().id,
-                        price:$scope.taskReward.price
+                    $http.post("http://localhost:8080/blue-server/"+"radar/addRadar.do?",{},{params:{
+                        moduleId:$scope.moduleId,
+                        industryId:$scope.industryId,
+                        avgLevel:$scope.avgLevel
                     }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("添加打赏金额成功");
+                        if(data.code == 0){
+                            $scope.showAlert("添加成功");
                         } else {
-                            $scope.showAlert1(data.errorMessage)
+                            $scope.showAlert1(data.message)
                         }
                     })
                 },  function() {
@@ -596,9 +613,7 @@
                     .clickOutsideToClose(false)
                     .title(txt)
                     .ok('确定')
-                ).then(function(){
-                    $location.path('/taskReward/taskReward-list');
-                })              
+                )           
             }    
 
             $scope.showAlert1 = function(txt) {

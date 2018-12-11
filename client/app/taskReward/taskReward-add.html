@@ -4,7 +4,7 @@
 
 
     <div class="row ui-section">
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加打赏金额</h2> </div>
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加规则</h2> </div>
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
         </div>
@@ -18,10 +18,31 @@
                                 <md-content layout-padding>
                                 <form name="taskRewardForm" class="taskRewardForm">
 
+
                                     <div class="form-group clearfix">
-                                        <label for="" class="col-sm-3 control-label">打赏金额：</label>
+                                            <label for="" class="col-sm-3 control-label">模块：</label>
+                                            <div class="col-sm-9">
+                                                <select class="" ng-model="moduleId" >
+                                                    <option value="{{module.moduleId}}" ng-repeat="module in moduleList">{{module.moduleName}}</option>
+                                                </select>
+                                            </div>
+                                    </div>
+
+                                      <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">行业：</label>
+                                            <div class="col-sm-9">
+                                                <select class="" ng-model="industryId" >
+                                                    <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                    <div class="form-group clearfix">
+                                        <label for="" class="col-sm-3 control-label">平均水平：</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" class="taskReward" ng-model="taskReward.price">
+                                            <input class="form-control" class="taskReward" ng-model="avgLevel">
                                         </div>
                                     </div>
 

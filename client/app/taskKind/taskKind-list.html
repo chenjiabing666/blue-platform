@@ -4,7 +4,7 @@
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">开发者认证审核</h2>
+            <h2 class="section-header">发票管理</h2>
         </div>
         
     </div>
@@ -14,26 +14,36 @@
             <div class="row">
             <div class="col-sm-12 col-xs-12" >
                 <form class="taskKind_list_header">
+
+                    <label class="col-sm-2 col-xs-2">
+                                <span >发票类型:</span>
+                                <select data-ng-model="type" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-change="search()">
+                                    <option value="">全部</option>
+                                    <option value="1">个人</option>
+                                    <option value="2">公司</option>
+                                </select>
+                    </label>
+
                     
-                   <label class="col-sm-3 col-xs-3">
-                        <span >ID:</span>
-                        <input type="text" id="userId" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="userId" data-ng-keyup="search()">
+                   <label class="col-sm-2 col-xs-2">
+                        <span >纳税人识别号:</span>
+                        <input type="text" id="userId" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="number" data-ng-keyup="search()">
                     </label> 
 
-                    <label class="col-sm-3 col-xs-3">
-                        <span>用户账号:</span>
-                        <input type="text" id="userName" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="userName" data-ng-keyup="search()">
+                    <label class="col-sm-2 col-xs-2">
+                        <span>手机号:</span>
+                        <input type="text" id="userName" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="mobile" data-ng-keyup="search()">
                     </label>
 
-                    <label class="col-sm-3 col-xs-3">
-                        <span>用户姓名:</span>
-                        <input type="text" id="realName" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="realName" data-ng-keyup="search()">
+                    <label class="col-sm-2 col-xs-2">
+                        <span>发票抬头:</span>
+                        <input type="text" id="realName" class="border-radius-5 border-default ml-10 input-default input-w-30"
+                        data-ng-model="title" data-ng-keyup="search()">
                     </label>
 
-                    <label class="col-sm-3 col-xs-3">
+                    <!-- <label class="col-sm-3 col-xs-3">
                                 <span >地区:</span>
                                 <select data-ng-model="provinceCode" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-change="search()">
                                     <option value="">全部</option>
@@ -46,14 +56,14 @@
                                <input type="text" id="authDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="border-radius-5 border-default ml-10 input-default input-w-50"
                         data-ng-model="feedBackDate"  data-ng-keyup="search()" data-ng-change="search()">
                     </label>
-
-                    <label class="col-sm-3 col-xs-3">
-                                <span >审核状态:</span>
-                                <select data-ng-model="status" class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-change="search()">
+ -->
+                    <label class="col-sm-2 col-xs-2">
+                                <span >状态:</span>
+                                <select data-ng-model="status" class="border-radius-5 border-default ml-10 input-default input-w-30" data-ng-change="search()">
                                     <option value="">全部</option>
-                                    <option value="0">未审核</option>
-                                    <option value="1">审核通过</option>
-                                    <option value="2">审核失败</option>
+                                    <option value="1">已开具</option>
+                                    <option value="2">未处理</option>
+                                    <option value="3">已邮寄</option>
                                 </select>
                     </label>
 
@@ -69,8 +79,8 @@
 
             <div class="col-md-4 clearfix">
                 <!-- <a class=" md-primary add-product" href="#/taskKind/taskKind-add">添加任务品类</a> -->
-                <a class=" md-primary add-product"  ng-click="deleteList(1)" >审核通过</a>
-                <a class=" md-primary add-product"  ng-click="deleteList(2)" >审核不通过</a>
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList(1)" >审核通过</a>
+                <a class=" md-primary add-product"  ng-click="deleteList(2)" >审核不通过</a> -->
             </div>
             
             </div>
@@ -79,9 +89,9 @@
         <table class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
-            <th><div class="th">
+            <!-- <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
-                </div></th>
+                </div></th> -->
                <!--  <th><div class="th">
                 序号
                 </div></th> -->
@@ -89,22 +99,42 @@
                 ID
                 </div></th>
                 <th><div class="th">
-                用户账号
+                发票金额
                 </div></th>
+               <!--  <th><div class="th">
+                发票种类
+                </div></th> -->
                 <th><div class="th">
-                用户姓名
-                </div></th>
-                <th><div class="th">
-                地址
+                发票类型
                 </div></th>
                 <!-- <th><div class="th">
                 认证类型
                 </div></th> -->
                 <th><div class="th">
-                请求时间
+                发票抬头
                 </div></th>
                 <th><div class="th">
-                审核状态
+                纳税人识别号
+                </div></th>
+
+                 <th><div class="th">
+                手机号
+                </div></th>
+
+                 <th><div class="th">
+                电子邮箱
+                </div></th>
+
+                 <th><div class="th">
+                发票邮寄地址
+                </div></th>
+
+                 <th><div class="th">
+                收件人
+                </div></th>
+
+                <th><div class="th">
+                状态
                 </div></th>
                 <!-- <th><div class="th">
                 创建时间
@@ -116,17 +146,24 @@
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.userId}}">
-                <td> <md-checkbox ng-click="selectItem(store.userId)" ng-checked="selected[store.userId]"></md-checkbox></td>
-                <td ng-bind="store.userId"></td>
-                <td ng-bind="store.userName"></td>
-                <td ng-bind="store.realName"></td>
-                <td ng-bind="store.address"></td>
-                <td ng-bind="store.authDate"></td>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.invoiceId}}">
+                <!-- <td> <md-checkbox ng-click="selectItem(store.userId)" ng-checked="selected[store.userId]"></md-checkbox></td> -->
+                <td ng-bind="store.invoiceId"></td>
+                <td ng-bind="store.amout"></td>
                 <td>
-                    <p ng-if="store.examinStatus==0">未审核</p>
-                    <p ng-if="store.examinStatus==1">审核通过</p>
-                    <p ng-if="store.examinStatus==2">审核失败</p>
+                    <p ng-show="store.type==1">个人</p>
+                    <p ng-show="store.type==2">公司</p>
+                </td>
+                <td ng-bind="store.title"></td>
+                <td ng-bind="store.number"></td>
+                <td ng-bind="store.mobile"></td>
+                <td ng-bind="store.email"></td>
+                <td ng-bind="store.address"></td>
+                <td ng-bind="store.name"></td>
+                <td>
+                    <p ng-if="store.status==1">已开具</p>
+                    <p ng-if="store.status==2">未处理</p>
+                    <p ng-if="store.status==3">已邮寄</p>
                 </td>
                 <!-- <td ng-bind="store.realName"></td>
 
@@ -137,9 +174,10 @@
                 <td ng-bind="store.isOpenAnonymity | isDoing"></td>
                 <td ng-bind="store.createdDate | date:'yyyy-MM-dd HH:mm:ss'"></td> -->          
                 <td class="opertation">
-                    <!-- <a href="#/taskKind/taskKind-change?id={{store.userId}}">编辑</a>
-                    <a href="" ng-click="deleteTaskKind(store.userId)">删除</a> -->
-                    <a href="#/taskKind/taskKind-detail?id={{store.userId}}">详情</a>
+                    <!-- <a href="#/taskKind/taskKind-change?id={{store.userId}}">编辑</a> -->
+                    <a href="" ng-click="deleteTaskKind(store.invoiceId,1)">已开具</a>
+                    <a href="" ng-click="deleteTaskKind(store.invoiceId,3)">已邮寄</a>
+                    <!-- <a href="#/taskKind/taskKind-detail?id={{store.userId}}">详情</a> -->
                    <!--  <a href="#/taskDuration/taskDuration-list?id={{store.userId}}">时长</a>
                     <a href="#/taskReward/taskReward-list?id={{store.userId}}">打赏</a> -->
                 </td>

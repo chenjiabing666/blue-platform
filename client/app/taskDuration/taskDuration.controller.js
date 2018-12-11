@@ -40,22 +40,32 @@
         $scope.taskKindId=$location.search().id;
         console.log($location);
 
+        $http.post("http://localhost:8080/blue-server/"+"industry/getIndustryList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:20
+                    }}).success(function (data){
+                        if(data.code == 0){
+                               $scope.industryList=data.result;
+                               console.log($scope.industryList);
+                        }
+
+                    });
+
         function getTaskDurationList(pageNum, pageSize){
 
-            $http.post('http://localhost:8080/yoyo-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
+            $http.post('http://localhost:8080/blue-server/' + 'industryIndex/getIndustryIndexList.do',{},{params:{
                 pageNum:pageNum,
                 pageSize:pageSize,
-                interfaceType:1,
-                taskKindId:$scope.taskKindId
+                name:$scope.name,
+                industryId:$scope.industryId
             }}).success(function (data) {
-                if (data.errorCode == 0) {
+                if (data.code == 0) {
                     console.log(data.result);
                     $scope.taskDurationLists=data.result;
                     $scope.stores=data.result;
                     $scope.taskDuration=data.result;
                     $scope.currentPageStores = data.result;
                     $scope.filteredStores = data.result;
-                    $scope.currentPageStores.$apply;
                     $scope.total = data.total;
                 }else {
                     $scope.currentPageStores = null;    
@@ -120,20 +130,16 @@
         };
 
         init = function() {   
-            
-            $http.post('http://localhost:8080/yoyo-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
-                taskKindId:$scope.taskKindId,            
+            $http.post('http://localhost:8080/blue-server/' + 'industryIndex/getIndustryIndexList.do',{},{params:{
                 pageNum:1,
                 pageSize:$scope.numPerPage,
             }}).success(function (data) {
-                if (data.errorCode == 0) {
+                if (data.code == 0) {
                     $scope.stores=data.result;
                     $scope.total = data.total;
-                    console.log($scope.stores);
-                    $scope.search();
-                    // $scope.searchTaskDuration(1,$scope.numPerPage);
+                    // console.log($scope.stores);
+                    $scope.filteredStores = data.result;
                     $scope.currentPageStores = $scope.stores;
-                    // $scope.searchTaskDuration(page,$scope.numPerPage);
                 }
             });         
         };
@@ -261,7 +267,7 @@
                 // console.log('确定')
 
 
-            var modifyTopicUrl ="http://localhost:8080/yoyo-server/"+"batch/deleteTaskDurationBatch.do";// 接收上传文件的后台地址
+            var modifyTopicUrl ="http://localhost:8080/blue-server/"+"batch/deleteTaskDurationBatch.do";// 接收上传文件的后台地址
                 console.log($scope.selected);
                 var temp = "";
 
@@ -329,7 +335,7 @@
 
 
 
-           $http.post('http://localhost:8080/yoyo-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
+           $http.post('http://localhost:8080/blue-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
             taskDurationId:$scope.kwTaskDurationId,
             nickName:$scope.kwNickName,
                     taskDuration:$scope.kwTaskDuration,
@@ -338,7 +344,7 @@
                     pageNum:pageNum,
                     pageSize:pageSize
                 }}).success(function (data){
-                    if(data.errorCode == 0){
+                    if(data.code == 0){
                         $scope.stores=data.result;
                         $scope.total = data.total;
                         $scope.currentPageStores = $scope.stores;
@@ -368,22 +374,22 @@
             $scope.showConfirm = function() {
                 // 确定
                 var confirm = $mdDialog.confirm()
-                .title('是否确定删除这条时长列表')
+                .title('是否确定删除')
                             // .ariaLabel('Lucky day')
                             // .targetEvent(ev)
                             .ok('确定')
                             .cancel('取消');
                             $mdDialog.show(confirm).then(function() {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskDuration/deleteTaskDuration.do?",{},{params:{
-                        taskDurationId:id
+                    $http.post("http://localhost:8080/blue-server/"+"industryIndex/deleteIndustryIndexById.do?",{},{params:{
+                        industryIndexId:id
                     }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("删除时长列表成功");
+                        if(data.code == 0){
+                            $scope.showAlert("删除时长成功");
                             $(".delete-"+id).css("display","none");
                             $scope.total--;
                         } else {
-                            $scope.showAlert(data.errorMessage);
+                            $scope.showAlert(data.message);
                         }if($scope.total<$scope.numPerPage){
                             $scope.filteredStores.length=$scope.total;
                         }
@@ -416,10 +422,10 @@
                 .ok('确定')
                 .cancel('取消');
                 $mdDialog.show(confirm).then(function(){
-                    $http.post("http://localhost:8080/yoyo-server/"+"elite/addElite.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"elite/addElite.do?",{},{params:{
                         taskDurationId:id,
                     }}).success(function(data){
-                        if(data.errorCode == 0){
+                        if(data.code == 0){
                             $scope.showAlert("设置成功");
                             $(".set-"+id).css("display","none");
                             $scope.total--;
@@ -461,10 +467,10 @@
 
         $scope.taskDurationId = $location.search().id;
         
-        $http.post('http://localhost:8080/yoyo-server/' + 'taskDuration/getTaskDurationById.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'taskDuration/getTaskDurationById.do',{},{params:{
             taskDurationId:$scope.taskDurationId
         }}).success( function (data){
-            if(data.errorCode == 0){
+            if(data.code == 0){
                 $scope.taskDuration = data.result;
             }
         });
@@ -481,10 +487,10 @@
             $location.path('/taskDuration/taskDuration-list');
         }
 
-        $http.post('http://localhost:8080/yoyo-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
+        $http.post('http://localhost:8080/blue-server/' + 'taskDuration/getTaskDurationList.do',{},{params:{
             taskKindId:$scope.taskKindId
         }}).success( function (data){
-                if(data.errorCode == 0){
+                if(data.code == 0){
                     $scope.taskDuration = data.result;
                     console.log($scope.taskDuration);
                 } else {
@@ -503,13 +509,13 @@
                 .cancel('取消修改');
 
                 $mdDialog.show(confirm).then(function() {
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskDuration/modifyTaskDuration.do?",{},{params:{
+                    $http.post("http://localhost:8080/blue-server/"+"taskDuration/modifyTaskDuration.do?",{},{params:{
                         taskDurationId:$scope.taskDurationId,
                         taskKindId:$scope.taskKindId,
                         duration:$scope.taskDuration.duration,
                      
                     }}).success(function (data){
-                        if(data.errorCode == 0){
+                        if(data.code == 0){
                             $scope.showAlert("修改时长成功");
                         } else {
                             $scope.showAlert1(data.errorMessage)
@@ -559,26 +565,45 @@
         $scope.backClick = function(){
             $location.path("/taskDuration/taskDuration-list");
         }
+
+
+        $http.post("http://localhost:8080/blue-server/"+"industry/getIndustryList.do?",{},{params:{
+                        pageNum:1,
+                        pageSize:20
+                    }}).success(function (data){
+                        if(data.code == 0){
+                               $scope.industryList=data.result;
+                               console.log($scope.industryList);
+                        }
+
+                    });
         
         $scope.addtaskDuration = function(){
 
             $scope.showConfirm = function() {
                 // 确定
                 var confirm = $mdDialog.confirm()
-                .title('是否确定添加时长')
+                .title('是否确定添加')
                 .ok('确定添加')
                 .cancel('取消添加');
                 $mdDialog.show(confirm).then(function() {
                     console.log($location.search().id);
                     console.log($scope.taskDuration.duration);
-                    $http.post("http://localhost:8080/yoyo-server/"+"taskDuration/addTaskDuration.do?",{},{params:{
-                        taskKindId:$location.search().id,
-                        duration:$scope.taskDuration.duration
+                    $http.post("http://localhost:8080/blue-server/"+"industryIndex/addIndustryIndex.do?",{},{params:{
+                        name:$scope.name,
+                        industryId:$scope.industryId,
+                        pureRate:$scope.pureRate,
+                        impureRate:$scope.impureRate,
+                        flowRate:$scope.flowRate,
+                        depositRate:$scope.depositRate,
+                        accountRate:$scope.accountRate,
+                        businessRate:$scope.businessRate,
+                        profitRate:$scope.profitRate,
                     }}).success(function (data){
-                        if(data.errorCode == 0){
-                            $scope.showAlert("添加时长成功");
+                        if(data.code == 0){
+                            $scope.showAlert("添加成功");
                         } else {
-                            $scope.showAlert1(data.errorMessage)
+                            $scope.showAlert(data.message);
                         }
                     })
                 },  function() {
@@ -592,9 +617,7 @@
                     .clickOutsideToClose(false)
                     .title(txt)
                     .ok('确定')
-                ).then(function(){
-                    $location.path('/taskDuration/taskDuration-list');
-                })              
+                );          
             }    
 
             $scope.showAlert1 = function(txt) {

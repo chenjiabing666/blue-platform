@@ -4,23 +4,38 @@
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">时长列表</h2>
+            <h2 class="section-header">行业数据指标列表</h2>
         </div>
-        <div class="col-md-8 clearfix"> 
+        <!-- <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
-        </div>
+        </div> -->
     </div>
     <div class="col-md-12" >
         <section class="panel panel-default table-dynamic">
           <div class="table-filters">
             <div class="row">
             <div class="col-sm-12 col-xs-12" >
-                
+                <form class="clazz_list_header">
+
+                            <label class="col-sm-3 col-xs-3">
+                                <span >企业名称:</span>
+                                <input type="text" id="nickName" placeholder="" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                                data-ng-model="name" data-ng-keyup="search()">
+                            </label> 
+
+                            <label class="col-sm-3 col-xs-3">
+                                <span >分类:</span>
+                                <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="industryId" data-ng-change="search()">
+                                    <option value="">全部</option>
+                                    <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
+                                </select> 
+                            </label>
+                </form>
             </div>
 
             <div class="col-md-4 clearfix">
-                <a class=" md-primary add-product" href="#/taskDuration/taskDuration-add?id={{taskKindId}}">添加时长</a>
-                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+                <a class=" md-primary add-product" href="#/taskDuration/taskDuration-add">添加行业数据指标</a>
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
             </div>
             
             </div>
@@ -29,18 +44,39 @@
         <table class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
-            <th><div class="th">
+            <!-- <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th> -->
+                <th><div class="th">
+                ID
                 </div></th>
                 <th><div class="th">
-                任务品类ID
+                标杆企业名称
                 </div></th>
                 <th><div class="th">
-                任务时长ID
+                销售净利率
                 </div></th>
                 <th><div class="th">
-                时长
+                毛利率
                 </div></th>
+                <th><div class="th">
+                流动比率
+                </div></th>
+                <th><div class="th">
+                存货周转率
+                </div></th>
+                <th><div class="th">
+                应收账款周转率
+                </div></th>
+                <th><div class="th">
+                营业收入增长率
+                </div></th>
+                <th><div class="th">
+                净利润增长率
+                </div></th>
+               <!--  <th><div class="th">
+                毛利率
+                </div></th> -->
                 <th><div class="th">
                 操作
                 </div></th>
@@ -48,14 +84,20 @@
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.taskDurationId}}">
-                <td> <md-checkbox ng-click="selectItem(store.taskDurationId)" ng-checked="selected[store.taskDurationId]"></md-checkbox></td>
-                <td ng-bind="store.taskKindId"></td>
-                <td ng-bind="store.taskDurationId"></td>
-                <td ng-bind="store.duration"></td>     
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.industryIndexId}}">
+                <!-- <td> <md-checkbox ng-click="selectItem(store.industryIndexId)" ng-checked="selected[store.industryIndexId]"></md-checkbox></td> -->
+                <td ng-bind="store.industryIndexId"></td>
+                <td ng-bind="store.name"></td>
+                <td ng-bind="store.pureRate"></td>     
+                <td ng-bind="store.impureRate"></td>  
+                <td ng-bind="store.flowRate"></td>  
+                <td ng-bind="store.depositRate"></td>  
+                <td ng-bind="store.accountRate"></td>  
+                <td ng-bind="store.businessRate"></td>  
+                <td ng-bind="store.profitRate"></td>  
                 <td class="opertation">
-                    <a href="#/taskDuration/taskDuration-change?taskDurationId={{store.taskDurationId}}&taskKindId={{taskKindId}}&id={{taskKindId}}">编辑</a>
-                    <a href="" ng-click="deleteTaskDuration(store.taskDurationId)">删除</a>
+                    <!-- <a href="#/taskDuration/taskDuration-change?id={{store.industryIndexId}}">编辑</a> -->
+                    <a href="" ng-click="deleteTaskDuration(store.industryIndexId)">删除</a>
                 </td>
               </tr>
             </tbody>
