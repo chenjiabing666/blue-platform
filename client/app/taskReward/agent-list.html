@@ -1,10 +1,10 @@
 
-<div class="page page-table" ng-controller="InvitationCtrl">
+<div class="page page-table" ng-controller="AgentCotroller">
 
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">经纪人列表</h2>
+            <h2 class="section-header">企业竞争力和市场定位</h2>
         </div>
         
     </div>
@@ -16,22 +16,26 @@
                 <form class="invitation_list_header">
                     
                    <label class="col-sm-3 col-xs-1">
-                        <span >经纪人ID:</span>
-                        <input type="text" id="invitationId" placeholder="输入经纪人ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
-                        data-ng-model="kwInvitationId" data-ng-keyup="search()">
+                        <span >行业:</span>
+                       <!--  <input type="text" id="invitationId" placeholder="输入经纪人ID" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="kwInvitationId" data-ng-keyup="search()"> -->
+                        <select class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="industryId" data-ng-change="search()">
+                            <option value="">不限</option>
+                            <option ng-repeat="industry in industryList" value="{{industry.industryId}}">{{industry.name}}</option>
+                        </select>
                     </label> 
 
-                    <label class="col-sm-3 col-xs-4">
+                    <!-- <label class="col-sm-3 col-xs-4">
                         <span >经纪人:</span>
                         <input type="text" id="invitation" placeholder="输入经纪人昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
                         data-ng-model="kwInvitation" data-ng-keyup="search()">
-                    </label> 
+                    </label>  -->
                 </form>
             </div>
 
             <div class="col-md-4 clearfix">
-                <a class=" md-primary add-product" href="#/invitation/invitation-add">添加经纪人</a>
-                <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a>
+                <a class="md-primary add-product" href="#/taskReward/taskReward-change">添加</a>
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
             </div>
             
             </div>
@@ -40,21 +44,34 @@
         <table class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
-            <th><div class="th">
+            <!-- <th><div class="th">
                 <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th> -->
+                <th><div class="th">
+                ID
                 </div></th>
                 <th><div class="th">
-                经纪人ID
+                质量模块平均得分
                 </div></th>
                 <th><div class="th">
-                邀请码
+                交付模块的平均得分
                 </div></th>
                 <th><div class="th">
-                一级邀请人数
+                成本模块的平均得分
                 </div></th>
+
                 <th><div class="th">
-                多级邀请人数
+                企业平均水平的健得分
                 </div></th>
+
+                <th><div class="th">
+                竞争力的平均水平
+                </div></th>
+
+               <!--  <th><div class="th">
+                成本模块的平均得分
+                </div></th> -->
+
                 <th><div class="th">
                 操作
                 </div></th>
@@ -62,16 +79,19 @@
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.invitationId}}">
-                <td> <md-checkbox ng-click="selectItem(store.invitationId)" ng-checked="selected[store.invitationId]"></md-checkbox></td>
-                <td ng-bind="store.userId"></td>
-                <td ng-bind="store.inviteCode"></td>
-                <td ng-bind="store.invitationCodeId"></td>
-                <td ng-bind="store.invitationCodeId"></td>            
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.competeId}}">
+                <!-- <td> <md-checkbox ng-click="selectItem(store.invitationId)" ng-checked="selected[store.invitationId]"></md-checkbox></td> -->
+                <td ng-bind="store.competeId"></td>
+                <td ng-bind="store.quality"></td>
+                <td ng-bind="store.deliver"></td>
+                <td ng-bind="store.cost"></td>            
+                <td ng-bind="store.score"></td>   
+                <td ng-bind="store.compete"></td>   
+                <!-- <td ng-bind="store.cost"></td>    -->
                 <td class="opertation">
-                    <a href="#/invitation/invitation-change?id={{store.invitationId}}">编辑</a>
-                    <a href="" ng-click="deleteInvitation(store.invitationId)">删除</a>
-                    <a href="#/invitation/invitation-detail?id={{store.invitationId}}">详情</a>
+                    <!-- <a href="#/invitation/invitation-change?id={{store.invitationId}}">编辑</a> -->
+                    <a href="" ng-click="deleteSetting(store.competeId)">删除</a>
+                    <!-- <a href="#/invitation/invitation-detail?id={{store.invitationId}}">详情</a> -->
                 </td>
               </tr>
             </tbody>

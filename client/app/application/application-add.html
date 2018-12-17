@@ -4,7 +4,7 @@
 
 
     <div class="row ui-section">
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加应用</h2> </div>
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加资料</h2> </div>
 
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
@@ -39,10 +39,16 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">付费形式：</label>
                                             <div class="col-sm-9">
-                                                <span><input type="radio" name="payType" value="1">免费&nbsp&nbsp&nbsp</span>
+                                                <select ng-model="payType">
+                                                    <option value="1">免费</option>
+                                                    <option value="2">企业</option>
+                                                    <option value="3">会员</option>
+                                                    <option value="4">付费</option>
+                                                </select>
+                                                <!-- <span><input type="radio" name="payType" value="1">免费&nbsp&nbsp&nbsp</span>
                                                 <span><input type="radio" name="payType" value="2">企业&nbsp&nbsp&nbsp</span>
                                                 <span><input type="radio" name="payType" value="3">会员&nbsp&nbsp&nbsp</span>
-                                                <span><input type="radio" name="payType" value="4">付费&nbsp&nbsp&nbsp</span>
+                                                <span><input type="radio" name="payType" value="4">付费&nbsp&nbsp&nbsp</span> -->
                                             </div>
                                         </div>
 
@@ -63,8 +69,14 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">分类：</label>
                                             <div class="col-sm-9">
-                                               <input type="radio" name="type" value="1">视频
-                                               <input type="radio" name="type" value="2">文件
+                                               <!-- <input type="radio" name="type" value="1">视频
+                                               <input type="radio" name="type" value="2">文件 -->
+                                               <select ng-model="type">
+                                                    <option value="1">视频</option>
+                                                    <option value="2">文件</option>
+                                                    <!-- <option value="3">会员</option>
+                                                    <option value="4">付费</option> -->
+                                                </select>
                                             </div>
                                         </div>
 

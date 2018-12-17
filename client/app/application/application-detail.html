@@ -28,8 +28,8 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">模块：</label>
                                             <div class="col-sm-9">
-                                                <select ng-model="information.moduleId">
-                                                    <option ng-repeat="module in moduleList" value="{{module.moduleId}}" ng-selected="information.moduleId==module.moduleId">{{module.moduleName}}</option>
+                                                <select ng-model="information.moduleId"  ng-options="module.moduleId as module.moduleName for module in moduleList">
+                                                    <!-- <option  value="{{module.moduleId}}" ng-selected="information.moduleId==module.moduleId" ng-options="information.moduleId as module.moduleId for module in moduleList " >{{module.moduleName}}</option> -->
                                                 </select>
                                             </div>
                                         </div>
@@ -37,10 +37,18 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">付费形式：</label>
                                             <div class="col-sm-9">
-                                                <span><input type="radio" name="payType" value="1" ng-checked="information.payType==1">免费&nbsp&nbsp&nbsp</span>
+
+                                                 <select ng-model="information.payType">
+                                                    <option value="1" ng-selected="information.payType==1">免费</option>
+                                                    <option value="2" ng-selected="information.payType==2">企业</option>
+                                                    <option value="3" ng-selected="information.payType==3">会员</option>
+                                                    <option value="4" ng-selected="information.payType==4">付费</option>
+                                                </select>
+
+                                                <!-- <span><input type="radio" name="payType" value="1" ng-checked="information.payType==1">免费&nbsp&nbsp&nbsp</span>
                                                 <span><input type="radio" name="payType" value="2" ng-checked="information.payType==2">企业&nbsp&nbsp&nbsp</span>
                                                 <span><input type="radio" name="payType" value="3" ng-checked="information.payType==3">会员&nbsp&nbsp&nbsp</span>
-                                                <span><input type="radio" name="payType" value="4" ng-checked="information.payType==4">付费&nbsp&nbsp&nbsp</span>
+                                                <span><input type="radio" name="payType" value="4" ng-checked="information.payType==4">付费&nbsp&nbsp&nbsp</span> -->
                                             </div>
                                         </div>
 
@@ -61,8 +69,14 @@
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">分类：</label>
                                             <div class="col-sm-9">
-                                               <input type="radio" name="type" value="1" ng-checked="information.type==1">视频
-                                               <input type="radio" name="type" value="2" ng-checked="information.type==2">文件
+                                                <select ng-model="information.type">
+                                                    <option value="1" ng-selected="information.type==1">视频</option>
+                                                    <option value="2" ng-selected="information.type==2">文件</option>
+                                                    <!-- <option value="3">会员</option>
+                                                    <option value="4">付费</option> -->
+                                                </select>
+                                              <!--  <input type="radio" name="type" value="1" ng-checked="information.type==1">视频
+                                               <input type="radio" name="type" value="2" ng-checked="information.type==2">文件 -->
                                             </div>
                                         </div>
 

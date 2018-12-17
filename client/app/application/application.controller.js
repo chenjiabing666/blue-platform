@@ -244,13 +244,13 @@
             form.append("moduleId",$scope.information.moduleId);
             form.append("file",$scope.imageFileObj);
             form.append("informationId",$scope.informationId);
-            $scope.payTypes="";
-            $("input:radio[name='payType']:checked").each(function() {
-                        $scope.payTypes+= $(this).val();
-                });
-            form.append("payType",$scope.payTypes);
-            var typeV=$("input[name='type']:checked").val();
-            form.append("type",typeV);
+            // $scope.payTypes="";
+            // $("input:radio[name='payType']:checked").each(function() {
+            //             $scope.payTypes+= $(this).val();
+            //     });
+            form.append("payType",$scope.information.payType);
+            // var typeV=$("input[name='type']:checked").val();
+            form.append("type",$scope.information.type);
 
             var html=editor.txt.html();  //html内容
             form.append("content",html);
@@ -1292,13 +1292,13 @@ $scope.selectAll = function () {
             form.append("point",$scope.point);
             form.append("moduleId",$scope.moduleId);
             form.append("file",$scope.imageFileObj);
-            $scope.payTypes="";
-            $("input:radio[name='payType']:checked").each(function() {
-                        $scope.payTypes+= $(this).val();
-                });
-            form.append("payType",$scope.payTypes);
-            var typeV=$("input[name='type']:checked").val();
-            form.append("type",typeV);
+            // $scope.payTypes="";
+            // $("input:radio[name='payType']:checked").each(function() {
+            //             $scope.payTypes+= $(this).val();
+            //     });
+            form.append("payType",$scope.payType);
+            // var typeV=$("input[name='type']:checked").val();
+            form.append("type",$scope.type);
 
             var html=editor.txt.html();  //html内容
             form.append("content",html);
