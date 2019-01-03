@@ -548,7 +548,7 @@
         var authoritySet = sessionStorage.authoritySet.split(',');
         //控制权限，如果没有这个权限，不显示
         for (var i = 0; i < authoritySet.length; i++) {
-            if (authoritySet[i] == "40") {
+            if (authoritySet[i] == "46") {
                 $scope.isShow = 1;
             }
         }
@@ -1170,7 +1170,7 @@ $scope.selectAll = function () {
     //
     function AddApplicationCtrl($scope, $http, $mdDialog, $location, $timeout) {
         $scope.isAddApplication = 0;
-        $scope.isShow = 0;
+        // $scope.isShow = 0;
         $scope.selectAuthories;
         var E = window.wangEditor
             var editor = new E('#editor')
@@ -1198,9 +1198,20 @@ $scope.selectAll = function () {
                 'redo'  // 重复
             ];
 
+
+        $scope.isShow = 0;
+        var authoritySet = sessionStorage.authoritySet.split(',');
+        //控制权限，如果没有这个权限，不显示
+        for (var i = 0; i < authoritySet.length; i++) {
+            if (authoritySet[i] == "47") {
+                $scope.isShow = 1;
+            }
+        }
+
+
             //指定上传的文件名，这里必须和后端代码对应
             editor.customConfig.uploadFileName = 'myFile'
-            editor.customConfig.uploadImgServer = "http://localhost:8080/blue-server/information/uploadImage.do"  // 上传图片到服务器
+            editor.customConfig.uploadImgServer = "http://www.m-scor.com/blue-server/information/uploadImage.do"  // 上传图片到服务器
 
             // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
             

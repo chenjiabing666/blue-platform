@@ -1,15 +1,15 @@
 
 
-<section class="page-form-ele page" ng-controller="noticeDetailCtrl">
+
+<section class="page-form-ele page" ng-controller="noticecommonCtrl">
 
 
-    <div class="row ui-section"  >
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">模块详情</h2> </div>
-        
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">通用解决方案</h2> </div>
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
         </div>
-        <div class="col-md-12" ng-show="isShow==1">
+        <div class="col-md-12">
             <section class="panel panel-default">
                 <div class="panel-body">
                     <div class="row notice-detail" >
@@ -18,56 +18,28 @@
                                 <md-content layout-padding>
                                     <form name="noticeForm" class="noticeForm">
 
-                                       <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">模块名称：</label>
+                                       <!-- <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">行业：</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" class="noticeName" ng-model="module.moduleName">
+                                                <select class="form-control" ng-model="industryId" >
+                                                    <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
+                                                </select>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">模块描述：</label>
+                                    <div class="form-group clearfix">
+                                            <label for="" class="col-sm-3 control-label">模块：</label>
                                             <div class="col-sm-9">
-                                                <textarea rows="20" cols="60" ng-model="module.description"></textarea>
+                                                <select class="" ng-model="moduleId" ng-options="module.moduleId as module.moduleName for module in moduleList" >
+                                                    <!-- <option value="{{module.moduleId}}" ng-repeat="module in moduleList">{{module.moduleName}}</option> -->
+                                                </select>
                                             </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">高分：</label>
-                                            <div class="col-sm-9">
-                                                <input  class="noticeName" ng-model="module.highScoreMin">分--
-                                                <input  class="noticeName" ng-model="module.highScoreMax">分
-                                            </div>
-                                        </div>
+                                    </div>
 
 
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">中等：</label>
-                                            <div class="col-sm-9">
-                                                <input  class="noticeName" ng-model="module.mediumScoreMin">分--
-                                                <input  class="noticeName" ng-model="module.mediumScoreMax">分
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group clearfix">
-                                            <label for="" class="col-sm-3 control-label">低分：</label>
-                                            <div class="col-sm-9">
-                                                <input  class="noticeName" ng-model="module.lowScoreMin">分--
-                                                <input  class="noticeName" ng-model="module.lowScoreMax">分
-                                            </div>
-                                        </div>
+                                        <div>
                                         
-                                        <div layout layout-sm='column' class="changeConfirm add-btn">
-                                            <md-button class="md-raised btn-w-md md-primary" ng-click="modifyNotice()">修改模块</md-button><div class="divider"></div>
-                                        </div>
-
-
-
-
-                                    <div ng-repeat="industry in industryList">
-                                        <h1 style="font-size: 20px;color: red">行业：{{industry.name}}</h1>
-                                        <div ng-repeat="solution in industry.solutions">
+                                        <div ng-repeat="solution in solutions">
                                             <h2 style="font-size: 10px;" ng-if="solution.type==1">高分解决方案</h2>
                                             <h2 style="font-size: 10px" ng-if="solution.type==2">中等解决方案</h2>
                                             <h2 style="font-size: 10px" ng-if="solution.type==3">低分解决方案</h2>
@@ -181,17 +153,26 @@
                                         </div>
                                         
                                         </div>
+
                                         
+                                        
+                                        <!-- <div layout layout-sm='column' class="changeConfirm add-btn">
+                                            <md-button class="md-raised btn-w-md md-primary" ng-click="addSolution()">确定添加</md-button><div class="divider"></div>
+                                        </div> -->
+
+
                                     </form>
                                 </md-content>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section> 
-
+            </section>    
         </div>
-        
+
+
+
+
     </div>
 </section>
 

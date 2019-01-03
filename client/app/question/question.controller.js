@@ -7,6 +7,7 @@
     // .controller('ImageCtrl', ['$scope', '$http', '$mdDialog', '$location', '$timeout', ImageCtrl])
     // .controller('AddImageCtrl', ['$scope', '$http', '$mdDialog', AddImageCtrl]) //,'$upload'
     .controller('ChangeQuestionCtrl', ['$scope', '$http','$location','$mdDialog','$timeout',ChangeQuestionCtrl])
+    
     function QuestionCtrl($scope, $filter, $http, $mdDialog) {
         var idTmr;
 
@@ -71,7 +72,7 @@
         $scope.isShow = 0;
         var authoritySet = sessionStorage.authoritySet.split(',');
         for (var i = 0; i < authoritySet.length; i++) {
-            if (authoritySet[i] == "50") {
+            if (authoritySet[i] == "48") {
                 $scope.isShow = 1;
             }
         }
@@ -119,7 +120,7 @@
             var end, start;
             start = (page - 1) * $scope.numPerPage;
             end = start + $scope.numPerPage;
-            //console.log('$scope.numPerPage=='+$scope.numPerPage);
+            console.log('$scope.numPerPage=='+$scope.numPerPage);
             getQuestionList(page, $scope.numPerPage);
         };
 
@@ -135,8 +136,7 @@
         };
 
         function search() {
-            $scope.endDate=$("#endDate").val();
-            $scope.startDate=$("#startDate").val();
+           
             $scope.filteredStores = $scope.stores;
             ////console.log($scope.stores);
             return $scope.onFilterChange();
@@ -320,8 +320,8 @@
                 }
             }).success(function(data) {
                 if (data.code == 0) {
-                    console.log(data.result);
-                    console.log("type:"+$scope.questionType);
+                    // console.log(data.result);
+                    // console.log("type:"+$scope.questionType);
                     $scope.stores = data.result;
                     $scope.currentPageStores = data.result;
                     $scope.filteredStores = data.result;
@@ -397,24 +397,24 @@
         //     }}).success(function (data){
         //     })
         // }
-        function initall(pageNum, pageSize) {
-            $http({
-                method: 'POST',
-                url: 'http://localhost:8080/blue-server/' + 'question/getQuestionList.do',
-                data: $.param({
-                    pageNum: 1,
-                    pageSize: 200
-                }), //序列化参数
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).success(function(data) {
-                if (data.errorCode == 0) {
-                    $scope.allstores = data.result;
-                };
-            });
-        }
-        initall();
+        // function initall(pageNum, pageSize) {
+        //     $http({
+        //         method: 'POST',
+        //         url: 'http://localhost:8080/blue-server/' + 'question/getQuestionList.do',
+        //         data: $.param({
+        //             pageNum: 1,
+        //             pageSize: 200
+        //         }), //序列化参数
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded'
+        //         }
+        //     }).success(function(data) {
+        //         if (data.errorCode == 0) {
+        //             $scope.allstores = data.result;
+        //         };
+        //     });
+        // }
+        // initall();
         init();
     }
 
@@ -644,7 +644,7 @@
         $scope.isShow = 0;
         var AuthoritySet = sessionStorage.authoritySet.split(',');
         for (var i = 0; i < AuthoritySet.length; i++) {
-            if (AuthoritySet[i] == "51") {
+            if (AuthoritySet[i] == "49") {
                 $scope.isShow = 1;
             }
         }
@@ -1260,8 +1260,6 @@ function ChangeQuestionCtrl($scope,$http,$location,$mdDialog,$timeout){
         $scope.modApp=function(){
             $scope.selectShow=1;
         }
-
-
 
             $http.post('http://localhost:8080/blue-server/' + 'module/getModuleList.do', {}, {
                 params: {

@@ -40,6 +40,14 @@
         $scope.taskKindId=$location.search().id;
         console.log($location);
 
+        $scope.isShow = 0;
+        var authoritySet = sessionStorage.authoritySet.split(',');
+        for (var i = 0; i < authoritySet.length; i++) {
+            if (authoritySet[i] == "51") {
+                $scope.isShow = 1;
+            }
+        }
+
         $http.post("http://localhost:8080/blue-server/"+"industry/getIndustryList.do?",{},{params:{
                         pageNum:1,
                         pageSize:20
@@ -566,6 +574,14 @@
             $location.path("/taskDuration/taskDuration-list");
         }
 
+        $scope.isShow = 0;
+        var authoritySet = sessionStorage.authoritySet.split(',');
+        for (var i = 0; i < authoritySet.length; i++) {
+            if (authoritySet[i] == "52") {
+                $scope.isShow = 1;
+            }
+        }
+
 
         $http.post("http://localhost:8080/blue-server/"+"industry/getIndustryList.do?",{},{params:{
                         pageNum:1,
@@ -599,6 +615,7 @@
                         accountRate:$scope.accountRate,
                         businessRate:$scope.businessRate,
                         profitRate:$scope.profitRate,
+                        year:$scope.year
                     }}).success(function (data){
                         if(data.code == 0){
                             $scope.showAlert("添加成功");

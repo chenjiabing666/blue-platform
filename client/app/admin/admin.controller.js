@@ -369,7 +369,7 @@
                     .cancel('取消');
                 $mdDialog.show(confirm).then(function () {
                     // console.log('确定')
-                    $http.post("http://localhost:8080/blue-server/" + "admin/deleteAdmin.do?", {}, {
+                    $http.post("http://localhost:8080/blue-server/" + "admin/deleteAdminById.do?", {}, {
                         params: {
                             adminId: id
                         }

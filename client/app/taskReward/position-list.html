@@ -1,14 +1,14 @@
 
-<div class="page page-table" ng-controller="AgentCotroller">
+<div class="page page-table" ng-controller="PositionController">
 
     <div class="row ui-section">
     <div class="col-md-12">
         <div class="col-md-8 clearfix">
-            <h2 class="section-header">企业竞争力</h2>
+            <h2 class="section-header">市场定位</h2>
         </div>
         
     </div>
-    <div class="col-md-12" ng-show="isShow==1">
+    <div class="col-md-12" ng-show="isShow==1" >
         <section class="panel panel-default table-dynamic">
           <div class="table-filters">
             <div class="row">
@@ -34,8 +34,8 @@
             </div>
 
             <div class="col-md-4 clearfix">
-                <a class="md-primary add-product" href="#/taskReward/taskReward-change">添加</a>
-                <a class="md-primary add-product" href="#/taskReward/compete-change">修改固定解释</a>
+                <a class="md-primary add-product" href="#/taskReward/position-add">添加</a>
+                <a class="md-primary add-product" href="#/taskReward/position-change">修改固定解释</a>
                 <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
             </div>
             
@@ -52,14 +52,14 @@
                 ID
                 </div></th>
                 <th><div class="th">
-                质量模块平均得分
+                企业的健康得分
                 </div></th>
                 <th><div class="th">
-                交付模块的平均得分
+                竞争力平均分值
                 </div></th>
-                <th><div class="th">
+                <!-- <th><div class="th">
                 成本模块的平均得分
-                </div></th>
+                </div></th> -->
 
                 <!-- <th><div class="th">
                 解读内容
@@ -80,12 +80,12 @@
 
             </thead>
             <tbody>
-              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.competeId}}">
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.positionId}}">
                 <!-- <td> <md-checkbox ng-click="selectItem(store.invitationId)" ng-checked="selected[store.invitationId]"></md-checkbox></td> -->
-                <td ng-bind="store.competeId"></td>
-                <td ng-bind="store.quality"></td>
-                <td ng-bind="store.deliver"></td>
-                <td ng-bind="store.cost"></td>            
+                <td ng-bind="store.positionId"></td>
+                <td ng-bind="store.score"></td>
+                <td ng-bind="store.compete"></td>
+                <!-- <td ng-bind="store.cost"></td>             -->
                 <!-- <td>
                     <p ng-repeat="analysis in store.analysis">{{analysis.content}}</p>
                 </td>    -->
@@ -95,8 +95,8 @@
                 </td>    -->
                 <!-- <td ng-bind="store.cost"></td>    -->
                 <td class="opertation">
-                    <a href="#/taskReward/agent-change?agentId={{store.competeId}}">编辑</a>
-                    <a href="" ng-click="deleteSetting(store.competeId)">删除</a>
+                    <a href="#/taskReward/position-edit?id={{store.positionId}}">编辑</a>
+                    <a href="" ng-click="deleteSetting(store.positionId)">删除</a>
                     <!-- <a href="#/invitation/invitation-detail?id={{store.invitationId}}">详情</a> -->
                 </td>
               </tr>

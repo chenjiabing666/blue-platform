@@ -10,7 +10,7 @@
             <!-- <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div> -->
         </div>
     </div>
-    <div class="col-md-12" >
+    <div class="col-md-12" ng-show="isShow==1" >
         <section class="panel panel-default table-dynamic">
           <div class="table-filters">
             <div class="row">
@@ -59,7 +59,7 @@
                 <td ng-bind="store.industryName"></td>   
                 <td ng-bind="store.avgLevel"></td>    
                 <td class="opertation">
-                    <!-- <a href="#/taskReward/taskReward-change?taskRewardId={{store.taskRewardId}}&taskKindId={{store.taskKindId}}&id={{store.taskKindId}}">编辑</a> -->
+                    <a href="#/taskReward/radar-change?radarId={{store.radarId}}">编辑</a>
                     <a href="" ng-click="deleteTaskReward(store.radarId)">删除</a>
                 </td>
               </tr>

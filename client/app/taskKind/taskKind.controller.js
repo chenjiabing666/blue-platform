@@ -523,7 +523,7 @@
         $scope.isShow = 0;
         var authoritySet = sessionStorage.authoritySet.split(',');
         for (var i = 0; i < authoritySet.length; i++) {
-            if (authoritySet[i] == "47") {
+            if (authoritySet[i] == "50") {
                 $scope.isShow = 1;
             }
         }

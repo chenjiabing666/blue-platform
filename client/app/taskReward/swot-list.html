@@ -10,12 +10,31 @@
             <!-- <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div> -->
         </div>
     </div>
-    <div class="col-md-12" >
+    <div class="col-md-12" ng-show="isShow==1" >
         <section class="panel panel-default table-dynamic">
           <div class="table-filters">
             <div class="row">
             <div class="col-sm-12 col-xs-12" >
-                
+                <form class="user_list_header">
+
+                    <label class="col-sm-2 col-xs-2">
+                        <span >行业：</span>
+                        <select class="" ng-model="industryId" data-ng-change="search()">
+                            <option value="">不限</option>
+                            <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
+                         </select>
+                    </label>
+
+                    <label class="col-sm-2 col-xs-2">
+                        <span >模块：</span>
+
+                        <select class="" ng-model="moduleId" data-ng-change="search()">
+                             <option value="">不限</option>
+                                                    <option value="{{module.moduleId}}" ng-repeat="module in moduleList">{{module.moduleName}}</option>
+                                                </select>
+                    </label>
+
+                </form>
             </div>
 
             <div class="col-md-4 clearfix">
@@ -66,7 +85,7 @@
                 <td ng-bind="store.advise"></td>   
                 <td ng-bind="store.createdDate"></td>    
                 <td class="opertation">
-                    <!-- <a href="#/taskReward/taskReward-change?taskRewardId={{store.taskRewardId}}&taskKindId={{store.taskKindId}}&id={{store.taskKindId}}">编辑</a> -->
+                    <a href="#/taskReward/swot-change?id={{store.swotId}}">编辑</a>
                     <a href="" ng-click="deleteTaskReward(store.swotId)">删除</a>
                 </td>
               </tr>

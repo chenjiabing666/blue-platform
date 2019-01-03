@@ -17,9 +17,9 @@
 <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">模块：</label>
                                             <div class="col-sm-9">
-                                                <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="moduleId" data-ng-change="search()">
+                                                <select  class="border-radius-5 border-default ml-10 input-default input-w-50" data-ng-model="question.moduleId" data-ng-change="search()" ng-options="module.moduleId as module.moduleName for module in moduleList">
                                                      <!--  <option value="">全部</option> -->
-                                                      <option value="{{module.moduleId}}" ng-repeat="module in moduleList" ng-selected="question.moduleId==module.moduleId" >{{module.moduleName}}</option>
+                                                      <!-- <option value="{{module.moduleId}}" ng-repeat="module in moduleList" ng-selected="question.moduleId==module.moduleId" >{{module.moduleName}}</option> -->
                                                 </select> 
                                             </div>
                                         </div>
@@ -100,6 +100,13 @@
                                             </div>
                                         </div>
 
+                                         <div class="form-group clearfix">
+                                                <label for="" class="col-sm-3 control-label">文件：</label>
+                                                <div class="col-sm-9">
+                                                    <a href="{{an.questionReasonUrl}}"  target="_blank" style="color:  red;font-size: 20px">{{an.questionReasonUrl||"无"}}</a>
+                                                </div>
+                                            </div>
+
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">上传文件：</label>
                                             <div class="col-sm-9">
@@ -116,6 +123,13 @@
                                         </div>
 
                                         <div class="form-group clearfix">
+                                                <label for="" class="col-sm-3 control-label">文件：</label>
+                                                <div class="col-sm-9">
+                                                    <a href="{{an.adviseUrl}}"  target="_blank" style="color:  red;font-size: 20px">{{an.adviseUrl||"无"}}</a>
+                                                </div>
+                                            </div>
+
+                                        <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">上传文件：</label>
                                             <div class="col-sm-9">
                                                 <input type="file" class="questionFile" ng-model="file" multiple ng-submit="doadviseA()" onchange="angular.element(this).scope().doadviseA(this)">
@@ -129,6 +143,13 @@
                                                 <textarea cols="80" rows="10" ng-model="an.analysis"></textarea>
                                             </div>
                                         </div>
+
+                                        <div class="form-group clearfix">
+                                                <label for="" class="col-sm-3 control-label">文件：</label>
+                                                <div class="col-sm-9">
+                                                    <a href="{{an.analysisUrl}}"  target="_blank" style="color:  red;font-size: 20px">{{an.analysisUrl||"无"}}</a>
+                                                </div>
+                                            </div>
 
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">上传文件：</label>

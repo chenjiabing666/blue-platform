@@ -1,0 +1,47 @@
+<section class="page-form-ele page" ng-controller="CompeteChange">
+
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">固定解释</h2> </div>
+
+        <div class="col-md-8 clearfix"> 
+            <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
+        </div>
+        <div class="col-md-12">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row taskReward-detail" >
+                        <div class="col-lg-8 col-lg-offset-2">
+
+                            <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                                <md-content layout-padding>
+                                <form name="taskRewardForm" class="taskRewardForm">
+
+                                
+
+                                <div class="form-group clearfix" ng-repeat="an in analysis">
+                                    <label for="" class="col-sm-3 control-label">固定解释（<span ng-show="an.type==1">普通版</span><span ng-show="an.type==2">pro版</span>）：</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" class="taskRewardName" ng-model="an.content" >
+                                    </div>
+                                </div>
+
+                              
+
+                                
+
+                               
+                                <div layout layout-sm='column' class="changeConfirm add-btn">
+                                    <md-button class="md-raised btn-w-md md-primary" ng-click="changetaskReward()">确定添加</md-button><div class="divider"></div>
+                                </div>
+
+                            </form>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+</div>
+</div>
+</section>

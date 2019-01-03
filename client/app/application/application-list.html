@@ -121,6 +121,10 @@
                 </div></th>
 
                 <th><div class="th">
+                文件
+                </div></th>
+
+                <th><div class="th">
                 付费形式
                 </div></th>
                 
@@ -154,6 +158,10 @@
                     <td>
                         <span ng-if="store.type==1">视频</span>
                         <span ng-if="store.type==2">文件</span>
+                    </td>
+
+                    <td>
+                        <a href="{{store.fileUrl}}" target="_blank">{{store.fileUrl}}</a>
                     </td>
 
                     <td>

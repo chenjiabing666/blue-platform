@@ -12,7 +12,7 @@
                 'page/404', 'page/500', 'page/blank', 'page/forgot-password', 'page/invoice', 'page/lock-screen', 'page/profile', 'page/signin', 'page/signup',
                 'app/calendar',
                 'user/user-list','user/user-add','user/user-change','user/user-detail','user/user-bindDecedent',
-                'expert/expert-list','expert/expert-add','expert/expert-change','expert/expert-detail','expert/expert-bindDecedent',
+                'expert/expert-list','expert/expert-add','expert/expert-change','expert/expert-detail','expert/expert-bindDecedent','expert/skill-list','expert/skill-add','expert/skill-detail',
                 'invitation/invitation-list','invitation/agent-list','invitation/invitation-user-list','invitation/invitation-add',
                 'invitation/invitation-change','invitation/invitation-detail','invitation/agent-change',
                 'admin/admin-list','admin/admin-add','admin/admin-change',
@@ -25,7 +25,7 @@
                 'message/message-list','message/message-detail','message/message-change','message/message-add',
                 'browse/browse-list','browse/browse-add','browse/browse-detail','browse/browse-message','browse/share-list',
                 'taskDuration/taskDuration-list','taskDuration/taskDuration-add','taskDuration/taskDuration-detail','taskDuration/taskDuration-change',
-                'taskReward/taskReward-list','taskReward/taskReward-add','taskReward/taskReward-detail','taskReward/taskReward-change','taskReward/agent-list','taskReward/swot-add','taskReward/swot-list',
+                'taskReward/taskReward-list','taskReward/taskReward-add','taskReward/taskReward-detail','taskReward/taskReward-change','taskReward/agent-list','taskReward/swot-add','taskReward/swot-list','taskReward/compete-change','taskReward/position-list','taskReward/position-add','taskReward/position-change','taskReward/radar-change','taskReward/agent-change','taskReward/position-edit','taskReward/swot-change',
                 'task/task-list','task/custom-task-list','task/task-add','task/task-detail','task/task-change','task/task-deal',
                 'feedback/feedback-list','feedback/feedback-add','feedback/feedback-detail','feedback/feedback-change',
                 'report/report-list','report/report-change',
@@ -39,7 +39,7 @@
                 'question/question-list','question/question-add','question/question-detail','question/question-change',
                 'cancelReason/cancelReason-list','cancelReason/cancelReason-add','cancelReason/cancelReason-change','cancelReason/cancelReason-detail',
                 'rule/rule-list','rule/rule-add','rule/rule-detail','rule/rule-change',
-                'notice/notice-list','notice/notice-add','notice/notice-change','notice/notice-detail','notice/notice-bindUser',
+                'notice/notice-list','notice/notice-add','notice/notice-change','notice/notice-detail','notice/notice-bindUser','notice/notice-common',
                 'image/image-list','video/video-list','setting/setting-list'
 
 

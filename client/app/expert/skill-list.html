@@ -1,0 +1,194 @@
+
+<div class="page page-table" ng-controller="SkillCtr">
+
+    <div class="row ui-section">
+    <div class="col-md-12">
+        <div class="col-md-8 clearfix">
+            <h2 class="section-header">技能列表</h2>
+        </div>
+
+    </div ng-show="isShow == 1">
+    <div class="col-md-12" >
+        <section class="panel panel-default table-dynamic">
+          <div class="table-filters">
+            <div class="row">
+            <div class="col-sm-12 col-xs-12" >
+                <form class="expert_list_header">
+
+                  <!--  <label class="col-sm-2 col-xs-2">
+                        <span >专家名：</span>
+                        <input type="text" id="expertId" placeholder="输入专家名" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="expertName" data-ng-keyup="search()" style="width: 150px;">
+                   </label> -->
+
+                   
+                   <!-- <label class="col-sm-2 col-xs-2">
+                        <span >用户账号:</span>
+                        <input type="text" id="expertId" placeholder="输入用户手机号" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="expertName" data-ng-keyup="search()" style="width: 150px;">
+                   </label>
+
+                   <label class="col-sm-2 col-xs-2">
+                        <span >用户名称:</span>
+                        <input type="text" id="nickName" placeholder="输入用户昵称" class="border-radius-5 border-default ml-10 input-default input-w-50"
+                        data-ng-model="nickName" data-ng-keyup="search()"  style="width: 150px;">
+                   </label>
+
+                <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >性别</span>
+                    <select name="select" id="vipType" data-ng-change="search()" data-ng-model="gender">
+                        <option value="" >全部</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </label>
+
+                <label class="col-sm-2 col-xs-2" style="height: 28px;position: relative;top: 21px;">
+                        <span >用户类型：</span>
+                    <select name="select" id="expertType" data-ng-change="search()" data-ng-model="expertType" >
+                        <option value="">全部</option>
+                        <option value="1">普通用户</option>
+                        <option value="2">企业用户</option>
+                        <option value="3">vip用户</option>
+                    </select>
+                </label> -->
+
+
+                  
+                </form>
+                <!-- <md-button  ng-click="emptyCondition()">清空筛选条件</md-button><div class="divider"></div> -->
+            </div>
+
+            <div class="col-md-4 clearfix">
+                <a class=" md-primary add-product" href="#/expert/skill-add">添加技能</a>
+                <!-- <a class=" md-primary add-product"  ng-click="export()" >导出</a> -->
+                <!-- <a class=" md-primary add-product"  ng-click="deleteList()" >批量删除</a> -->
+                <!-- <a class=" md-primary add-product" href="http://localhost:8080/applicationMarket-server/expert/exportExcel.do?expertIds={{expertIdsExcel}}" >导出到Excel</a> -->
+                <!-- <a ng-click="exportExcel()" class=" md-primary add-product">添加用户</a> -->
+            </div>
+
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+            <tr>
+            <!-- <th><div class="th">
+                <md-checkbox ng-click="selectAll()" ng-checked="isSelectedAll">全选</md-checkbox>
+                </div></th> -->
+                <th><div class="th">
+                技能ID
+                </div></th>
+                <th><div class="th">
+                技能
+                </div></th>
+                <!-- <th><div class="th">
+                照片
+                </div></th>
+
+                <th><div class="th">
+                专家排序
+                </div></th>
+                <th><div class="th">
+                专家价格
+                </div></th> -->
+                <!-- <th><div class="th">
+                擅长技能
+                </div></th> -->
+                
+               <!--  <th><div class="th">
+                积分
+                </div></th>
+
+                <th><div class="th">
+                用户类型
+                </div></th> -->
+
+               <!--  <th><div class="th">
+                是否开发者
+                </div></th> -->
+                
+                <th><div class="th">
+                操作
+                </div></th>
+            </tr>
+
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="store in currentPageStores" class="delete-{{store.skillId}}">
+                <!-- <td> <md-checkbox ng-click="selectItem(store.expertId)" ng-checked="selected[store.expertId]"></md-checkbox></td> -->
+                <td ng-bind="store.skillId"></td>
+                <!-- <td ng-bind="store.expertType | parseExpertType"></td> -->
+                <td ng-bind="store.content"></td>
+                <!-- <td>
+                    <a href="{{store.expertPhoto}}" target="_blank">
+                        <img src="{{store.expertPhoto}}" style="height: 100px;width: 100px">
+                    </a>
+                </td>
+                <td ng-bind="store.expertSort"></td> -->
+
+                <!-- <td>
+                    <p ng-if="store.gender==1">男</p>
+                    <p ng-if="store.gender==2">女</p>
+                </td> -->
+
+                <!-- <td ng-bind="store.price||'0'"></td> -->
+                <!-- <td ng-bind="store.swtcBalance ||'0'"></td> -->
+
+                <!-- <td>
+                    <p ng-if="store.expertType==1">普通用户</p>
+                    <p ng-if="store.expertType==2">企业用户</p>
+                    <p ng-if="store.expertType==3">vip用户</p>
+
+                </td> -->
+
+                <td class="opertation">
+                    <!-- <a href="#/expert/expert-change?id={{store.expertId}}">编辑</a> -->
+                    <a href="" ng-click="deleteExpert(store.skillId)">删除</a>
+                    <a href="#/expert/skill-detail?id={{store.skillId}}">详情</a>
+                    <!-- <a href="" ng-click="setElite(store.expertId)">设为精英</a> -->
+                </td>
+                 <!-- <a href="" ng-click="deleteExpert(store.expertId)">删除</a></td> -->
+              </tr>
+
+
+
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+            <div class="col-md-6 page-num-info">
+                <span>
+                显示
+                <select data-ng-model="numPerPage"
+                    data-ng-options="num for num in numPerPageOpt"
+                    data-ng-change="onNumPerPageChange()">
+                </select>
+                条
+                当前页{{filteredStores.length}}条/总{{total}}条
+                </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+                <uib-pagination class="pagination-sm"
+                    ng-model="currentPage"
+                    total-items="total"
+                    max-size="4"
+                    ng-change="select(currentPage)"
+                    items-per-page="numPerPage"
+                    rotate="false"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    boundary-links="true"></uib-pagination>
+            </div>
+            </div>
+        </footer>
+        </section>
+    </div>
+    </div>
+
+</div>
+<style>
+    .birthInput{
+        width: 100px;
+    }
+</style>
