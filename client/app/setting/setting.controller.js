@@ -62,7 +62,11 @@
                 copyRight:$scope.config.copyRight,
                 companyPhone:$scope.config.companyMobile,
                 companyAddress:$scope.config.companyAddress,
-                companyName:$scope.config.companyName
+                companyName:$scope.config.companyName,
+                proPrice:$scope.config.proPrice,
+                videoPrice:$scope.config.videoPrice,
+                yearPrice:$scope.config.yearPrice,
+
             }}).success(function (data) {
                if (data.code == 0) {
                     $scope.showAlert("修改成功");
