@@ -25,7 +25,7 @@
                 'message/message-list','message/message-detail','message/message-change','message/message-add',
                 'browse/browse-list','browse/browse-add','browse/browse-detail','browse/browse-message','browse/share-list',
                 'taskDuration/taskDuration-list','taskDuration/taskDuration-add','taskDuration/taskDuration-detail','taskDuration/taskDuration-change',
-                'taskReward/taskReward-list','taskReward/taskReward-add','taskReward/taskReward-detail','taskReward/taskReward-change','taskReward/agent-list','taskReward/swot-add','taskReward/swot-list','taskReward/compete-change','taskReward/position-list','taskReward/position-add','taskReward/position-change','taskReward/radar-change','taskReward/agent-change','taskReward/position-edit','taskReward/swot-change',
+                'taskReward/taskReward-list','taskReward/taskReward-add','taskReward/taskReward-detail','taskReward/taskReward-change','taskReward/agent-list','taskReward/swot-add','taskReward/swot-list','taskReward/compete-change','taskReward/position-list','taskReward/position-add','taskReward/position-change','taskReward/radar-change','taskReward/agent-change','taskReward/position-edit','taskReward/swot-change','taskReward/swot-common-list','taskReward/swot-common-add',
                 'task/task-list','task/custom-task-list','task/task-add','task/task-detail','task/task-change','task/task-deal',
                 'feedback/feedback-list','feedback/feedback-add','feedback/feedback-detail','feedback/feedback-change',
                 'report/report-list','report/report-change',

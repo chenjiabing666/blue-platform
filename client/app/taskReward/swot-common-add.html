@@ -1,9 +1,10 @@
-<section class="page-form-ele page" ng-controller="SwotEdit">
+
+
+<section class="page-form-ele page" ng-controller="SWOCommonTAddCtrl">
 
 
     <div class="row ui-section">
-        <div class="col-lg-8 clearfix"> <h2 class="section-header">规则修改</h2> </div>
-
+        <div class="col-lg-8 clearfix"> <h2 class="section-header">添加通用规则</h2> </div>
         <div class="col-md-8 clearfix"> 
             <md-button class="md-raised btn-w-md md-primary changeClick" ng-click="backClick()">返回</md-button><div class="divider"></div>
         </div>
@@ -16,38 +17,38 @@
                             <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                                 <md-content layout-padding>
                                 <form name="taskRewardForm" class="taskRewardForm">
-                                   
-                                      
+
+
                                     <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">模块：</label>
                                             <div class="col-sm-9">
-                                                <select class="" ng-model="swot.moduleId" ng-options="module.moduleId as module.moduleName for module in moduleList" >
-                                                    <!-- <option value="{{module.moduleId}}" ng-repeat="module in moduleList">{{module.moduleName}}</option> -->
+                                                <select class="" ng-model="moduleId" >
+                                                    <option value="{{module.moduleId}}" ng-repeat="module in moduleList">{{module.moduleName}}</option>
                                                 </select>
                                             </div>
                                     </div>
-
-                                      <div class="form-group clearfix" ng-show="swot.activated==0">
+<!-- 
+                                      <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">行业：</label>
                                             <div class="col-sm-9">
-                                                <select class="" ng-model="swot.industryId" ng-options="industry.industryId as industry.name for industry in industryList" >
-                                                    <!-- <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option> -->
+                                                <select class="" ng-model="industryId" >
+                                                    <option value="{{industry.industryId}}" ng-repeat="industry in industryList">{{industry.name}}</option>
                                                 </select>
                                             </div>
                                         </div>
-
+ -->
                                         <div class="form-group clearfix">
                                             <label for="" class="col-sm-3 control-label">建议的类型</label>
                                             <div class="col-sm-9">
-                                                <select class="" ng-model="swot.type">
-                                                    <option value="1" ng-selected="swot.type==1">S</option>
+                                                <select class="" ng-model="type" >
+                                                    <option value="1">S</option>
                                                     <!-- <option value="2">W</option> -->
-                                                    <option value="2" ng-selected="swot.type==2">W-A</option>
-                                                    <option value="3" ng-selected="swot.type==3">W-B</option>
-                                                    <option value="4" ng-selected="swot.type==4">O</option>
+                                                    <option value="2">W-A</option>
+                                                    <option value="3">W-B</option>
+                                                    <option value="4">O</option>
                                                      <!-- <option value="">T</option> -->
-                                                    <option value="5" ng-selected="swot.type==5">T-A</option>
-                                                    <option value="6" ng-selected="swot.type==6">T-B</option>
+                                                    <option value="5">T-A</option>
+                                                    <option value="6">T-B</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -58,14 +59,12 @@
                                         <label for="" class="col-sm-3 control-label">建议：</label>
                                         <div class="col-sm-9">
                                             <!-- <input class="form-control" class="taskReward" ng-model="advise"> -->
-                                            <textarea rows="10" cols="40" ng-model="swot.advise"></textarea>
+                                            <textarea rows="10" cols="40" ng-model="advise"></textarea>
                                         </div>
                                     </div>
 
-
-                               
                                 <div layout layout-sm='column' class="changeConfirm add-btn">
-                                    <md-button class="md-raised btn-w-md md-primary" ng-click="changetaskReward()">确定修改</md-button><div class="divider"></div>
+                                    <md-button class="md-raised btn-w-md md-primary" ng-click="addtaskReward()">确定添加</md-button><div class="divider"></div>
                                 </div>
 
                             </form>
